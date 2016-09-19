@@ -1,0 +1,3 @@
+Compile:
+
+nbc -O=dst.rxe src.nbc

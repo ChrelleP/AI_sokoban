@@ -11,54 +11,70 @@
 #define LEFT_LIGHT      IN_1
 #define RIGHT_LIGHT     IN_2
 #define TOUCH           IN_4
-#define FORWARD_LIGHT   IN_3
+#define FRONT_LIGHT     IN_3
 #define WHEEL_LEFT      OUT_A
 #define WHEEL_RIGHT     OUT_B
 
 // Variables
-#define SPEED           100
-
-
+#define SPEED           30
 
 sub set_sensors()
 {
   SetSensorLight(LEFT_LIGHT);
   SetSensorLight(RIGHT_LIGHT);
-  SetSensorLight(FORWARD_LIGHT);
+  SetSensorLight(FRONT_LIGHT);
   SetSensorTouch(TOUCH);
 }
 
-void line_following()
+void actuators(int &motor_array[])
+{
+  if(motor_array[0] < 0)
+  {
+    OnFwd(WHEEL_LEFT,abs(motor_array[0]));
+  } else
+  {
+    OnRev(WHEEL_LEFT,abs(motor_array[0]));
+  }
+  if(motor_array[1] < 0)
+  {
+    OnFwd(WHEEL_RIGHT,abs(motor_array[0]));
+  } else
+  {
+    OnRev(WHEEL_RIGHT,abs(motor_array[0]));
+  }
+}
+
+sub line_following(int &motor_array[])
 {
   float error = 0;    // Error term for PID controller
   float offset = 50;  // Offset - the amount of typical black/white ratio (should be around 50%)
-  int k_prop = 10;    // Proportional Gain
-  int light_val = 0;  // Value for light sensor
+  int k_prop = 1;    // Proportional Gain
+  int light_val_right = 1;  // Value for light sensor
+  int light_val_left = 0;
 
   int power_A = 0;
   int power_B = 0;
 
-  int time_tick = 1000;
-
   // PID controller
-  while(time_tick > 0){
-      light_val = Sensor(RIGHT_LIGHT);
-      error = (light_val - offset) * k_prop;
+  light_val_left = Sensor(LEFT_LIGHT);
+  light_val_right = Sensor(RIGHT_LIGHT);
 
-      if(error == 0){
-        OnFwd(WHEEL_RIGHT, SPPED);
-        OnFwd(WHEEL_LEFT, SPEED);
-      }
+  error = light_val_left - light_val_right;
+  // ERROR: Negativ -> Drej til venstre, Positiv -> Drej til højre.
 
+  error = error * k_prop;
 
-      power_A = forward + difference;
-      power_B = forward - difference;
+  TextOut(0,LCD_LINE5,"Error");
+  NumOut(0,LCD_LINE6, error);
 
-      OnFwd(OUT_A, power_A);
-      OnFwd(OUT_B, power_B);
-
-      time_tick = time_tick - 1;
-      Wait(10);
+  if (error < 0) {
+    motor_array[0] = SPEED - error;
+    motor_array[1] = SPEED;
+  }
+  else
+  {
+    motor_array[0] = SPEED;
+    motor_array[1] = SPEED - error;
   }
 }
 
@@ -66,7 +82,15 @@ task main()
 {
   // Setting up sensors
   set_sensors();
+  int motor_array[2];
 
-  // Line follow
-  line_following();
+  while (true) {
+    TextOut(0,LCD_LINE1,"LeftSensor");
+    NumOut(0,LCD_LINE2,Sensor(LEFT_LIGHT));
+    TextOut(0,LCD_LINE3,"RightSensor");
+    NumOut(0,LCD_LINE4,Sensor(RIGHT_LIGHT));
+    line_following(motor_array);
+    //cross(motor_array)
+    actuators(motor_array);
+  }
 }

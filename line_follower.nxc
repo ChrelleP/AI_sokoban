@@ -6,17 +6,13 @@
 //          Mathias Thor - Mthor13@student.sdu.dk
 //*********************************************************
 
-// ---------- DEFINES -------------
-// Sensors and outputs
-#define LEFT_LIGHT      IN_1
-#define RIGHT_LIGHT     IN_2
-#define TOUCH           IN_4
-#define FRONT_LIGHT     IN_3
-#define WHEEL_LEFT      OUT_A
-#define WHEEL_RIGHT     OUT_B
+#include "defines.nxc" // TODO Dont know if this works
 
 // Variables
 #define SPEED           30
+
+int go_forward_state = 0, line_following_state = 0, cross_detection_state = 0, turn_mechanism_state = 0;
+enum { INITIAL, STATE1, STATE2 };
 
 sub set_sensors()
 {
@@ -42,6 +38,17 @@ void actuators(int &motor_array[])
   {
     OnRev(WHEEL_RIGHT,abs(motor_array[0]));
   }
+}
+
+task template()
+{
+  switch (go_forward_state) {
+    case INITIAL:
+      /* Do something */
+      go_forward_state = STATE1;
+      break;
+  }
+
 }
 
 sub line_following(int &motor_array[])

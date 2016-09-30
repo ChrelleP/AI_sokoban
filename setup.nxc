@@ -13,6 +13,9 @@
 int go_forward_state = 0, line_following_state = 0, cross_detection_state = 0, turn_mechanism_state = 0;
 enum { INITIAL, STATE1, STATE2 };
 
+// Variables for line following
+float integral = 0, last_error = 0;
+
 // Initialize sensors
 sub set_sensors() {
   SetSensorLight(LEFT_LIGHT);

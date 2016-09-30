@@ -1,6 +1,43 @@
 // Line following state function
 
-sub line_following()
+sub line_following(int &motor_array[])
 {
   TextOut(0,LCD_LINE1,"line_following");
+
+  switch (line_following_state) {
+    case INITIAL:
+      /* Do something */
+      line_following_state = STATE1;
+      break;
+    case STATE1:
+      float error = 0;    // Error term for PID controller
+      float correction = 0;
+      int k_p = 1;    // Proportional Gain
+      int k_i = 0;
+      int k_d = 0;
+      int light_val_right = 0;  // Value for light sensor
+      int light_val_left = 0;
+
+      // PID controller
+      light_val_left = Sensor(LEFT_LIGHT);
+      light_val_right = Sensor(RIGHT_LIGHT);
+
+      error = light_val_left - light_val_right;
+      // ERROR: Negativ -> Drej til venstre, Positiv -> Drej til højre.
+
+      integral = integral + error;
+      float derivative = error - last_error;
+
+      correction = error * k_p + integral * k_i + derivative * k_d;
+
+      if (correction < -1) {
+        motor_array[0] = SPEED - correction;
+        motor_array[1] = SPEED;
+      }
+      else if (correction > 1)
+      {
+        motor_array[0] = SPEED;
+        motor_array[1] = SPEED - correction;
+      }
+  }
 }

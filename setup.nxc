@@ -5,16 +5,21 @@
 #define FRONT_LIGHT     IN_3
 #define WHEEL_LEFT      OUT_A
 #define WHEEL_RIGHT     OUT_B
+#define LEFT            0
+#define RIGHT           1
+
 
 // Variables
-#define SPEED  30
+#define SPEED  75
 
 // States
 int go_forward_state = 0, line_following_state = 0, cross_detection_state = 0, turn_mechanism_state = 0;
 enum { INITIAL, STATE1, STATE2 };
 
 // Variables for line following
-float integral = 0, last_error = 0;
+float integral = 0;
+float last_error = 0;
+float PreviousTick = 0;
 
 // Initialize sensors
 sub set_sensors() {

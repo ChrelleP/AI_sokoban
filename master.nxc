@@ -31,16 +31,10 @@ task main()
   int motor_array[2];
 
   while (true) {
-    Wait(3000);
     go_forward(motor_array);
-    Wait(3000);
     line_following(motor_array);
-    Wait(3000);
     cross_detection();
-    Wait(3000);
     turn_mechanism();
-    Wait(3000);
     actuator_driver(motor_array);
-    Wait(3000);
   }
 }

@@ -1,20 +1,30 @@
 // Actuator Driver state function
 sub actuator_driver(int &motor_array[])
 {
-  TextOut(0,LCD_LINE1,"actuator_driver");
-
   if(motor_array[0] < 0)
   {
+    if (motor_array[0] < -100) {
+      motor_array[0] = -100;
+    }
     OnFwd(WHEEL_LEFT,abs(motor_array[0]));
   } else
   {
+    if (motor_array[0] > 100) {
+      motor_array[0] = 100;
+    }
     OnRev(WHEEL_LEFT,abs(motor_array[0]));
   }
   if(motor_array[1] < 0)
   {
-    OnFwd(WHEEL_RIGHT,abs(motor_array[0]));
+    if (motor_array[1] < -100) {
+      motor_array[1] = -100;
+    }
+    OnFwd(WHEEL_RIGHT,abs(motor_array[1]));
   } else
   {
-    OnRev(WHEEL_RIGHT,abs(motor_array[0]));
+    if (motor_array[1] > 100) {
+      motor_array[1] = 100;
+    }
+    OnRev(WHEEL_RIGHT,abs(motor_array[1]));
   }
 }

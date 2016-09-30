@@ -2,5 +2,4 @@
 
 sub cross_detection()
 {
-  TextOut(0,LCD_LINE1,"cross_detection");
 }

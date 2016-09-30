@@ -2,21 +2,22 @@
 
 sub line_following(int &motor_array[])
 {
-  TextOut(0,LCD_LINE1,"line_following");
-
   switch (line_following_state) {
     case INITIAL:
-      /* Do something */
+      PreviousTick = CurrentTick();
       line_following_state = STATE1;
       break;
     case STATE1:
       float error = 0;    // Error term for PID controller
       float correction = 0;
-      int k_p = 1;    // Proportional Gain
-      int k_i = 0;
-      int k_d = 0;
-      int light_val_right = 0;  // Value for light sensor
-      int light_val_left = 0;
+      float k_p = 0.5;        // Proportional Gain
+      float k_i = 0.001;
+      float k_d = 100.0;
+      float light_val_right = 0;  // Value for right light sensor
+      float light_val_left = 0;   // Value for left light sensor
+
+      float dt = CurrentTick() - PreviousTick;
+      PreviousTick = CurrentTick();
 
       // PID controller
       light_val_left = Sensor(LEFT_LIGHT);
@@ -25,19 +26,40 @@ sub line_following(int &motor_array[])
       error = light_val_left - light_val_right;
       // ERROR: Negativ -> Drej til venstre, Positiv -> Drej til højre.
 
-      integral = integral + error;
-      float derivative = error - last_error;
+      integral = integral + error * dt;
+      float derivative = (error - last_error)/dt;
+
+      if (integral > 15) {
+        integral = 15;
+      }
 
       correction = error * k_p + integral * k_i + derivative * k_d;
+      TextOut(0,LCD_LINE1, "Correction:");
+      TextOut(0,LCD_LINE2, "                                               ");
+      TextOut(0,LCD_LINE2, NumToStr(correction));
+      TextOut(0,LCD_LINE3, "                                               ");
+      TextOut(0,LCD_LINE3, NumToStr(light_val_left));
+      TextOut(0,LCD_LINE4, "                                               ");
+      TextOut(0,LCD_LINE4, NumToStr(light_val_right));
+      TextOut(0,LCD_LINE5, "                                               ");
+      TextOut(0,LCD_LINE5, NumToStr(error));
+      TextOut(0,LCD_LINE6, "                                               ");
+      TextOut(0,LCD_LINE6, NumToStr(derivative * k_d));
+
 
       if (correction < -1) {
-        motor_array[0] = SPEED - correction;
-        motor_array[1] = SPEED;
+        motor_array[LEFT] = SPEED - abs(correction);
+        motor_array[RIGHT] = SPEED;
       }
       else if (correction > 1)
       {
-        motor_array[0] = SPEED;
-        motor_array[1] = SPEED - correction;
+        motor_array[LEFT] = SPEED;
+        motor_array[RIGHT] = SPEED - abs(correction);
       }
+      last_error = error;
+      break;
+
+      default:
+      break;
   }
 }

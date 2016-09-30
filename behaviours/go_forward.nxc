@@ -2,7 +2,6 @@
 
 sub go_forward(int &motor_array[])
 {
-  TextOut(0,LCD_LINE1,"go_forward");
   motor_array[0] = SPEED;
   motor_array[1] = SPEED;
 }

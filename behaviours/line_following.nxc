@@ -34,7 +34,7 @@ sub line_following(int &motor_array[])
       }
 
       correction = error * k_p + integral * k_i + derivative * k_d;
-      TextOut(0,LCD_LINE1, "Correction:");
+      /*TextOut(0,LCD_LINE1, "Correction:");
       TextOut(0,LCD_LINE2, "                                               ");
       TextOut(0,LCD_LINE2, NumToStr(correction));
       TextOut(0,LCD_LINE3, "                                               ");
@@ -44,7 +44,7 @@ sub line_following(int &motor_array[])
       TextOut(0,LCD_LINE5, "                                               ");
       TextOut(0,LCD_LINE5, NumToStr(error));
       TextOut(0,LCD_LINE6, "                                               ");
-      TextOut(0,LCD_LINE6, NumToStr(derivative * k_d));
+      TextOut(0,LCD_LINE6, NumToStr(derivative * k_d));*/
 
 
       if (correction < -1) {

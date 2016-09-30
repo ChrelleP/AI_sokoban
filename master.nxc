@@ -11,7 +11,7 @@
 #include "behaviours/line_following.nxc"
 #include "behaviours/actuator_driver.nxc"
 #include "behaviours/cross_detection.nxc"
-#include "behaviours/turn_mechanism.nxc"
+#include "behaviours/follow_plan.nxc"
 
 task main()
 {
@@ -23,8 +23,8 @@ task main()
   while (true) {
     go_forward(motor_array);
     line_following(motor_array);
-    cross_detection(cross_event, motor_array);
-    follow_plan();
+    cross_detection(motor_array, cross_event);
+    follow_plan(motor_array, cross_event);
     actuator_driver(motor_array);
   }
 }

@@ -2,12 +2,13 @@
 
 sub follow_plan(int &motor_array[], bool &cross_event)
 {
-  switch (follow_plan_state) {
+  /*switch (follow_plan_state) {
     case INITIAL: // IDLE STATE
       follow_plan_state = STATE1;
       break;
     case STATE1: // TURN LEFT
-      switch(if(cross_event){
+      switch(
+        if(cross_event){
         float difference = abs(Sensor(LEFT_LIGHT) - Sensor(RIGHT_LIGHT));
         if(difference < 5){
           follow_plan_state = INITIAL;
@@ -15,6 +16,7 @@ sub follow_plan(int &motor_array[], bool &cross_event)
         }
 
       }
+
       else{
         motor_array[RIGHT]  = TURN_SPEED;
         motor_array[LEFT]   = -TURN_SPEED;
@@ -29,4 +31,5 @@ sub follow_plan(int &motor_array[], bool &cross_event)
       break;
     case STATE4: // BACKWARDS
   }
+  */
 }

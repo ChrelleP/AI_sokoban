@@ -1,13 +1,56 @@
 // Cross Detection state function
 
-sub cross_detection()
+sub cross_detection(bool &cross_event, int &motor_array[])
 {
   switch (cross_detection_state) {
+
     case INITIAL:
-      /* Do something */
+      for (int i = 0; i < avg_size; i++)
+      {
+        light_average[sample_number] = Sensor(FRONT_LIGHT);
+      }
       cross_detection_state = STATE1;
       break;
+
     case STATE1:
-      light_average[sample_number] = sensor(FRONT_LIGHT)/sizeof(light_average)/sizeof(light_average[0]);
-      break
+      // If we are over avg_size loop around
+      if (sample_number = avg_size-1)
+      {
+        sample_number = 0;
+      }
+
+      // Calculate sum
+      float sum = 0;
+      for (int i = 0; i < avg_size; i++)
+      {
+        sum = sum + light_average[i];
+      }
+
+      // If we see a sample that is under average (black)
+      // Else fill the sample in the buffer
+      if (Sensor(FRONT_LIGHT)-10 > sum/avg_size) {
+        if (rare_sample > 4)
+        {
+          cross_detection_state = STATE2;
+        }
+        else
+        {
+          rare_sample = rare_sample + 1;
+        }
+      }
+      else
+      {
+        // Fill average buffer
+        light_average[sample_number] = Sensor(FRONT_LIGHT);
+        sample_number = sample_number + 1;
+      }
+      break;
+
+    case STATE2:
+      motor_array[0] = 0;
+      motor_array[1] = 0;
+      break;
+
+    default:
+      break;
 }

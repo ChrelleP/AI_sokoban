@@ -4,7 +4,7 @@ sub line_following(int &motor_array[])
 {
   switch (line_following_state) {
     case INITIAL:
-      PreviousTick = CurrentTick();
+      previous_tick = CurrentTick();
       line_following_state = STATE1;
       break;
     case STATE1:

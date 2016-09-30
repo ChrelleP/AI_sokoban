@@ -22,9 +22,10 @@ float last_error    = 0;
 float previous_tick = 0;
 
 // Registers for cross_detection
-int cross_counter       = 0;
-int sample_number       = 1;
-float light_average[10] = 0;
+int rare_sample     = 0;
+int sample_number   = 0;
+const int avg_size  = 10;
+float light_average[10];
 
 // Initialize sensors
 sub set_sensors() {

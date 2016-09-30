@@ -18,12 +18,13 @@ task main()
   // Setting up sensors
   set_sensors();
   int motor_array[2];
+  bool cross_event = false;
 
   while (true) {
     go_forward(motor_array);
     line_following(motor_array);
-    cross_detection();
-    turn_mechanism();
+    cross_detection(cross_event, motor_array);
+    follow_plan();
     actuator_driver(motor_array);
   }
 }

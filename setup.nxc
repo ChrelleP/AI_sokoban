@@ -28,6 +28,7 @@ int sample_number       = 1;
 float light_average[10] = 0;
 
 // Registers for follow_plan
+int turn_state = 0;
 
 // Initialize sensors
 sub set_sensors() {

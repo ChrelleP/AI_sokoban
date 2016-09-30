@@ -11,7 +11,7 @@
 #include "behaviours/line_following.nxc"
 #include "behaviours/actuator_driver.nxc"
 #include "behaviours/cross_detection.nxc"
-#include "behaviours/turn_mechanism.nxc"
+#include "behaviours/follow_plan.nxc"
 
 task main()
 {

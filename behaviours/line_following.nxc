@@ -30,11 +30,11 @@ sub line_following(int &motor_array[])
 
       correction = error * k_p + integral * k_i + derivative * k_d;
 
-      if (correction < 0) {
+      if (correction < -1) {
         motor_array[0] = SPEED - correction;
         motor_array[1] = SPEED;
       }
-      else
+      else if (correction > 1)
       {
         motor_array[0] = SPEED;
         motor_array[1] = SPEED - correction;

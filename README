@@ -35,21 +35,3 @@ sub line_following(int &motor_array[])
     motor_array[1] = SPEED - error;
   }
 }
-
-void actuator_driver(int &motor_array[])
-{
-  if(motor_array[0] < 0)
-  {
-    OnFwd(WHEEL_LEFT,abs(motor_array[0]));
-  } else
-  {
-    OnRev(WHEEL_LEFT,abs(motor_array[0]));
-  }
-  if(motor_array[1] < 0)
-  {
-    OnFwd(WHEEL_RIGHT,abs(motor_array[0]));
-  } else
-  {
-    OnRev(WHEEL_RIGHT,abs(motor_array[0]));
-  }
-}

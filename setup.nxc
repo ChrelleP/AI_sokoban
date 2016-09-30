@@ -7,15 +7,14 @@
 #define WHEEL_RIGHT     OUT_B
 
 // Variables
-#define SPEED           30
+#define SPEED  30
 
 // States
 int go_forward_state = 0, line_following_state = 0, cross_detection_state = 0, turn_mechanism_state = 0;
 enum { INITIAL, STATE1, STATE2 };
 
 // Initialize sensors
-sub set_sensors()
-{
+sub set_sensors() {
   SetSensorLight(LEFT_LIGHT);
   SetSensorLight(RIGHT_LIGHT);
   SetSensorLight(FRONT_LIGHT);

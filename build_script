@@ -4,7 +4,6 @@ filename="${1##*/}"
 filename="${filename%.*}"
 
 nbc -O=build/$filename.rxe $1
-
-sudo t2n -put build/$filename.rxe << CONFIRM
+ t2n -put build/$filename.rxe << CONFIRM
 y
 CONFIRM

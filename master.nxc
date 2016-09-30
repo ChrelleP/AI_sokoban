@@ -23,7 +23,7 @@ task main()
     go_forward(motor_array);
     line_following(motor_array);
     cross_detection();
-    turn_mechanism();
+    follow_plan(motor_array);
     actuator_driver(motor_array);
   }
 }

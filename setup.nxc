@@ -11,10 +11,11 @@
 
 // Variables
 #define SPEED  75
+#define TURN_SPEED 50
 
 // States
 int go_forward_state = 0, line_following_state = 0, cross_detection_state = 0, turn_mechanism_state = 0;
-enum { INITIAL, STATE1, STATE2 };
+enum { INITIAL, STATE1, STATE2, STATE3, STATE4 };
 
 // Registers for line following
 float integral      = 0;
@@ -25,6 +26,8 @@ float previous_tick = 0;
 int cross_counter       = 0;
 int sample_number       = 1;
 float light_average[10] = 0;
+
+// Registers for follow_plan
 
 // Initialize sensors
 sub set_sensors() {

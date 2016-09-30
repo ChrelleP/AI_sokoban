@@ -1,13 +1,70 @@
 // Cross Detection state function
 
-sub cross_detection()
+sub cross_detection(int &motor_array[],bool &cross_event)
 {
   switch (cross_detection_state) {
+
     case INITIAL:
-      /* Do something */
+      for (int i = 0; i < max_sample_size; i++)
+      {
+        light_average[i] = Sensor(FRONT_LIGHT);
+      }
       cross_detection_state = STATE1;
       break;
+
     case STATE1:
-      light_average[sample_number] = sensor(FRONT_LIGHT)/sizeof(light_average)/sizeof(light_average[0]);
-      break
+      int current_sensor_val = Sensor(FRONT_LIGHT);
+      // If we are over max_sample_size loop around
+      if (sample_number == max_sample_size-1)
+      {
+        sample_number = 0;
+      }
+
+      // Calculate sum
+      float sum = 0;
+      for (int i = 0; i < max_sample_size; i++)
+      {
+        sum = sum + light_average[i];
+      }
+
+      // If we see a sample that is under average (black)
+      // Else fill the sample in the buffer
+      if (current_sensor_val < sum/max_sample_size - 8) { // CHANGE THE SENSITIVITY
+        if (rare_sample > 3)
+        {
+          rare_sample = 0;
+          cross_detection_state = STATE2;
+        }
+        else
+        {
+          rare_sample = rare_sample + 1;
+        }
+      }
+      else
+      {
+        // Fill average buffer
+        light_average[sample_number] = current_sensor_val;
+        sample_number = sample_number + 1;
+        rare_sample = 0;
+      }
+
+      TextOut(0,LCD_LINE1, "Average:");
+      TextOut(0,LCD_LINE2, "                                               ");
+      TextOut(0,LCD_LINE2, NumToStr(sum/max_sample_size));
+      TextOut(0,LCD_LINE3, "Last read:");
+      TextOut(0,LCD_LINE4, "                                               ");
+      TextOut(0,LCD_LINE4, NumToStr(current_sensor_val));
+      TextOut(0,LCD_LINE5, "                                               ");
+      TextOut(0,LCD_LINE5, NumToStr(sample_number));
+
+      break;
+
+    case STATE2:
+      cross_event = true;
+      // Continue coding from here
+      break;
+
+    default:
+      break;
+    }
 }

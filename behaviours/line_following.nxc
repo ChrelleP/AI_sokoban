@@ -16,8 +16,8 @@ sub line_following(int &motor_array[])
       float light_val_right = 0;  // Value for right light sensor
       float light_val_left = 0;   // Value for left light sensor
 
-      float dt = CurrentTick() - PreviousTick;
-      PreviousTick = CurrentTick();
+      float dt = CurrentTick() - previous_tick;
+      previous_tick = CurrentTick();
 
       // PID controller
       light_val_left = Sensor(LEFT_LIGHT);
@@ -59,7 +59,7 @@ sub line_following(int &motor_array[])
       last_error = error;
       break;
 
-      default:
+    default:
       break;
   }
 }

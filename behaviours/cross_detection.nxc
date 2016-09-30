@@ -2,4 +2,12 @@
 
 sub cross_detection()
 {
+  switch (cross_detection_state) {
+    case INITIAL:
+      /* Do something */
+      cross_detection_state = STATE1;
+      break;
+    case STATE1:
+      light_average[sample_number] = sensor(FRONT_LIGHT)/sizeof(light_average)/sizeof(light_average[0]);
+      break
 }

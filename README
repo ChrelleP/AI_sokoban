@@ -2,36 +2,13 @@ Compile:
 
 nbc -O=master.rxe master.nxc
 
-sub line_following(int &motor_array[])
+task template()
 {
-  float error = 0;    // Error term for PID controller
-  float offset = 50;  // Offset - the amount of typical black/white ratio (should be around 50%)
-  int k_prop = 1;    // Proportional Gain
-  int light_val_right = 1;  // Value for light sensor
-  int light_val_left = 0;
-
-  int power_A = 0;
-  int power_B = 0;
-
-  // PID controller
-  light_val_left = Sensor(LEFT_LIGHT);
-  light_val_right = Sensor(RIGHT_LIGHT);
-
-  error = light_val_left - light_val_right;
-  // ERROR: Negativ -> Drej til venstre, Positiv -> Drej til højre.
-
-  error = error * k_prop;
-
-  TextOut(0,LCD_LINE5,"Error");
-  NumOut(0,LCD_LINE6, error);
-
-  if (error < 0) {
-    motor_array[0] = SPEED - error;
-    motor_array[1] = SPEED;
+  switch (go_forward_state) {
+    case INITIAL:
+      /* Do something */
+      go_forward_state = STATE1;
+      break;
   }
-  else
-  {
-    motor_array[0] = SPEED;
-    motor_array[1] = SPEED - error;
-  }
+
 }

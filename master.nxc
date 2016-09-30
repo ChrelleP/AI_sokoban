@@ -13,17 +13,6 @@
 #include "behaviours/cross_detection.nxc"
 #include "behaviours/turn_mechanism.nxc"
 
-task template()
-{
-  switch (go_forward_state) {
-    case INITIAL:
-      /* Do something */
-      go_forward_state = STATE1;
-      break;
-  }
-
-}
-
 task main()
 {
   // Setting up sensors

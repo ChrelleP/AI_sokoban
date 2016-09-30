@@ -16,10 +16,15 @@
 int go_forward_state = 0, line_following_state = 0, cross_detection_state = 0, turn_mechanism_state = 0;
 enum { INITIAL, STATE1, STATE2 };
 
-// Variables for line following
-float integral = 0;
-float last_error = 0;
-float PreviousTick = 0;
+// Registers for line following
+float integral      = 0;
+float last_error    = 0;
+float previous_tick = 0;
+
+// Registers for cross_detection
+int cross_counter       = 0;
+int sample_number       = 1;
+float light_average[10] = 0;
 
 // Initialize sensors
 sub set_sensors() {

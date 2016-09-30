@@ -1,6 +1,0 @@
-// Actuator Driver state function
-
-void actuator_driver()
-{
-    PlayTone(440, 500);     // Play 'A' for one half second
-}

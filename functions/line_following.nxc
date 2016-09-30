@@ -1,6 +1,0 @@
-// Line following state function
-
-void line_following()
-{
-    PlayTone(340, 500);     // Play 'A' for one half second
-}

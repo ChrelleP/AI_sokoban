@@ -1,8 +1,0 @@
-// ---------- DEFINES -------------
-// Sensors and outputs
-#define LEFT_LIGHT      IN_1
-#define RIGHT_LIGHT     IN_2
-#define TOUCH           IN_4
-#define FRONT_LIGHT     IN_3
-#define WHEEL_LEFT      OUT_A
-#define WHEEL_RIGHT     OUT_B

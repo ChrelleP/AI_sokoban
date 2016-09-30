@@ -1,0 +1,46 @@
+//****************** SOKOBAN ROBOT ************************
+// This program is made for a Sokoban robot created in the
+// intoductory program for AI at SDU '16
+//
+// Made by: Christian Koed Pedersen - Chped13@student.sdu.dk
+//          Mathias Thor - Mthor13@student.sdu.dk
+//*********************************************************
+
+#include "setup.nxc"
+#include "behaviours/go_forward.nxc"
+#include "behaviours/line_following.nxc"
+#include "behaviours/actuator_driver.nxc"
+#include "behaviours/cross_detection.nxc"
+#include "behaviours/turn_mechanism.nxc"
+
+task template()
+{
+  switch (go_forward_state) {
+    case INITIAL:
+      /* Do something */
+      go_forward_state = STATE1;
+      break;
+  }
+
+}
+
+task main()
+{
+  // Setting up sensors
+  set_sensors();
+  int motor_array[2];
+
+  while (true) {
+    Wait(3000);
+    go_forward();
+    Wait(3000);
+    line_following();
+    Wait(3000);
+    cross_detection();
+    Wait(3000);
+    turn_mechanism();
+    Wait(3000);
+    actuator_driver();
+    Wait(3000);
+  }
+}

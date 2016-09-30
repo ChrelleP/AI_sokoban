@@ -1,0 +1,6 @@
+// Line following state function
+
+sub line_following()
+{
+  TextOut(0,LCD_LINE1,"line_following");
+}

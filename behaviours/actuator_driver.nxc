@@ -1,0 +1,6 @@
+// Actuator Driver state function
+
+sub actuator_driver()
+{
+  TextOut(0,LCD_LINE1,"actuator_driver");
+}

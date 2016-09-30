@@ -1,6 +1,0 @@
-// Cross Detection state function
-
-void cross_detection()
-{
-    PlayTone(480, 500);     // Play 'A' for one half second
-}

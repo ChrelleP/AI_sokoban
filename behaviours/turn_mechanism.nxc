@@ -1,0 +1,6 @@
+// Turn Mechanism state function
+
+sub turn_mechanism()
+{
+  TextOut(0,LCD_LINE1,"turn_mechanism");
+}

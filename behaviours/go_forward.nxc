@@ -1,0 +1,6 @@
+// Go Forward state function
+
+sub go_forward()
+{
+  TextOut(0,LCD_LINE1,"go_forward");
+}

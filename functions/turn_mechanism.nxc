@@ -1,6 +1,0 @@
-// Turn Mechanism state function
-
-void turn_mechanism()
-{
-    PlayTone(300, 500);     // Play 'A' for one half second
-}

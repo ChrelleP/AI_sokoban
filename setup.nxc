@@ -1,0 +1,23 @@
+// Sensors and outputs
+#define LEFT_LIGHT      IN_1
+#define RIGHT_LIGHT     IN_2
+#define TOUCH           IN_4
+#define FRONT_LIGHT     IN_3
+#define WHEEL_LEFT      OUT_A
+#define WHEEL_RIGHT     OUT_B
+
+// Variables
+#define SPEED           30
+
+// States
+int go_forward_state = 0, line_following_state = 0, cross_detection_state = 0, turn_mechanism_state = 0;
+enum { INITIAL, STATE1, STATE2 };
+
+// Initialize sensors
+sub set_sensors()
+{
+  SetSensorLight(LEFT_LIGHT);
+  SetSensorLight(RIGHT_LIGHT);
+  SetSensorLight(FRONT_LIGHT);
+  SetSensorTouch(TOUCH);
+}

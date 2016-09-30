@@ -1,0 +1,6 @@
+// Go Forward state function
+
+void go_forward()
+{
+    PlayTone(4000, 500);     // Play 'A' for one half second
+}

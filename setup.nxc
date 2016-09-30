@@ -11,10 +11,10 @@
 
 // Variables
 #define SPEED  75
-#define TURN_SPEED 50
+#define TURN_SPEED 40
 
 // States
-int go_forward_state = 0, line_following_state = 0, cross_detection_state = 0, turn_mechanism_state = 0;
+int go_forward_state = 0, line_following_state = 0, cross_detection_state = 0, follow_plan_state = 0;
 enum { INITIAL, STATE1, STATE2, STATE3, STATE4 };
 
 // Registers for line following

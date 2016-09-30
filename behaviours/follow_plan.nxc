@@ -19,28 +19,39 @@ sub follow_plan(int &motor_array[], bool &cross_event)
           }
           break;
         case 1: // WAIT FOR HIGH ENOUGH DIFFERENCE BETWEEN SENSORS
-          float difference = abs(Sensor(LEFT_LIGHT) - Sensor(RIGHT_LIGHT));
+          {
+            float difference = abs(Sensor(LEFT_LIGHT) - Sensor(RIGHT_LIGHT));
 
-          if(difference > 10){
-            turn_state = 2;
-          }
-          else{
-            motor_array[RIGHT] = TURN_SPEED;
-            motor_array[LEFT] = -TURN_SPEED;
+            if(difference > 10){
+              turn_state = 2;
+            }
+            else{
+              motor_array[RIGHT] = TURN_SPEED;
+              motor_array[LEFT] = -TURN_SPEED;
+            }
           }
           break;
         case 2: // WAIT FOR SMALL ENOUGH DIFFERENCE BETWEEN SENSORS
-          float difference = abs(Sensor(LEFT_LIGHT) - Sensor(RIGHT_LIGHT));
+          {
+            float difference = abs(Sensor(LEFT_LIGHT) - Sensor(RIGHT_LIGHT));
 
-          if(difference < 5){
-            turn_state = 0;
-            cross_event = false;
-            follow_plan_state = STATE4;
+            if(difference < 5){
+              turn_state = 0;
+              cross_event = false;
+              follow_plan_state = STATE4;
+            }
+            else{
+              motor_array[RIGHT] = TURN_SPEED;
+              motor_array[LEFT] = -TURN_SPEED;
+            }
           }
-          else{
-            motor_array[RIGHT] = TURN_SPEED;
-            motor_array[LEFT] = -TURN_SPEED;
-          }
+
+          TextOut(0,LCD_LINE7, "                                               ");
+          TextOut(0,LCD_LINE7, NumToStr(turn_state));
+          TextOut(0,LCD_LINE8, "                                               ");
+          TextOut(0,LCD_LINE8, NumToStr(cross_event));
+
+          break;
       }
       break;
     case STATE2: // TURN RIGHT
@@ -51,7 +62,7 @@ sub follow_plan(int &motor_array[], bool &cross_event)
       if(cross_event)
       {
         cross_event = false;
-        follow_plan_state = INITIAL
+        follow_plan_state = INITIAL;
       }
       break;
     case STATE4: // BACKWARDS

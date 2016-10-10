@@ -29,7 +29,7 @@ sub cross_detection(int &motor_array[],bool &cross_event)
 
       // If we see a sample that is under average (black)
       // Else fill the sample in the buffer
-      if (current_sensor_val < sum/max_sample_size - 8) { // CHANGE THE SENSITIVITY
+      if (current_sensor_val < sum/max_sample_size - 15) { // CHANGE THE SENSITIVITY
         if (rare_sample > 3)
         {
           rare_sample = 0;
@@ -61,6 +61,7 @@ sub cross_detection(int &motor_array[],bool &cross_event)
 
     case STATE2:
       cross_event = true;
+      cross_detection_state = STATE1;
       // Continue coding from here
       break;
 

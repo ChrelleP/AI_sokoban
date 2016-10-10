@@ -1,71 +1,65 @@
 // Follow Plan state function
 
-sub follow_plan(int &motor_array[], bool &cross_event)
+sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete)
 {
   switch (follow_plan_state) {
     case INITIAL: // IDLE STATE
-      follow_plan_state = STATE1;
+      follow_plan_state = STATE2;
       break;
     case STATE1: // TURN LEFT
-      switch(turn_state)
-      {
-        case 0: // WAIT FOR CROSS EVENT
-          if(cross_event){
-            turn_state = 1;
-          }
-          else{
-            motor_array[RIGHT] = TURN_SPEED;
-            motor_array[LEFT] = -TURN_SPEED;
-          }
-          break;
-        case 1: // WAIT FOR HIGH ENOUGH DIFFERENCE BETWEEN SENSORS
-          {
-            float difference = abs(Sensor(LEFT_LIGHT) - Sensor(RIGHT_LIGHT));
-
-            if(difference > 10){
-              turn_state = 2;
-            }
-            else{
-              motor_array[RIGHT] = TURN_SPEED;
-              motor_array[LEFT] = -TURN_SPEED;
-            }
-          }
-          break;
-        case 2: // WAIT FOR SMALL ENOUGH DIFFERENCE BETWEEN SENSORS
-          {
-            float difference = abs(Sensor(LEFT_LIGHT) - Sensor(RIGHT_LIGHT));
-
-            if(difference < 5){
-              turn_state = 0;
-              cross_event = false;
-              follow_plan_state = STATE4;
-            }
-            else{
-              motor_array[RIGHT] = TURN_SPEED;
-              motor_array[LEFT] = -TURN_SPEED;
-            }
-          }
-
-          TextOut(0,LCD_LINE7, "                                               ");
-          TextOut(0,LCD_LINE7, NumToStr(turn_state));
-          TextOut(0,LCD_LINE8, "                                               ");
-          TextOut(0,LCD_LINE8, NumToStr(cross_event));
-
-          break;
+      if(turn_complete == true){
+        follow_plan_state = STATE3;
+        turn_action = 0;
+        turn_complete = false;
+        cross_event = false;
+      }
+      else{
+        turn_action = 1;
       }
       break;
     case STATE2: // TURN RIGHT
-      motor_array[RIGHT]  = -TURN_SPEED;
-      motor_array[LEFT]   = TURN_SPEED;
-      break;
-    case STATE3: // FORWARD
-      if(cross_event)
-      {
+      if(turn_complete == true){
+        follow_plan_state = STATE3;
+        turn_action = 0;
+        turn_complete = false;
         cross_event = false;
-        follow_plan_state = INITIAL;
+      }
+      else{
+        turn_action = 1;
       }
       break;
+    case STATE3: // FORWARD
+      if(cross_event == true)
+      {
+        cross_event = false;
+        RotateMotor(OUT_AB, -SPEED, 130);
+        follow_plan_state = STATE2;
+      }
+
+      /*switch(forward_state)
+      {
+        case 0:
+          if(cross_event == true){
+            cross_event = false;
+            motor_on = 20;
+            forward_state = 1;
+            follow_plan_state = STATE4;
+          }
+          break;
+        case 1:
+          if(motor_on == 0){
+            forward_state = 0;
+            follow_plan_state = STATE2;
+          }
+          else{
+            motor_on = motor_on - 1;
+          }
+          break;
+      }*/
+      break;
     case STATE4: // BACKWARDS
+      motor_array[LEFT] = 0;
+      motor_array[RIGHT] = 0;
       break;
   }
 }

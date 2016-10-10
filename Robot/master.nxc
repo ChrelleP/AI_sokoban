@@ -12,19 +12,33 @@
 #include "behaviours/actuator_driver.nxc"
 #include "behaviours/cross_detection.nxc"
 #include "behaviours/follow_plan.nxc"
+#include "behaviours/turn.nxc"
 
 task main()
 {
   // Setting up sensors
   set_sensors();
   int motor_array[2];
-  bool cross_event = false;
+  int turn_action    = INITIAL;
+  bool turn_complete = false;
+  bool cross_event   = false;
 
   while (true) {
     go_forward(motor_array);
     line_following(motor_array);
     cross_detection(motor_array, cross_event);
-    follow_plan(motor_array, cross_event);
+    follow_plan(motor_array, cross_event, turn_action, turn_complete);
+    turn(motor_array, cross_event, turn_action, turn_complete);
     actuator_driver(motor_array);
+
+    if(cross_event == true)
+      OnFwd(LIGHT, 50);
+    else if(cross_event == false)
+      OnFwd(LIGHT, 0);
+
+    TextOut(0,LCD_LINE5, "cross_event");
+    TextOut(0,LCD_LINE6, "                                               ");
+    TextOut(0,LCD_LINE6, NumToStr(cross_event));
+
   }
 }

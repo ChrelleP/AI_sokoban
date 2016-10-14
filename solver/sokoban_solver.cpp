@@ -18,43 +18,10 @@
 #include <vector>
 #include <queue>
 #include <deque>
-
-using namespace std;
-
-struct Soko_state
-{
-  string moves;
-  string map_state;
-};
-
+#include "common.h"
 #include "breadth_first.h"
 
-bool is_goal_state(Soko_state &state_current)
-{
-  bool is_goal = false;
-  size_t found_goal = state_current.map_state.find("G");
-  size_t found_robot_on_goal = state_current.map_state.find("W");
-  size_t found_free_box = state_current.map_state.find("J");
-
-  if(found_goal == string::npos){
-    if(found_robot_on_goal == string::npos){
-      if(found_free_box == string::npos){
-        is_goal = true;
-      }
-      else cout << "free box detected!" << endl;
-    }
-    else cout << "robot on goal detected!" << endl;
-  }
-  else cout << "free goal detected!" << endl;
-
-  return is_goal;
-}
-
-queue<Soko_state> make_states(const Soko_state &cur_state)
-{
-  queue<Soko_state> states;
-  return states;
-}
+using namespace std;
 
 int main(int argc, char** argv)
 {
@@ -100,9 +67,12 @@ int main(int argc, char** argv)
   Soko_state init_state;
   init_state.moves = "";
   init_state.map_state = sokoban_map;
+  init_state.height = map_hight;
+  init_state.width = map_width;
   // Consider adding number of moves...
 
   breadth_first(init_state);
+  make_states(init_state);
 
   is_goal_state(init_state);
 

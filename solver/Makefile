@@ -5,10 +5,12 @@ INCPATH=
 
 LDFLAGS= #Linker options
 
-SOURCES= sokoban_solver.cpp  #cpp files
+SOURCES= 	sokoban_solver.cpp \
+					breadth_first.cpp	\
+					common.cpp
 
 OBJECTS=$(SOURCES:.cpp=.o)  #Object files
-EXECUTEABLE=sokoban_solver #Output name
+EXECUTEABLE=solve #Output name
 all: $(HEADERS) $(SOURCES) $(EXECUTEABLE)
 
 $(EXECUTEABLE): $(OBJECTS)

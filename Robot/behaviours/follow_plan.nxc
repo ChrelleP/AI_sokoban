@@ -1,10 +1,34 @@
 // Follow Plan state function
 
-sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete)
+sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete, char &current_event bool &event_complete)
 {
   switch (follow_plan_state) {
     case INITIAL: // IDLE STATE
-      follow_plan_state = STATE2;
+      switch(current_event){
+        case 'L':
+          follow_plan_state = STATE1;
+          break;
+        case 'R':
+          follow_plan_state = STATE2;
+          break;
+        case 'F':
+          follow_plan_state = STATE3;
+          break;
+        case 'B':
+          follow_plan_state = STATE4;
+          break;
+        case 'S':
+          follow_plan_state = STATE5;
+          break;
+        case 'N':
+          follow_plan_state = INITIAL;
+          break;
+        default:
+          break;
+      }
+
+      TextOut(0,LCD_LINE7, "                                               ");
+      NumOut(0,LCD_LINE7, current_event);
       break;
     case STATE1: // TURN LEFT
       if(turn_complete == true){
@@ -25,7 +49,7 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
         cross_event = false;
       }
       else{
-        turn_action = 1;
+        turn_action = 2;
       }
       break;
     case STATE3: // FORWARD
@@ -33,7 +57,9 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
       {
         cross_event = false;
         RotateMotor(OUT_AB, -SPEED, 130);
-        follow_plan_state = STATE2;
+        follow_plan_state = INITIAL;
+        event_complete = true;
+        current_event = 'N';
       }
 
       /*switch(forward_state)
@@ -58,6 +84,12 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
       }*/
       break;
     case STATE4: // BACKWARDS
+      int motor_left = -motor_array[LEFT];
+      int motor_right = -motor_array[RIGHT];
+      motor_array[LEFT] = motor_left;
+      motor_array[RIGHT] = motor_right;
+      break;
+    case STATE5:
       motor_array[LEFT] = 0;
       motor_array[RIGHT] = 0;
       break;

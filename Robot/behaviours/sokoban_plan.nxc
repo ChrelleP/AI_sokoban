@@ -1,0 +1,28 @@
+// Go Forward state function
+
+sub sokoban_plan(char &current_event, bool &event_complete)
+{
+  switch(sokoban_plan_state)
+  {
+    case INITIAL:
+      pos = 0;
+      sokoban_plan_state = STATE1;
+      break;
+    case STATE1:  // Retrieve plan event
+      if(StrIndex(plan, pos) != 0){
+        current_event = StrIndex(plan, pos);
+        sokoban_plan_state = STATE2;
+      }
+      else{
+        current_event = 'S';
+      }
+      break;
+    case STATE2: // Wait for event done
+      if(event_complete){
+        pos++;
+        sokoban_plan_state = STATE1;
+        event_complete = false;
+      }
+      break;
+  }
+}

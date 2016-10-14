@@ -15,8 +15,13 @@
 #define TURN_SPEED 30
 
 // States
-int go_forward_state = 0, line_following_state = 0, cross_detection_state = 0, follow_plan_state = 0, turn_state = 0;;
-enum { INITIAL, STATE1, STATE2, STATE3, STATE4 };
+int go_forward_state = 0,
+    line_following_state = 0,
+    cross_detection_state = 0,
+    follow_plan_state = 0,
+    turn_state = 0,
+    sokoban_plan_state = 0;
+enum { INITIAL, STATE1, STATE2, STATE3, STATE4, STATE5 };
 
 // Registers for line following
 float integral      = 0;
@@ -32,6 +37,11 @@ float light_average[10];
 // Registers for follow Plan
 int forward_state = 0;
 int motor_on = 0;
+int keep = 0;
+
+// Registers for sokoban Plan
+string plan = "FF";
+int pos = 0;
 
 // Initialize sensors
 sub set_sensors() {

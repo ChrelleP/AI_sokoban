@@ -20,42 +20,38 @@ bool is_goal_state(Soko_state &state_current)
   return is_goal;
 }
 
-queue<Soko_state> make_states(const Soko_state &cur_state)
+void make_init_state(int argc, char** argv, Soko_state &init_state)
 {
-  int x=0, y=-1;
-  char player;
-  bool found = false;
-
-  //http://stackoverflow.com/questions/5757721/use-getline-and-while-loop-to-split-a-string
-  stringstream string_iterator(cur_state.map_state);
-  string line;
-
-  for(int i = 0; i < cur_state.height; i++)
-	{
-    getline(string_iterator, line, '\n');
-    if(!found)
-      y++;
-
-    for (int i = 0; i <line.length() ; i++)
-    {
-    	if (!found)
-    	{
-    		if (line[i] == 'M' | line[i] == 'W' )
-    		{
-    			player = line[i];
-    			x = i;
-    			found = true;
-    		}
-    	}
-    }
-  }
-  cout << "[into]   Player: " << "(" << x << "," << y << ")" << endl;
-
-  if(!found)
+  ifstream sokoban_map_file;
+  sokoban_map_file.open (argv[1]);
+  if (!sokoban_map_file)
   {
-    cout << "[error]  player not found" << endl;
+    cerr << "[error]  can't open " << argv[1] << endl;
   }
 
-  queue<Soko_state> states;
-  return states;
+  // Extract map metadata
+  string line;
+	getline(sokoban_map_file, line, ' ');
+	int map_width = atoi(line.c_str()); // atoi -> string2int
+  getline(sokoban_map_file, line, ' ');
+  int map_hight = atoi(line.c_str());
+  getline(sokoban_map_file, line, '\n');
+  int num_of_goals = atoi(line.c_str());
+
+  // Extract map
+  string sokoban_map = "";
+  while (getline(sokoban_map_file, line))
+  {
+    sokoban_map.append(line) += "\n";
+  }
+
+  cout << "\nSokoban map loaded:\n" << endl;
+  cout << sokoban_map << endl;
+  cout << "Map dimensions:  "<< map_hight << " x " << map_width << endl;
+  cout << "Number of goals: "<< num_of_goals << endl << endl;
+
+  init_state.moves = "";
+  init_state.map_state = sokoban_map;
+  init_state.height = map_hight;
+  init_state.width = map_width;
 }

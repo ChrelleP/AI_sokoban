@@ -11,6 +11,7 @@
 
 using namespace std;
 
+// Declerations
 struct Soko_state
 {
   string moves;
@@ -19,9 +20,8 @@ struct Soko_state
   int width;
 };
 
-// Decleration
 bool is_goal_state(Soko_state &state_current);
-queue<Soko_state> make_states(const Soko_state &cur_state);
+void make_init_state(int argc, char** argv, Soko_state &init_state);
 
 
 #endif

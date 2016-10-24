@@ -27,6 +27,7 @@ using namespace std;
 int main(int argc, char** argv)
 {
   queue<Soko_state> new_states;
+  Soko_state solution_state;
 
   // Check is input is valid
   if (argc != 2)
@@ -38,7 +39,11 @@ int main(int argc, char** argv)
   {
     Soko_state init_state;
     make_init_state(argc, argv, init_state);
-    breadth_first(init_state);
+    solution_state = breadth_first(init_state);
+
+    cout << solution_state.moves << endl;
+    cout << "\n" << solution_state.map_state << endl;
+    /*
     new_states = make_states(init_state);
 
     cout << endl;
@@ -47,8 +52,8 @@ int main(int argc, char** argv)
        cout << new_states.front().map_state << endl;
        new_states.pop();
     }
-
     is_goal_state(init_state);
+    */
   }
 
   cout << "[info]   program done" << endl;

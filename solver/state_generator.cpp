@@ -35,8 +35,8 @@ queue<Soko_state> make_states(const Soko_state &current_state)
     	}
     }
   }
-  cout << "[info]   Player: " << "(" << col << "," << row << ")" << endl;
-  cout << "[info]   Player symbol: " << map_vector[row][col] << endl;
+  //cout << "[info]   Player: " << "(" << col << "," << row << ")" << endl;
+  //cout << "[info]   Player symbol: " << map_vector[row][col] << endl;
 
   if(!found)
   {
@@ -48,20 +48,34 @@ queue<Soko_state> make_states(const Soko_state &current_state)
   //cout << "\n" << new_state.map_state << endl;
   /// Make moves
   queue<Soko_state> new_states;
+  Soko_state tmp_state;
   // forward
-  new_states.push( move( current_state, map_vector, col, row, 'f' ) );
+  tmp_state = move( current_state, map_vector, col, row, 'f' );
+  if (tmp_state.map_state != "NO_MOVE") {
+    new_states.push( tmp_state );
+  }
   // backward
-  new_states.push( move( current_state, map_vector, col, row, 'b' ) );
+  tmp_state = move( current_state, map_vector, col, row, 'b' );
+  if (tmp_state.map_state != "NO_MOVE") {
+    new_states.push( tmp_state );
+  }
   // right
-  new_states.push( move( current_state, map_vector, col, row, 'r' ) );
+  tmp_state = move( current_state, map_vector, col, row, 'r' );
+  if (tmp_state.map_state != "NO_MOVE") {
+    new_states.push( tmp_state );
+  }
   // left
-  new_states.push( move( current_state, map_vector, col, row, 'l' ) );
+  tmp_state = move( current_state, map_vector, col, row, 'l' );
+  if (tmp_state.map_state != "NO_MOVE") {
+    new_states.push( tmp_state );
+  }
   return new_states;
 }
 
 Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vector, int col , int row, char movement_type)
 {
   Soko_state new_state = current_state;
+  bool no_move = false;
   int new_row, new_col, new_row_push, new_col_push;
   string update_moves = "";
 
@@ -72,28 +86,28 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       new_col = col;
       new_row_push = row-2;
       new_col_push = col;
-      update_moves = "f, ";
+      update_moves = "f";
       break;
     case 'b':
       new_row = row+1;
       new_col = col;
       new_row_push = row+2;
       new_col_push = col;
-      update_moves = "b, ";
+      update_moves = "b";
       break;
     case 'l':
       new_row = row;
       new_col = col-1;
       new_row_push = row;
       new_col_push = col-2;
-      update_moves = "l, ";
+      update_moves = "l";
       break;
     case 'r':
       new_row = row;
       new_col = col+1;
       new_row_push = row;
       new_col_push = col+2;
-      update_moves = "r, ";
+      update_moves = "r";
       break;
     default:
       cout << "[error]  unknown movement direction" << endl;
@@ -166,19 +180,23 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
         case 'J':
         case 'I':
         default:
+          no_move = true;
           break;
       }
+      if (!no_move) {
+        // Update moves list with forward move
+        new_state.moves.append(update_moves);
 
-      // Update moves list with forward move
-      new_state.moves.append(update_moves);
-
-      // Go back to string
-      new_state.map_state = "";
-      for (int i = 0; i < new_state.height; i++)
-      {
-        for (int j = 0; j < new_state.width; j++)
-          new_state.map_state.push_back( map_vector[i][j] );
-        new_state.map_state.push_back('\n');
+        // Go back to string
+        new_state.map_state = "";
+        for (int i = 0; i < new_state.height; i++)
+        {
+          for (int j = 0; j < new_state.width; j++)
+            new_state.map_state.push_back( map_vector[i][j] );
+          new_state.map_state.push_back('\n');
+        }
+      } else {
+        new_state.map_state = "NO_MOVE";
       }
   		break;
     case 'I':
@@ -202,21 +220,27 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
         case 'J':
         case 'I':
         default:
+          no_move = true;
           break;
       }
-      // Update moves list with forward move
-      new_state.moves.append(update_moves);
+      if (!no_move) {
+        // Update moves list with forward move
+        new_state.moves.append(update_moves);
 
-      // Go back to string
-      new_state.map_state = "";
-      for (int i = 0; i < new_state.height; i++)
-      {
-        for (int j = 0; j < new_state.width; j++)
-          new_state.map_state.push_back( map_vector[i][j] );
-        new_state.map_state.push_back('\n');
+        // Go back to string
+        new_state.map_state = "";
+        for (int i = 0; i < new_state.height; i++)
+        {
+          for (int j = 0; j < new_state.width; j++)
+            new_state.map_state.push_back( map_vector[i][j] );
+          new_state.map_state.push_back('\n');
+        }
+      } else {
+        new_state.map_state = "NO_MOVE";
       }
       break;
     case 'X':
+      new_state.map_state = "NO_MOVE";
       break;
     default:
       cout << "[error]  " << map_vector[new_row][new_col] << " is a unknown puzzle type" << endl;

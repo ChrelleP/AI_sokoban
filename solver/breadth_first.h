@@ -10,9 +10,10 @@
 #include <queue>
 #include <deque>
 #include "common.h"
+#include "state_generator.h"
 using namespace std;
 
 // Decleration
-void breadth_first(Soko_state &init_state);
+Soko_state breadth_first(Soko_state &init_state);
 
 #endif

@@ -1,9 +1,9 @@
 08 08 05
 XXXXXXXX
-XX.XX..X
-X.J.JJ.X
-XGXMX..X
-XGXIXX.X
-X..GJG.X
-X.....GX
+XG.....X
+X......X
+X..J...X
+X......X
+X..X...X
+X..M...X
 XXXXXXXX

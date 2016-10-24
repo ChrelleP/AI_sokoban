@@ -23,7 +23,7 @@ sub turn(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_com
           break;
         case 1: // WAIT FOR HIGH ENOUGH DIFFERENCE BETWEEN SENSORS
           {
-            float difference = abs(Sensor(LEFT_LIGHT) - Sensor(RIGHT_LIGHT));
+            float difference = abs((Sensor(LEFT_LIGHT) + 7) - Sensor(RIGHT_LIGHT));
 
             if(difference > 10){
               turn_state = 0;
@@ -54,7 +54,7 @@ sub turn(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_com
           break;
         case 1: // WAIT FOR HIGH ENOUGH DIFFERENCE BETWEEN SENSORS
           {
-            float difference = abs(Sensor(LEFT_LIGHT) - Sensor(RIGHT_LIGHT));
+            float difference = abs((Sensor(LEFT_LIGHT) + 7) - Sensor(RIGHT_LIGHT));
 
             if(difference > 10){
               turn_state = 0;

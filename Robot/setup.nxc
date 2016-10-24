@@ -11,8 +11,8 @@
 
 
 // Variables
-#define SPEED  60
-#define TURN_SPEED 30
+#define SPEED  80
+#define TURN_SPEED 50
 
 // States
 int go_forward_state = 0,
@@ -33,6 +33,8 @@ int rare_sample     = 0;
 int sample_number   = 0;
 const int max_sample_size  = 10;
 float light_average[10];
+int upper_thresh = 60;
+int lower_thresh = 45;
 
 // Registers for follow Plan
 int forward_state = 0;
@@ -40,8 +42,11 @@ int motor_on = 0;
 int keep = 0;
 
 // Registers for sokoban Plan
-string plan = "FF";
+string plan = "FFFFFFF";
 int pos = 0;
+
+// DEBUG
+bool debug = false;
 
 // Initialize sensors
 sub set_sensors() {

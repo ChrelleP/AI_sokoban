@@ -30,19 +30,25 @@ task main()
     sokoban_plan(current_event, event_complete);
     go_forward(motor_array);
     line_following(motor_array);
-    cross_detection(motor_array, cross_event);
+    cross_detection_2(motor_array, cross_event);
     follow_plan(motor_array, cross_event, turn_action, turn_complete, current_event, event_complete);
     turn(motor_array, cross_event, turn_action, turn_complete);
+
+    //DEBUG STOP ROBOT
+    if(debug)
+    {
+      motor_array[RIGHT] = 0;
+      motor_array[LEFT] = 0;
+    }
     actuator_driver(motor_array);
 
-    if(cross_event == true)
-      OnFwd(LIGHT, 50);
-    else if(cross_event == false)
-      OnFwd(LIGHT, 0);
 
-    TextOut(0,LCD_LINE5, "cross_event");
-    TextOut(0,LCD_LINE6, "                                               ");
-    TextOut(0,LCD_LINE6, NumToStr(cross_event));
+    ClearScreen();
+    TextOut(0,LCD_LINE5, "VALUE:");
+    TextOut(0,LCD_LINE6, NumToStr(Sensor(LEFT_LIGHT)));
+    TextOut(0,LCD_LINE7, NumToStr(Sensor(RIGHT_LIGHT)));
+    TextOut(0,LCD_LINE8, NumToStr(abs(Sensor(LEFT_LIGHT) - Sensor(RIGHT_LIGHT))));
+
 
   }
 }

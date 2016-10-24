@@ -26,9 +26,6 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
         default:
           break;
       }
-
-      TextOut(0,LCD_LINE7, "                                               ");
-      NumOut(0,LCD_LINE7, current_event);
       break;
     case STATE1: // TURN LEFT
       if(turn_complete == true){
@@ -56,32 +53,11 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
       if(cross_event == true)
       {
         cross_event = false;
-        RotateMotor(OUT_AB, -SPEED, 130);
+        //RotateMotor(OUT_AB, -SPEED, 130);
         follow_plan_state = INITIAL;
         event_complete = true;
         current_event = 'N';
       }
-
-      /*switch(forward_state)
-      {
-        case 0:
-          if(cross_event == true){
-            cross_event = false;
-            motor_on = 20;
-            forward_state = 1;
-            follow_plan_state = STATE4;
-          }
-          break;
-        case 1:
-          if(motor_on == 0){
-            forward_state = 0;
-            follow_plan_state = STATE2;
-          }
-          else{
-            motor_on = motor_on - 1;
-          }
-          break;
-      }*/
       break;
     case STATE4: // BACKWARDS
       int motor_left = -motor_array[LEFT];

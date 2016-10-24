@@ -43,52 +43,62 @@ queue<Soko_state> make_states(const Soko_state &current_state)
     cout << "[error]  player not found" << endl;
   }
 
+
+  //new_states.push( move( current_state, map_vector, col, row, 'b' ) );
+  //cout << "\n" << new_state.map_state << endl;
   /// Make moves
+  queue<Soko_state> new_states;
   // forward
-  Soko_state new_state = move( current_state, map_vector, col, row, 'f' );
-  cout << "\n" << new_state.map_state << endl;
+  new_states.push( move( current_state, map_vector, col, row, 'f' ) );
   // backward
+  new_states.push( move( current_state, map_vector, col, row, 'b' ) );
   // right
+  new_states.push( move( current_state, map_vector, col, row, 'r' ) );
   // left
-
-
-  queue<Soko_state> states;
-  return states;
+  new_states.push( move( current_state, map_vector, col, row, 'l' ) );
+  return new_states;
 }
 
 Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vector, int col , int row, char movement_type)
 {
   Soko_state new_state = current_state;
-  int new_row, new_col;
-  string update_moves;
+  int new_row, new_col, new_row_push, new_col_push;
+  string update_moves = "";
 
   // For forward
   switch (movement_type) {
     case 'f':
       new_row = row-1;
       new_col = col;
+      new_row_push = row-2;
+      new_col_push = col;
       update_moves = "f, ";
       break;
     case 'b':
       new_row = row+1;
       new_col = col;
+      new_row_push = row+2;
+      new_col_push = col;
       update_moves = "b, ";
       break;
     case 'l':
       new_row = row;
       new_col = col-1;
+      new_row_push = row;
+      new_col_push = col-2;
       update_moves = "l, ";
       break;
     case 'r':
       new_row = row;
       new_col = col+1;
+      new_row_push = row;
+      new_col_push = col+2;
       update_moves = "r, ";
       break;
     default:
-      cout << "[error]    unknown movement direction" << endl;
+      cout << "[error]  unknown movement direction" << endl;
       break;
   }
-
 
   switch (map_vector[new_row][new_col]) {
     case '.':
@@ -114,7 +124,29 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       }
       break;
     case 'G':
-      /*// Move play to the new spot
+      // Move play to the new spot
+      if (map_vector[row][col] == 'M') {
+        map_vector[new_row][new_col] = 'W';
+        map_vector[row][col] = '.';
+      } else {
+        map_vector[new_row][new_col] = 'W';
+        map_vector[row][col] = 'G';
+      }
+
+      // Update moves list with forward move
+      new_state.moves.append(update_moves);
+
+      // Go back to string
+      new_state.map_state = "";
+      for (int i = 0; i < new_state.height; i++)
+      {
+        for (int j = 0; j < new_state.width; j++)
+          new_state.map_state.push_back( map_vector[i][j] );
+        new_state.map_state.push_back('\n');
+      }
+      break;
+    case 'J':
+      // Move play to the new spot
       if (map_vector[row][col] == 'M') {
         map_vector[new_row][new_col] = 'M';
         map_vector[row][col] = '.';
@@ -122,34 +154,72 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
         map_vector[new_row][new_col] = 'M';
         map_vector[row][col] = 'G';
       }
-      //adjusting for player tile and tile north of player
-      new_level_map[y-1][x] = '+';
-      (player == '@') ? new_level_map[y][x] = ' ' : new_level_map[y][x] = '.';
 
-      //create and update new state
-      new_state = cur_state;
-      new_state.state_str = "";
-      //turning vector<vector<char>> back to string
-      for (int i = 0; i < new_level_map.size(); i++)
-      {
-      std::vector<char> temp = new_level_map[i];
-      std::vector<char>::iterator itr;
-      for (itr = temp.begin(); itr != temp.end(); itr++)
-        new_state.state_str.push_back( *itr);
-      new_state.state_str.append("\n");
+      switch ( map_vector[new_row_push][new_col_push] ) {
+        case '.':
+          map_vector[new_row_push][new_col_push] = 'J';
+          break;
+        case 'G':
+          map_vector[new_row_push][new_col_push] = 'I';
+          break;
+        case 'X':
+        case 'J':
+        case 'I':
+        default:
+          break;
       }
 
-      //update state stats
-      new_state.move_list.append("u, ");*/
-      break;
-    case 'J':
-      break;
+      // Update moves list with forward move
+      new_state.moves.append(update_moves);
+
+      // Go back to string
+      new_state.map_state = "";
+      for (int i = 0; i < new_state.height; i++)
+      {
+        for (int j = 0; j < new_state.width; j++)
+          new_state.map_state.push_back( map_vector[i][j] );
+        new_state.map_state.push_back('\n');
+      }
+  		break;
     case 'I':
+      // Move play to the new spot
+      if (map_vector[row][col] == 'M') {
+        map_vector[new_row][new_col] = 'W';
+        map_vector[row][col] = '.';
+      } else {
+        map_vector[new_row][new_col] = 'W';
+        map_vector[row][col] = 'G';
+      }
+
+      switch ( map_vector[new_row_push][new_col_push] ) {
+        case '.':
+          map_vector[new_row_push][new_col_push] = 'J';
+          break;
+        case 'G':
+          map_vector[new_row_push][new_col_push] = 'I';
+          break;
+        case 'X':
+        case 'J':
+        case 'I':
+        default:
+          break;
+      }
+      // Update moves list with forward move
+      new_state.moves.append(update_moves);
+
+      // Go back to string
+      new_state.map_state = "";
+      for (int i = 0; i < new_state.height; i++)
+      {
+        for (int j = 0; j < new_state.width; j++)
+          new_state.map_state.push_back( map_vector[i][j] );
+        new_state.map_state.push_back('\n');
+      }
       break;
-    case 'x':
+    case 'X':
       break;
     default:
-      cout << "[error]    unknown puzzle type in front of the robot" << endl;
+      cout << "[error]  " << map_vector[new_row][new_col] << " is a unknown puzzle type" << endl;
       break;
   }
   return new_state;

@@ -1,11 +1,23 @@
 #include "breadth_first.h"
-
+// https://msdn.microsoft.com/en-us/library/bb982522.aspx
 Soko_state breadth_first(Soko_state &init_state)
 {
   cout << "[info]   executing breadth first search!" << endl;
   deque<Soko_state> open;
 	vector<Soko_state> closed;
 	Soko_state current_state;
+  Mymap hash_map;
+  cout << "max_size() == " << hash_map.max_size() << endl;
+  hash_map.insert(Mymap::value_type(init_state.map_state, 22));
+  hash_map.insert(Mymap::value_type("kit", 99));
+  hash_map.insert(Mymap::value_type("kat", 3));
+
+  for (Mymap::const_iterator it = hash_map.begin();
+    it != hash_map.end(); ++it)
+    std::cout << " [" << it->first << ", " << it->second << "]";
+  std::cout << std::endl;
+
+  std::cout << "count(\"state\") == " << hash_map.count(init_state.map_state) << std::endl;
 
   //push first state into queue
   open.push_back(init_state);

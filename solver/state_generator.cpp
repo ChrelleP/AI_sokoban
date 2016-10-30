@@ -10,7 +10,7 @@ queue<Soko_state> make_states(const Soko_state &current_state)
   // http://stackoverflow.com/questions/5757721/use-getline-and-while-loop-to-split-a-string
   stringstream string_iterator(current_state.map_state);
   vector< vector<char> > map_vector;
-  map_vector.resize( current_state.width , vector<char>( current_state.height , 'Q' ) );
+  map_vector.resize( current_state.height , vector<char>( current_state.width , 'Q' ) );
   string line;
 
   // Find player
@@ -76,8 +76,11 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
 {
   Soko_state new_state = current_state;
   bool no_move = false;
+  const int COST_MOVE = 1;
+  const int COST_PUSH = 1;
   int new_row, new_col, new_row_push, new_col_push;
-  string update_moves = "";
+  string update_move = "";
+  string update_move_push = "";
 
   // For forward
   switch (movement_type) {
@@ -86,28 +89,32 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       new_col = col;
       new_row_push = row-2;
       new_col_push = col;
-      update_moves = "f";
+      update_move = "u";
+      update_move_push = "U";
       break;
     case 'b':
       new_row = row+1;
       new_col = col;
       new_row_push = row+2;
       new_col_push = col;
-      update_moves = "b";
+      update_move = "d";
+      update_move_push = "D";
       break;
     case 'l':
       new_row = row;
       new_col = col-1;
       new_row_push = row;
       new_col_push = col-2;
-      update_moves = "l";
+      update_move = "l";
+      update_move_push = "L";
       break;
     case 'r':
       new_row = row;
       new_col = col+1;
       new_row_push = row;
       new_col_push = col+2;
-      update_moves = "r";
+      update_move = "r";
+      update_move_push = "R";
       break;
     default:
       cout << "[error]  unknown movement direction" << endl;
@@ -126,7 +133,10 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       }
 
       // Update moves list with forward move
-      new_state.moves.append(update_moves);
+      new_state.moves.append(update_move);
+      new_state.cost_to_node += COST_MOVE;
+      new_state.cost_to_goal = h1(new_state);
+      new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
 
       // Go back to string
       new_state.map_state = "";
@@ -148,7 +158,10 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       }
 
       // Update moves list with forward move
-      new_state.moves.append(update_moves);
+      new_state.moves.append(update_move);
+      new_state.cost_to_node += COST_MOVE;
+      new_state.cost_to_goal = h1(new_state);
+      new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
 
       // Go back to string
       new_state.map_state = "";
@@ -171,7 +184,14 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
 
       switch ( map_vector[new_row_push][new_col_push] ) {
         case '.':
-          map_vector[new_row_push][new_col_push] = 'J';
+          if (deadlock_test(map_vector,new_col_push,new_row_push))
+          {
+            no_move = true;
+          }
+          else
+          {
+            map_vector[new_row_push][new_col_push] = 'J';
+          }
           break;
         case 'G':
           map_vector[new_row_push][new_col_push] = 'I';
@@ -185,7 +205,10 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       }
       if (!no_move) {
         // Update moves list with forward move
-        new_state.moves.append(update_moves);
+        new_state.moves.append(update_move_push);
+        new_state.cost_to_node += COST_PUSH;
+        new_state.cost_to_goal = h1(new_state);
+        new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
 
         // Go back to string
         new_state.map_state = "";
@@ -211,7 +234,14 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
 
       switch ( map_vector[new_row_push][new_col_push] ) {
         case '.':
-          map_vector[new_row_push][new_col_push] = 'J';
+          if (deadlock_test(map_vector,new_col_push,new_row_push))
+          {
+            no_move = true;
+          }
+          else
+          {
+            map_vector[new_row_push][new_col_push] = 'J';
+          }
           break;
         case 'G':
           map_vector[new_row_push][new_col_push] = 'I';
@@ -225,7 +255,10 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       }
       if (!no_move) {
         // Update moves list with forward move
-        new_state.moves.append(update_moves);
+        new_state.moves.append(update_move_push);
+        new_state.cost_to_node += COST_PUSH;
+        new_state.cost_to_goal = h1(new_state);
+        new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
 
         // Go back to string
         new_state.map_state = "";
@@ -262,3 +295,50 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
 * W = robot on goal   (+)
 *
 */
+
+bool deadlock_test(vector< vector<char> > map_vector, int col, int row)
+{
+  char p1 = map_vector[row-1][col+1];
+  char p2 = map_vector[row][col+1];
+  char p3 = map_vector[row+1][col+1];
+  char p4 = map_vector[row+1][col];
+  char p5 = map_vector[row+1][col-1];
+  char p6 = map_vector[row][col-1];
+  char p7 = map_vector[row-1][col-1];
+  char p8 = map_vector[row-1][col];
+
+  // Check for corner deadlock
+  if ((p8 == 'X' && p1 == 'X' && p2 == 'X') ||
+      (p2 == 'X' && p3 == 'X' && p4 == 'X') ||
+      (p4 == 'X' && p5 == 'X' && p6 == 'X') ||
+      (p6 == 'X' && p7 == 'X' && p8 == 'X'))
+  {
+    return true;
+  }
+
+  // Check for against wall deadlock
+  if (((p1 == 'X' && p2 == 'X' && p3 == 'X') && ( (p4 == 'J' || p4 == 'I') || (p8 == 'J' || p8 == 'I') )) ||
+      ((p3 == 'X' && p4 == 'X' && p5 == 'X') && ( (p2 == 'J' || p2 == 'I') || (p6 == 'J' || p6 == 'I') )) ||
+      ((p5 == 'X' && p6 == 'X' && p7 == 'X') && ( (p4 == 'J' || p4 == 'I') || (p8 == 'J' || p8 == 'I') )) ||
+      ((p7 == 'X' && p8 == 'X' && p1 == 'X') && ( (p2 == 'J' || p2 == 'I') || (p6 == 'J' || p6 == 'I') )))
+  {
+    return true;
+  }
+
+  // Chek for empty goal wall deadlock (Make one for eack wall direction)
+  if (false) {
+    // Check if we meed a wall or box before a goal
+  }
+
+  return false;
+}
+
+std::size_t hash(std::vector<std::vector<int>> *vec)
+{
+    std::size_t hash = 0;
+    for (auto &inner_vec : *vec) {
+        boost::hash_combine(hash, inner_vec[0]);
+        boost::hash_combine(hash, inner_vec[1]);
+    }
+    return hash;
+}

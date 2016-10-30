@@ -19,7 +19,9 @@ Soko_state breadth_first(Soko_state &init_state)
 
     //print out in case a long time is taken and wondering if it froze
     if ((closed.size() % 5000) == 0)
-      std::cout << "Searched "<< closed.size() <<" nodes"<<std::endl;
+    {
+      cout << "Searched "<< closed.size() <<" nodes"<<endl;
+    }
 
     //if found, set report node to current node, set explored count to closed list size
     if (is_goal_state(current_state))
@@ -41,7 +43,7 @@ Soko_state breadth_first(Soko_state &init_state)
       //check if state has already been seen on open list
       for (it = open.begin(); it != open.end(); it++)
       {
-        if (it->moves == temp_state.moves)
+        if (it->map_state == temp_state.map_state)
         {
           already_seen = true;
           break;
@@ -50,7 +52,7 @@ Soko_state breadth_first(Soko_state &init_state)
       //check if state has already been seen on closed list
       for (itr = closed.begin(); itr != closed.end(); itr++)
       {
-        if (itr->moves == temp_state.moves)
+        if (itr->map_state == temp_state.map_state)
         {
           already_seen = true;
           break;

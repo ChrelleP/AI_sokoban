@@ -7,6 +7,7 @@ LDFLAGS= #Linker options
 
 SOURCES= 	sokoban_solver.cpp \
 					breadth_first.cpp	\
+					a_star.cpp	\
 					state_generator.cpp \
 					common.cpp
 

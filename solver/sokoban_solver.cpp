@@ -21,6 +21,8 @@
 #include "common.h"
 #include "state_generator.h"
 #include "breadth_first.h"
+#include "a_star.h"
+
 
 using namespace std;
 
@@ -39,9 +41,10 @@ int main(int argc, char** argv)
   {
     Soko_state init_state;
     make_init_state(argc, argv, init_state);
+    //solution_state = a_star(init_state);
     solution_state = breadth_first(init_state);
 
-    cout << solution_state.moves << endl;
+    cout << "\n" << solution_state.moves << endl;
     cout << "\n" << solution_state.map_state << endl;
     /*
     new_states = make_states(init_state);

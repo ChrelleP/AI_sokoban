@@ -1,84 +1,73 @@
 #include "breadth_first.h"
 // https://msdn.microsoft.com/en-us/library/bb982522.aspx
-Soko_state breadth_first(Soko_state &init_state)
+Soko_state breadth_first(Soko_state &state_init)
 {
   cout << "[info]   executing breadth first search!" << endl;
-  deque<Soko_state> open;
-	vector<Soko_state> closed;
-	Soko_state current_state;
-  Mymap hash_map;
-  cout << "max_size() == " << hash_map.max_size() << endl;
-  hash_map.insert(Mymap::value_type(init_state.map_state, 22));
-  hash_map.insert(Mymap::value_type("kit", 99));
-  hash_map.insert(Mymap::value_type("kat", 3));
+  // Make variable for current state
+  Soko_state state_current;
+  // Initialize open and closed set
+  deque<Soko_state> open_set;
+  Mymap hash_map_closed;
+  Mymap hash_map_open;
 
-  for (Mymap::const_iterator it = hash_map.begin();
-    it != hash_map.end(); ++it)
-    std::cout << " [" << it->first << ", " << it->second << "]";
-  std::cout << std::endl;
+  // Put start state in the open set.
+  open_set.push_back(state_init);
+  hash_map_open.insert(Mymap::value_type(state_init.map_state, state_init));
 
-  std::cout << "count(\"state\") == " << hash_map.count(init_state.map_state) << std::endl;
-
-  //push first state into queue
-  open.push_back(init_state);
-  while (!open.empty())
+  while (!open_set.empty())
   {
-    //take N from OPEN
-    current_state = open.front();
-    open.pop_front();
-    //push N onto CLOSED
-    closed.push_back(current_state);
+    // maintain open set
+    state_current = open_set.front();
+    open_set.pop_front();
+    hash_map_open.erase(state_current.map_state);
+    // maintain closed set
+    hash_map_closed.insert(Mymap::value_type(state_current.map_state, state_current));
 
-    //print out in case a long time is taken and wondering if it froze
-    if ((closed.size() % 5000) == 0)
+    if ((hash_map_closed.size() % 5000) == 0)
+      cout << "Searched "<< hash_map_closed.size() <<" nodes"<<endl;
+
+    // If current state is the goal state, then terminate
+    if (is_goal_state(state_current))
+      return state_current;
+
+    // State generation
+    queue<Soko_state> state_successors = make_states(state_current);
+
+    // Make bools for the next loop
+    bool dublicated_state = false;
+
+    // For each state state successors of state current do
+    while (!state_successors.empty())
     {
-      cout << "Searched "<< closed.size() <<" nodes"<<endl;
-    }
+      dublicated_state = false;
+      Soko_state state_current_successors = state_successors.front();
 
-    //if found, set report node to current node, set explored count to closed list size
-    if (is_goal_state(current_state))
-    {
-      open.pop_front();
-      return current_state;
-    }
+      // Is the current state successors in the open set?
+      if (hash_map_open.count(state_current_successors.map_state))
+        dublicated_state = true;
 
-    //generate valid states
-    queue<Soko_state> valid_states = make_states(current_state);
-    deque<Soko_state>::iterator it;
-    vector<Soko_state>::iterator itr;
+      // Is the current state successors in the closed set?
+      if (hash_map_closed.count(state_current_successors.map_state))
+        dublicated_state = true;
 
-    //while queue is not empty of states
-    while (!valid_states.empty())
-    {
-      bool already_seen = false;
-      Soko_state temp_state = valid_states.front();
-      //check if state has already been seen on open list
-      for (it = open.begin(); it != open.end(); it++)
-      {
-        if (it->map_state == temp_state.map_state)
-        {
-          already_seen = true;
-          break;
-        }
-      }
-      //check if state has already been seen on closed list
-      for (itr = closed.begin(); itr != closed.end(); itr++)
-      {
-        if (itr->map_state == temp_state.map_state)
-        {
-          already_seen = true;
-          break;
-        }
-      }
-      //if not duplicate, then add state to open queue
-      if (!already_seen)
-      {
-        //add to back of open
-        open.push_back(temp_state);
-      }
+      // If seen
+      if (dublicated_state)
+        state_successors.pop();
       else
-      valid_states.pop();
+      {
+        open_set.push_back(state_current_successors);
+        hash_map_open.insert(Mymap::value_type(state_current_successors.map_state, state_current_successors));
+      }
     }
   }
-  return current_state;
+  state_current.map_state = "SOLUTION NOT FOUND!\n";
+  return state_current;
 }
+
+
+// dDDuurrruulDrddddllLuuuuRdlddRdrruuuLLrruulDrdLrdddllullluuuRRDDuullddddRRRuLLdlUUdrruuuRRdLulDDurrrdddLLuLLdlUrruuurrurDDDD
+// dDDuurrruulDrddddllLuuuuRdlddRdrruuuLLrruulDrdLrdddllullluuuRRDDuullddddRRRuLLdlUUdrruuuRRdLulDDurrrdddLLuLLdlUrruuurrurDDDD
+// 
+
+// drddlllLUddlluRRRRRdrUUruulldRRdldlluLuulldRurDDullDRdRRRdrUUruurrdLulDulldRddlllluurDldRRRdrUUUluRdddlllldlluRRRRRdrUU
+// rdddlllLUddlluRRRRRdrUUruulldRRdldlluLuulldRurDDullDRdRRRdrUUruurrdLulDulldRddlllluurDldRRRdrUUUluRdddlllldlluRRRRRdrUU

@@ -27,9 +27,10 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   }
 
   // Extract map metadata
+  // atoi is a string2int function
   string line;
 	getline(sokoban_map_file, line, ' ');
-	int map_width = atoi(line.c_str()); // atoi -> string2int
+	int map_width = atoi(line.c_str());
   getline(sokoban_map_file, line, ' ');
   int map_hight = atoi(line.c_str());
   getline(sokoban_map_file, line, '\n');
@@ -45,7 +46,7 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   cout << "\nSokoban map loaded:\n" << endl;
   cout << sokoban_map << endl;
   cout << "Map dimensions:  "<< map_hight << " x " << map_width << endl;
-  cout << "Number of goals: "<< num_of_goals << endl << endl;
+  cout << "Number of goals: "<< num_of_goals << endl;
 
   init_state.moves = "";
   init_state.map_state = sokoban_map;
@@ -54,6 +55,40 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   init_state.cost_to_node = 0;
   init_state.cost_to_goal = h1(init_state);
   init_state.f_score = init_state.cost_to_node + init_state.cost_to_goal;
+
+  // Find player
+  bool found = false;
+  int row=-1, col=0;
+  stringstream string_iterator(init_state.map_state);
+
+  for(int i = 0; i < init_state.height; i++)
+  {
+    getline( string_iterator, line, '\n' );
+    if(!found)
+      row++;
+
+    for (int j = 0; j < init_state.width ; j++)
+    {
+      if (!found)
+      {
+        if (line[j] == 'M' || line[j] == 'W' )
+        {
+          col = j;
+          found = true;
+        }
+      }
+    }
+  }
+
+  if(!found)
+    cout << "[error]  player not found" << endl;
+
+  init_state.player_row = row;
+  init_state.player_col = col;
+
+  cout << "Player position: "<< row << " x " << col << endl << endl;
+
+
 }
 
 /* Heuristics function uses Manhattan distance between player and

@@ -46,17 +46,6 @@ int main(int argc, char** argv)
 
     cout << "\n" << solution_state.moves << endl;
     cout << "\n" << solution_state.map_state << endl;
-    /*
-    new_states = make_states(init_state);
-
-    cout << endl;
-    while (!new_states.empty())
-    {
-       cout << new_states.front().map_state << endl;
-       new_states.pop();
-    }
-    is_goal_state(init_state);
-    */
   }
 
   cout << "[info]   program done" << endl;

@@ -1,90 +1,63 @@
 #include "state_generator.h"
 
-queue<Soko_state> make_states(const Soko_state &current_state)
+queue<Soko_state> make_states(const Soko_state &state_current)
 {
-  int col=0, row=-1;
-  char player;
-  bool found = false;
-
   // Find position of the player
   // http://stackoverflow.com/questions/5757721/use-getline-and-while-loop-to-split-a-string
-  stringstream string_iterator(current_state.map_state);
+  stringstream string_iterator(state_current.map_state);
   vector< vector<char> > map_vector;
-  map_vector.resize( current_state.height , vector<char>( current_state.width , 'Q' ) );
+  map_vector.resize( state_current.height , vector<char>( state_current.width , 'Q' ) );
   string line;
 
-  // Find player
-  for(int i = 0; i < current_state.height; i++)
+  // Make vector<vector<char>> map
+  for(int i = 0; i < state_current.height; i++)
 	{
     getline( string_iterator, line, '\n' );
-    if(!found)
-      row++;
-
-    for (int j = 0; j < current_state.width ; j++)
-    {
-      map_vector[i][j] = line[j];
-
-    	if (!found)
-    	{
-    		if (line[j] == 'M' || line[j] == 'W' )
-    		{
-    			player = line[j];
-    			col = j;
-    			found = true;
-    		}
-    	}
-    }
-  }
-  //cout << "[info]   Player: " << "(" << col << "," << row << ")" << endl;
-  //cout << "[info]   Player symbol: " << map_vector[row][col] << endl;
-
-  if(!found)
-  {
-    cout << "[error]  player not found" << endl;
+    for (int j = 0; j < state_current.width ; j++)
+        map_vector[i][j] = line[j];
   }
 
-
-  //new_states.push( move( current_state, map_vector, col, row, 'b' ) );
-  //cout << "\n" << new_state.map_state << endl;
   /// Make moves
   queue<Soko_state> new_states;
-  Soko_state tmp_state;
+  Soko_state move_state;
   // forward
-  tmp_state = move( current_state, map_vector, col, row, 'f' );
-  if (tmp_state.map_state != "NO_MOVE") {
-    new_states.push( tmp_state );
+  move_state = move( state_current, map_vector, 'u' );
+  if (move_state.map_state != "NO_MOVE") {
+    new_states.push( move_state );
   }
   // backward
-  tmp_state = move( current_state, map_vector, col, row, 'b' );
-  if (tmp_state.map_state != "NO_MOVE") {
-    new_states.push( tmp_state );
+  move_state = move( state_current, map_vector, 'd' );
+  if (move_state.map_state != "NO_MOVE") {
+    new_states.push( move_state );
   }
   // right
-  tmp_state = move( current_state, map_vector, col, row, 'r' );
-  if (tmp_state.map_state != "NO_MOVE") {
-    new_states.push( tmp_state );
+  move_state = move( state_current, map_vector, 'r' );
+  if (move_state.map_state != "NO_MOVE") {
+    new_states.push( move_state );
   }
   // left
-  tmp_state = move( current_state, map_vector, col, row, 'l' );
-  if (tmp_state.map_state != "NO_MOVE") {
-    new_states.push( tmp_state );
+  move_state = move( state_current, map_vector, 'l' );
+  if (move_state.map_state != "NO_MOVE") {
+    new_states.push( move_state );
   }
   return new_states;
 }
 
-Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vector, int col , int row, char movement_type)
+Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vector, char movement_type)
 {
-  Soko_state new_state = current_state;
+  Soko_state new_state = state_current;
   bool no_move = false;
   const int COST_MOVE = 1;
   const int COST_PUSH = 1;
   int new_row, new_col, new_row_push, new_col_push;
   string update_move = "";
   string update_move_push = "";
+  int row = state_current.player_row;
+  int col = state_current.player_col;
 
   // For forward
   switch (movement_type) {
-    case 'f':
+    case 'u':
       new_row = row-1;
       new_col = col;
       new_row_push = row-2;
@@ -92,7 +65,7 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       update_move = "u";
       update_move_push = "U";
       break;
-    case 'b':
+    case 'd':
       new_row = row+1;
       new_col = col;
       new_row_push = row+2;
@@ -137,6 +110,8 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       new_state.cost_to_node += COST_MOVE;
       new_state.cost_to_goal = h1(new_state);
       new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
+      new_state.player_col = new_col;
+      new_state.player_row = new_row;
 
       // Go back to string
       new_state.map_state = "";
@@ -162,6 +137,8 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       new_state.cost_to_node += COST_MOVE;
       new_state.cost_to_goal = h1(new_state);
       new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
+      new_state.player_col = new_col;
+      new_state.player_row = new_row;
 
       // Go back to string
       new_state.map_state = "";
@@ -174,7 +151,7 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       break;
     case 'J':
       // Move play to the new spot
-      if (map_vector[row][col] == 'M') {
+      if ( map_vector[row][col] == 'M' ) {
         map_vector[new_row][new_col] = 'M';
         map_vector[row][col] = '.';
       } else {
@@ -203,12 +180,15 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
           no_move = true;
           break;
       }
-      if (!no_move) {
+      if ( !no_move )
+      {
         // Update moves list with forward move
         new_state.moves.append(update_move_push);
         new_state.cost_to_node += COST_PUSH;
         new_state.cost_to_goal = h1(new_state);
         new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
+        new_state.player_col = new_col;
+        new_state.player_row = new_row;
 
         // Go back to string
         new_state.map_state = "";
@@ -218,9 +198,9 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
             new_state.map_state.push_back( map_vector[i][j] );
           new_state.map_state.push_back('\n');
         }
-      } else {
-        new_state.map_state = "NO_MOVE";
       }
+      else
+        new_state.map_state = "NO_MOVE";
   		break;
     case 'I':
       // Move play to the new spot
@@ -235,13 +215,9 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
       switch ( map_vector[new_row_push][new_col_push] ) {
         case '.':
           if (deadlock_test(map_vector,new_col_push,new_row_push))
-          {
             no_move = true;
-          }
           else
-          {
             map_vector[new_row_push][new_col_push] = 'J';
-          }
           break;
         case 'G':
           map_vector[new_row_push][new_col_push] = 'I';
@@ -253,12 +229,14 @@ Soko_state move(const Soko_state &current_state, vector< vector<char> > map_vect
           no_move = true;
           break;
       }
-      if (!no_move) {
+      if ( !no_move ) {
         // Update moves list with forward move
-        new_state.moves.append(update_move_push);
+        new_state.moves.append( update_move_push );
         new_state.cost_to_node += COST_PUSH;
         new_state.cost_to_goal = h1(new_state);
         new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
+        new_state.player_col = new_col;
+        new_state.player_row = new_row;
 
         // Go back to string
         new_state.map_state = "";
@@ -331,14 +309,4 @@ bool deadlock_test(vector< vector<char> > map_vector, int col, int row)
   }
 
   return false;
-}
-
-std::size_t hash(std::vector<std::vector<int>> *vec)
-{
-    std::size_t hash = 0;
-    for (auto &inner_vec : *vec) {
-        boost::hash_combine(hash, inner_vec[0]);
-        boost::hash_combine(hash, inner_vec[1]);
-    }
-    return hash;
 }

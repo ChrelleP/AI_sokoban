@@ -16,12 +16,13 @@ struct Soko_state
 {
   string moves;
   string map_state;
+  int player_row;
+  int player_col;
   int height;
   int width;
   int cost_to_node;
   int cost_to_goal;
   int f_score;
-  size_t hash_key;
 };
 
 bool is_goal_state(Soko_state &state_current);

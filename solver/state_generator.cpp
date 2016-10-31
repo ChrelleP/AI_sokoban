@@ -4,14 +4,14 @@ queue<Soko_state> make_states(const Soko_state &state_current)
 {
   // Find position of the player
   // http://stackoverflow.com/questions/5757721/use-getline-and-while-loop-to-split-a-string
+
   stringstream string_iterator(state_current.map_state);
   vector< vector<char> > map_vector;
   map_vector.resize( state_current.height , vector<char>( state_current.width , 'Q' ) );
   string line;
 
-  // Make vector<vector<char>> map
   for(int i = 0; i < state_current.height; i++)
-	{
+  {
     getline( string_iterator, line, '\n' );
     for (int j = 0; j < state_current.width ; j++)
         map_vector[i][j] = line[j];
@@ -47,13 +47,10 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
 {
   Soko_state new_state = state_current;
   bool no_move = false;
-  const int COST_MOVE = 1;
-  const int COST_PUSH = 1;
+  const int COST_MOVE = 1, COST_PUSH = 1;
   int new_row, new_col, new_row_push, new_col_push;
-  string update_move = "";
-  string update_move_push = "";
-  int row = state_current.player_row;
-  int col = state_current.player_col;
+  int row = state_current.player_row, col = state_current.player_col;
+  string update_move = "", update_move_push = "";
 
   // For forward
   switch (movement_type) {
@@ -105,7 +102,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
         map_vector[row][col] = 'G';
       }
 
-      // Update moves list with forward move
+      // Update Sokoban Struct With New Values
       new_state.moves.append(update_move);
       new_state.cost_to_node += COST_MOVE;
       new_state.cost_to_goal = h1(new_state);
@@ -115,12 +112,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
 
       // Go back to string
       new_state.map_state = "";
-      for (int i = 0; i < new_state.height; i++)
-      {
-        for (int j = 0; j < new_state.width; j++)
-          new_state.map_state.push_back( map_vector[i][j] );
-        new_state.map_state.push_back('\n');
-      }
+      vecmap2string(new_state, map_vector);
       break;
     case 'G':
       // Move play to the new spot
@@ -132,7 +124,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
         map_vector[row][col] = 'G';
       }
 
-      // Update moves list with forward move
+      // Update Sokoban Struct With New Values
       new_state.moves.append(update_move);
       new_state.cost_to_node += COST_MOVE;
       new_state.cost_to_goal = h1(new_state);
@@ -141,13 +133,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
       new_state.player_row = new_row;
 
       // Go back to string
-      new_state.map_state = "";
-      for (int i = 0; i < new_state.height; i++)
-      {
-        for (int j = 0; j < new_state.width; j++)
-          new_state.map_state.push_back( map_vector[i][j] );
-        new_state.map_state.push_back('\n');
-      }
+      vecmap2string(new_state, map_vector);
       break;
     case 'J':
       // Move play to the new spot
@@ -182,7 +168,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
       }
       if ( !no_move )
       {
-        // Update moves list with forward move
+        // Update Sokoban Struct With New Values
         new_state.moves.append(update_move_push);
         new_state.cost_to_node += COST_PUSH;
         new_state.cost_to_goal = h1(new_state);
@@ -191,13 +177,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
         new_state.player_row = new_row;
 
         // Go back to string
-        new_state.map_state = "";
-        for (int i = 0; i < new_state.height; i++)
-        {
-          for (int j = 0; j < new_state.width; j++)
-            new_state.map_state.push_back( map_vector[i][j] );
-          new_state.map_state.push_back('\n');
-        }
+        vecmap2string(new_state, map_vector);
       }
       else
         new_state.map_state = "NO_MOVE";
@@ -230,7 +210,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
           break;
       }
       if ( !no_move ) {
-        // Update moves list with forward move
+        // Update Sokoban Struct With New Values
         new_state.moves.append( update_move_push );
         new_state.cost_to_node += COST_PUSH;
         new_state.cost_to_goal = h1(new_state);
@@ -239,13 +219,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
         new_state.player_row = new_row;
 
         // Go back to string
-        new_state.map_state = "";
-        for (int i = 0; i < new_state.height; i++)
-        {
-          for (int j = 0; j < new_state.width; j++)
-            new_state.map_state.push_back( map_vector[i][j] );
-          new_state.map_state.push_back('\n');
-        }
+        vecmap2string(new_state, map_vector);
       } else {
         new_state.map_state = "NO_MOVE";
       }
@@ -259,20 +233,6 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
   }
   return new_state;
 }
-
-/*
-* Mathias og Chrisians: SOKOBAN SOLVER
-*
-* Information:
-* X = Wall            (#)
-* J = box on free     ($)
-* I = box on goal     (*)
-* G = Empty Goal      (.)
-* . = free ground     ( )
-* M = robot on free   (@)
-* W = robot on goal   (+)
-*
-*/
 
 bool deadlock_test(vector< vector<char> > map_vector, int col, int row)
 {
@@ -309,4 +269,15 @@ bool deadlock_test(vector< vector<char> > map_vector, int col, int row)
   }
 
   return false;
+}
+
+void vecmap2string (Soko_state &input_state, vector<vector<char>> &map_vector)
+{
+  input_state.map_state = "";
+  for (int i = 0; i < input_state.height; i++)
+  {
+    for (int j = 0; j < input_state.width; j++)
+      input_state.map_state.push_back( map_vector[i][j] );
+    input_state.map_state.push_back('\n');
+  }
 }

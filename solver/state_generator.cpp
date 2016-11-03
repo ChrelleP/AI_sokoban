@@ -2,7 +2,7 @@
 
 queue<Soko_state> make_states(const Soko_state &state_current)
 {
-  vector< vector<char> > map_vector;
+  vector< vector<char>> map_vector;
   map_vector.resize( state_current.height , vector<char>( state_current.width , 'Q' ) );
 
   // Make string to vector<vector<char>> map
@@ -145,13 +145,9 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
       switch ( map_vector[new_row_push][new_col_push] ) {
         case '.':
           if (deadlock_test(map_vector,new_col_push,new_row_push))
-          {
             no_move = true;
-          }
           else
-          {
             map_vector[new_row_push][new_col_push] = 'J';
-          }
           break;
         case 'G':
           map_vector[new_row_push][new_col_push] = 'I';

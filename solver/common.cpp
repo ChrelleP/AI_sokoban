@@ -24,11 +24,11 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
 	getline(sokoban_map_file, line, ' ');
 	int map_width = atoi(line.c_str());
   getline(sokoban_map_file, line, ' ');
-  int map_hight = atoi(line.c_str());
+  int map_height = atoi(line.c_str());
   getline(sokoban_map_file, line, '\n');
   int num_of_goals = atoi(line.c_str());
 
-  init_state.height = map_hight;
+  init_state.height = map_height;
   init_state.width = map_width;
 
   // Extract map
@@ -39,6 +39,7 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   }
 
   init_state.map_state = sokoban_map;
+  // deadlock_tester(init_state); // TODO: Make player model for "on deadlock" 'N'
 
   // Find player
   // http://stackoverflow.com/questions/5757721/use-getline-and-while-loop-to-split-a-string
@@ -71,16 +72,73 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   init_state.player_row = row;
   init_state.player_col = col;
 
-  cout << "[map]  map dimensions:  "<< map_hight << " x " << map_width << endl;
+  cout << "[map]  map dimensions:  "<< map_height << " x " << map_width << endl;
   cout << "[map]  number of goals: "<< num_of_goals << endl;
   cout << "[map]  player position: "<< row << " x " << col << endl << endl;
   cout << "[map]  sokoban map loaded:" << endl;
-  cout << sokoban_map << endl;
+  cout << init_state.map_state << endl;
 
   init_state.moves = "";
   init_state.cost_to_node = 0;
   init_state.cost_to_goal = h1(init_state);
   init_state.f_score = init_state.cost_to_node + init_state.cost_to_goal;
+}
+
+void deadlock_tester(Soko_state &init_state)
+{
+  cout << "test";
+  vector< vector<char>> map_vector;
+  map_vector.resize( init_state.height , vector<char>( init_state.width , 'Q' ) );
+
+  // Make string to vector<vector<char>> map
+  int row_tmp = 0, col_tmp = 0;
+  for (int i = 0; i < init_state.map_state.size(); i++) {
+    if (init_state.map_state[i]=='\n') {
+      row_tmp += 1;
+      col_tmp = 0;
+    }
+    else {
+      map_vector[row_tmp][col_tmp] = init_state.map_state[i];
+      col_tmp +=1;
+    }
+  }
+
+  char p1,p2,p3,p4,p5,p6,p7,p8;
+
+  for (int row = 1; row < init_state.height-1; row++) {
+    for (int col = 1; col < init_state.width-1; col++) {
+      p1 = map_vector[row-1][col+1];
+      p2 = map_vector[row][col+1];
+      p3 = map_vector[row+1][col+1];
+      p4 = map_vector[row+1][col];
+      p5 = map_vector[row+1][col-1];
+      p6 = map_vector[row][col-1];
+      p7 = map_vector[row-1][col-1];
+      p8 = map_vector[row-1][col];
+
+      // Check for corner deadlock
+      if ((p8 == 'X' && p1 == 'X' && p2 == 'X') ||
+          (p2 == 'X' && p3 == 'X' && p4 == 'X') ||
+          (p4 == 'X' && p5 == 'X' && p6 == 'X') ||
+          (p6 == 'X' && p7 == 'X' && p8 == 'X'))
+      {
+        if (map_vector[row][col] == '.') {
+          map_vector[row][col] = 'D';
+        }
+      }
+
+      // Chek for empty goal wall deadlock (Make one for eack wall direction)
+      if (false) {
+        // Check if we meed a wall or box before a goal
+      }
+    }
+  }
+  init_state.map_state = "";
+  for (int i = 0; i < init_state.height; i++) {
+    for (int j = 0; j < init_state.width; j++)
+      init_state.map_state.push_back( map_vector[i][j] );
+    init_state.map_state.push_back('\n');
+  }
 }
 
 /* Heuristics function uses Manhattan distance between player and

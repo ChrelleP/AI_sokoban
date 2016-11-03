@@ -41,6 +41,7 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   init_state.map_state = sokoban_map;
 
   // Find player
+  // http://stackoverflow.com/questions/5757721/use-getline-and-while-loop-to-split-a-string
   bool found = false;
   int row=-1, col=0;
   stringstream string_iterator(init_state.map_state);

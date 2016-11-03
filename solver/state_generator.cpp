@@ -2,19 +2,20 @@
 
 queue<Soko_state> make_states(const Soko_state &state_current)
 {
-  // Find position of the player
-  // http://stackoverflow.com/questions/5757721/use-getline-and-while-loop-to-split-a-string
-
-  stringstream string_iterator(state_current.map_state);
   vector< vector<char> > map_vector;
   map_vector.resize( state_current.height , vector<char>( state_current.width , 'Q' ) );
-  string line;
 
-  for(int i = 0; i < state_current.height; i++)
-  {
-    getline( string_iterator, line, '\n' );
-    for (int j = 0; j < state_current.width ; j++)
-        map_vector[i][j] = line[j];
+  // Make string to vector<vector<char>> map
+  int row_tmp = 0, col_tmp = 0;
+  for (int i = 0; i < state_current.map_state.size(); i++) {
+    if (state_current.map_state[i]=='\n') {
+      row_tmp += 1;
+      col_tmp = 0;
+    }
+    else {
+      map_vector[row_tmp][col_tmp] = state_current.map_state[i];
+      col_tmp +=1;
+    }
   }
 
   /// Make moves
@@ -52,7 +53,6 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
   int row = state_current.player_row, col = state_current.player_col;
   string update_move = "", update_move_push = "";
 
-  // For forward
   switch (movement_type) {
     case 'u':
       new_row = row-1;
@@ -109,9 +109,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
       new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
       new_state.player_col = new_col;
       new_state.player_row = new_row;
-
       // Go back to string
-      new_state.map_state = "";
       vecmap2string(new_state, map_vector);
       break;
     case 'G':
@@ -131,7 +129,6 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
       new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
       new_state.player_col = new_col;
       new_state.player_row = new_row;
-
       // Go back to string
       vecmap2string(new_state, map_vector);
       break;
@@ -175,7 +172,6 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
         new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
         new_state.player_col = new_col;
         new_state.player_row = new_row;
-
         // Go back to string
         vecmap2string(new_state, map_vector);
       }
@@ -217,7 +213,6 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
         new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
         new_state.player_col = new_col;
         new_state.player_row = new_row;
-
         // Go back to string
         vecmap2string(new_state, map_vector);
       } else {
@@ -274,8 +269,7 @@ bool deadlock_test(vector< vector<char> > map_vector, int col, int row)
 void vecmap2string (Soko_state &input_state, vector<vector<char>> &map_vector)
 {
   input_state.map_state = "";
-  for (int i = 0; i < input_state.height; i++)
-  {
+  for (int i = 0; i < input_state.height; i++) {
     for (int j = 0; j < input_state.width; j++)
       input_state.map_state.push_back( map_vector[i][j] );
     input_state.map_state.push_back('\n');

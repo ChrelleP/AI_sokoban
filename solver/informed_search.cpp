@@ -3,7 +3,7 @@
 
 Soko_state informed_search(Soko_state &state_init, string search_type)
 {
-  cout << "[info] executing " << search_type << " search!" << endl;
+  cout << "\n[info] executing " << search_type << " search!" << endl;
 
   // Make variable for current state
   Soko_state state_current;

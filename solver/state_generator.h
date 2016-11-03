@@ -2,8 +2,6 @@
 #define STATE_GEN
 // Includes
 #include "common.h"
-#include <boost/functional/hash.hpp>
-
 using namespace std;
 
 // Decleration

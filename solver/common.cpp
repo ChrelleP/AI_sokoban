@@ -2,19 +2,11 @@
 
 bool is_goal_state(Soko_state &state_current)
 {
-  bool is_goal = false;
-  size_t found_goal = state_current.map_state.find("G");
-  size_t found_robot_on_goal = state_current.map_state.find("W");
-  size_t found_free_box = state_current.map_state.find("J");
-
-  if(found_goal == string::npos){
-    if(found_robot_on_goal == string::npos){
-      if(found_free_box == string::npos){
-        is_goal = true;
-      }
-    }
-  }
-  return is_goal;
+  size_t legal_chars = state_current.map_state.find_first_not_of("XI.M\n");
+  if(legal_chars != string::npos)
+    return false;
+  else
+    return true;
 }
 
 void make_init_state(int argc, char** argv, Soko_state &init_state)
@@ -27,7 +19,7 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   }
 
   // Extract map metadata
-  // atoi is a string2int function
+  // http://www.cplusplus.com/forum/general/13135/
   string line;
 	getline(sokoban_map_file, line, ' ');
 	int map_width = atoi(line.c_str());
@@ -36,6 +28,9 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   getline(sokoban_map_file, line, '\n');
   int num_of_goals = atoi(line.c_str());
 
+  init_state.height = map_hight;
+  init_state.width = map_width;
+
   // Extract map
   string sokoban_map = "";
   while (getline(sokoban_map_file, line))
@@ -43,18 +38,7 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
     sokoban_map.append(line) += "\n";
   }
 
-  cout << "\nSokoban map loaded:\n" << endl;
-  cout << sokoban_map << endl;
-  cout << "Map dimensions:  "<< map_hight << " x " << map_width << endl;
-  cout << "Number of goals: "<< num_of_goals << endl;
-
-  init_state.moves = "";
   init_state.map_state = sokoban_map;
-  init_state.height = map_hight;
-  init_state.width = map_width;
-  init_state.cost_to_node = 0;
-  init_state.cost_to_goal = h1(init_state);
-  init_state.f_score = init_state.cost_to_node + init_state.cost_to_goal;
 
   // Find player
   bool found = false;
@@ -86,9 +70,16 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   init_state.player_row = row;
   init_state.player_col = col;
 
-  cout << "Player position: "<< row << " x " << col << endl << endl;
+  cout << "[map]  map dimensions:  "<< map_hight << " x " << map_width << endl;
+  cout << "[map]  number of goals: "<< num_of_goals << endl;
+  cout << "[map]  player position: "<< row << " x " << col << endl << endl;
+  cout << "[map]  sokoban map loaded:" << endl;
+  cout << sokoban_map << endl;
 
-
+  init_state.moves = "";
+  init_state.cost_to_node = 0;
+  init_state.cost_to_goal = h1(init_state);
+  init_state.f_score = init_state.cost_to_node + init_state.cost_to_goal;
 }
 
 /* Heuristics function uses Manhattan distance between player and

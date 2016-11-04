@@ -12,7 +12,7 @@
 
 // Variables
 #define SPEED  80
-#define TURN_SPEED 50
+#define TURN_SPEED 80
 
 // States
 int go_forward_state = 0,
@@ -20,7 +20,8 @@ int go_forward_state = 0,
     cross_detection_state = 0,
     follow_plan_state = 0,
     turn_state = 0,
-    sokoban_plan_state = 0;
+    sokoban_plan_state = 0,
+    deploy_state = 0;
 enum { INITIAL, STATE1, STATE2, STATE3, STATE4, STATE5 };
 
 // Registers for line following
@@ -40,10 +41,14 @@ int lower_thresh = 45;
 int forward_state = 0;
 int motor_on = 0;
 int keep = 0;
+int slow_down = 0;
 
 // Registers for sokoban Plan
-string plan = "FFFFFFF";
+string plan = "FRLFRRDLLLFFFDLLLFFDRRRFFD";
 int pos = 0;
+
+// Deploy Registers
+int motor_ramp = 0;
 
 // DEBUG
 bool debug = false;

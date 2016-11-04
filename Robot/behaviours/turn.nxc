@@ -11,14 +11,12 @@ sub turn(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_com
       {
         case 0: // WAIT FOR CROSS EVENT
           if(cross_event){
-            motor_array[RIGHT] = TURN_SPEED;
-            motor_array[LEFT] = -TURN_SPEED;
             cross_event = 0;
             turn_state = 1;
           }
           else{
             motor_array[RIGHT] = TURN_SPEED;
-            motor_array[LEFT] = -TURN_SPEED;
+            motor_array[LEFT] = 0;
           }
           break;
         case 1: // WAIT FOR HIGH ENOUGH DIFFERENCE BETWEEN SENSORS
@@ -33,7 +31,7 @@ sub turn(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_com
             }
             else{
               motor_array[RIGHT] = TURN_SPEED;
-              motor_array[LEFT] = -TURN_SPEED;
+              motor_array[LEFT] = 0;
             }
           }
           break;
@@ -48,7 +46,7 @@ sub turn(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_com
             cross_event = 0;
           }
           else{
-            motor_array[RIGHT] = -TURN_SPEED;
+            motor_array[RIGHT] = 0;
             motor_array[LEFT] = TURN_SPEED;
           }
           break;
@@ -63,7 +61,7 @@ sub turn(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_com
               turn_complete = true;
             }
             else{
-              motor_array[RIGHT] = -TURN_SPEED;
+              motor_array[RIGHT] = 0;
               motor_array[LEFT] = TURN_SPEED;
             }
           }

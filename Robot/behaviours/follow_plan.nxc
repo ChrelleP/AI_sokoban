@@ -1,6 +1,6 @@
 // Follow Plan state function
 
-sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete, char &current_event bool &event_complete)
+sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete, char &current_event bool &event_complete, int &event_counter, int &deploy_action, bool &deploy_complete)
 {
   switch (follow_plan_state) {
     case INITIAL: // IDLE STATE
@@ -14,7 +14,7 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
         case 'F':
           follow_plan_state = STATE3;
           break;
-        case 'B':
+        case 'D':
           follow_plan_state = STATE4;
           break;
         case 'S':
@@ -52,18 +52,38 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
     case STATE3: // FORWARD
       if(cross_event == true)
       {
-        cross_event = false;
-        //RotateMotor(OUT_AB, -SPEED, 130);
-        follow_plan_state = INITIAL;
-        event_complete = true;
-        current_event = 'N';
+        if(event_counter == 1){
+          if(slow_down < 30)
+            slow_down += 5;
+
+          motor_array[LEFT] = motor_array[LEFT] - slow_down;
+          motor_array[RIGHT] = motor_array[RIGHT] - slow_down;
+
+          if(Sensor(LEFT_LIGHT) < 50 && Sensor(RIGHT_LIGHT) < 50){
+            slow_down = 0;
+            cross_event = false;
+            follow_plan_state = INITIAL;
+            event_complete = true;
+            current_event = 'N';
+          }
+        }
+        else{
+          cross_event = false;
+          event_counter --;
+        }
       }
       break;
-    case STATE4: // BACKWARDS
-      int motor_left = -motor_array[LEFT];
-      int motor_right = -motor_array[RIGHT];
-      motor_array[LEFT] = motor_left;
-      motor_array[RIGHT] = motor_right;
+    case STATE4: // DEPLOY
+      if(deploy_complete == true){
+        deploy_complete = false;
+        cross_event = false;
+        event_complete = true;
+        follow_plan_state = INITIAL;
+        current_event = 'N';
+      }
+      else{
+        deploy_action = STATE1;
+      }
       break;
     case STATE5:
       motor_array[LEFT] = 0;

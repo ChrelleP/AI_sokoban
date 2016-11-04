@@ -1,6 +1,6 @@
 // Go Forward state function
 
-sub sokoban_plan(char &current_event, bool &event_complete)
+sub sokoban_plan(char &current_event, bool &event_complete, int &event_counter)
 {
   switch(sokoban_plan_state)
   {
@@ -11,6 +11,10 @@ sub sokoban_plan(char &current_event, bool &event_complete)
     case STATE1:  // Retrieve plan event
       if(StrIndex(plan, pos) != 0){
         current_event = StrIndex(plan, pos);
+        while(StrIndex(plan, pos + 1) == 'F'){
+          pos ++;
+          event_counter ++;
+        }
         sokoban_plan_state = STATE2;
       }
       else{
@@ -22,6 +26,7 @@ sub sokoban_plan(char &current_event, bool &event_complete)
         pos++;
         sokoban_plan_state = STATE1;
         event_complete = false;
+        current_event = 'N';
       }
       break;
   }

@@ -31,7 +31,7 @@ Soko_state graph_search(Soko_state &state_init, string search_type)
     bool dublicated_state = false;
 
     if ((hash_map_closed.size() % 10000) == 0)
-      cout << "[info] searched "<< hash_map_closed.size() <<" nodes"<<endl;
+      cout << "[info] visited "<< hash_map_closed.size()/1000 <<"K nodes"<<endl;
 
     // If current state is the goal state, then terminate
     if (is_goal_state(state_current))

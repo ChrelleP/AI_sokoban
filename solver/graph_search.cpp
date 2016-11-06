@@ -27,9 +27,6 @@ Soko_state graph_search(Soko_state &state_init, string search_type)
     // maintain closed set
     hash_map_closed.insert(Mymap::value_type(state_current.map_state, state_current));
 
-    // Make bools for the next loop
-    bool dublicated_state = false;
-
     if ((hash_map_closed.size() % 10000) == 0)
       cout << "[info] visited "<< hash_map_closed.size()/1000 <<"K nodes"<<endl;
 
@@ -43,29 +40,19 @@ Soko_state graph_search(Soko_state &state_init, string search_type)
     // For each state state successors of state current do
     while (!state_successors.empty())
     {
-      dublicated_state = false;
       Soko_state state_current_successors = state_successors.front();
 
-      // Is the current state successors in the open set?
-      if (hash_map_open.count(state_current_successors.map_state))
-        dublicated_state = true;
-
-      // Is the current state successors in the closed set?
-      if (hash_map_closed.count(state_current_successors.map_state))
-        dublicated_state = true;
-
-      // If seen
-      if (dublicated_state)
+      // Is the current state successors in the open or closed set?
+      if (hash_map_open.count(state_current_successors.map_state) || hash_map_closed.count(state_current_successors.map_state)){
         state_successors.pop();
-      else
-      {
-        if (search_type == "breadth_first") {
-          breadth_first_queuing(hash_map_open, state_current_successors, open_set);
-        } else if (search_type == "a_star") {
-          a_star_queuing(hash_map_open, state_current_successors, open_set);
-        }
-        state_successors.pop();
-      }
+        continue; }
+
+      if (search_type == "breadth_first")
+        breadth_first_queuing(hash_map_open, state_current_successors, open_set);
+      else if (search_type == "a_star")
+        a_star_queuing(hash_map_open, state_current_successors, open_set);
+
+      state_successors.pop();
     }
   }
   state_current.map_state = "SOLUTION NOT FOUND!\n";

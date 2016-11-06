@@ -10,7 +10,7 @@ sub line_following(int &motor_array[])
     case STATE1:
       float error = 0;    // Error term for PID controller
       float correction = 0;
-      float k_p = 0.5;        // Proportional Gain
+      float k_p = 1;        // Proportional Gain
       float k_i = 0.001;
       float k_d = 100.0;
       float light_val_right = 0;  // Value for right light sensor
@@ -20,7 +20,7 @@ sub line_following(int &motor_array[])
       previous_tick = CurrentTick();
 
       // PID controller
-      light_val_left = Sensor(LEFT_LIGHT);
+      light_val_left = Sensor(LEFT_LIGHT) + 7;
       light_val_right = Sensor(RIGHT_LIGHT);
 
       error = light_val_left - light_val_right;
@@ -34,18 +34,6 @@ sub line_following(int &motor_array[])
       }
 
       correction = error * k_p + integral * k_i + derivative * k_d;
-      /*TextOut(0,LCD_LINE1, "Correction:");
-      TextOut(0,LCD_LINE2, "                                               ");
-      TextOut(0,LCD_LINE2, NumToStr(correction));
-      TextOut(0,LCD_LINE3, "                                               ");
-      TextOut(0,LCD_LINE3, NumToStr(light_val_left));
-      TextOut(0,LCD_LINE4, "                                               ");
-      TextOut(0,LCD_LINE4, NumToStr(light_val_right));
-      TextOut(0,LCD_LINE5, "                                               ");
-      TextOut(0,LCD_LINE5, NumToStr(error));
-      TextOut(0,LCD_LINE6, "                                               ");
-      TextOut(0,LCD_LINE6, NumToStr(derivative * k_d));*/
-
 
       if (correction < -1) {
         motor_array[LEFT] = SPEED - abs(correction);

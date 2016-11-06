@@ -1,6 +1,6 @@
 // Follow Plan state function
 
-sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete, char &current_event bool &event_complete)
+sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete, char &current_event bool &event_complete, int &event_counter, int &deploy_action, bool &deploy_complete)
 {
   switch (follow_plan_state) {
     case INITIAL: // IDLE STATE
@@ -14,7 +14,7 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
         case 'F':
           follow_plan_state = STATE3;
           break;
-        case 'B':
+        case 'D':
           follow_plan_state = STATE4;
           break;
         case 'S':
@@ -26,9 +26,6 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
         default:
           break;
       }
-
-      TextOut(0,LCD_LINE7, "                                               ");
-      NumOut(0,LCD_LINE7, current_event);
       break;
     case STATE1: // TURN LEFT
       if(turn_complete == true){
@@ -55,39 +52,38 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
     case STATE3: // FORWARD
       if(cross_event == true)
       {
+        if(event_counter == 1){
+          if(slow_down < 30)
+            slow_down += 5;
+
+          motor_array[LEFT] = motor_array[LEFT] - slow_down;
+          motor_array[RIGHT] = motor_array[RIGHT] - slow_down;
+
+          if(Sensor(LEFT_LIGHT) < 50 && Sensor(RIGHT_LIGHT) < 50){
+            slow_down = 0;
+            cross_event = false;
+            follow_plan_state = INITIAL;
+            event_complete = true;
+            current_event = 'N';
+          }
+        }
+        else{
+          cross_event = false;
+          event_counter --;
+        }
+      }
+      break;
+    case STATE4: // DEPLOY
+      if(deploy_complete == true){
+        deploy_complete = false;
         cross_event = false;
-        RotateMotor(OUT_AB, -SPEED, 130);
-        follow_plan_state = INITIAL;
         event_complete = true;
+        follow_plan_state = INITIAL;
         current_event = 'N';
       }
-
-      /*switch(forward_state)
-      {
-        case 0:
-          if(cross_event == true){
-            cross_event = false;
-            motor_on = 20;
-            forward_state = 1;
-            follow_plan_state = STATE4;
-          }
-          break;
-        case 1:
-          if(motor_on == 0){
-            forward_state = 0;
-            follow_plan_state = STATE2;
-          }
-          else{
-            motor_on = motor_on - 1;
-          }
-          break;
-      }*/
-      break;
-    case STATE4: // BACKWARDS
-      int motor_left = -motor_array[LEFT];
-      int motor_right = -motor_array[RIGHT];
-      motor_array[LEFT] = motor_left;
-      motor_array[RIGHT] = motor_right;
+      else{
+        deploy_action = STATE1;
+      }
       break;
     case STATE5:
       motor_array[LEFT] = 0;

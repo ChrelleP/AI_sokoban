@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "----------------- Compiling Sokoban ---------------------"
+
+if [ $1 = "country" ]; then

@@ -69,3 +69,29 @@ sub cross_detection(int &motor_array[],bool &cross_event)
       break;
     }
 }
+
+sub cross_detection_2(int &motor_array[],bool &cross_event)
+{
+  switch(cross_detection_state)
+  {
+    case INITIAL:
+      cross_detection_state = STATE1;
+      cross_event = false;
+      //MAYBE CALIBRATE
+
+      break;
+    case STATE1: // Looking for black
+      if(Sensor(FRONT_LIGHT) < lower_thresh)
+      {
+        cross_detection_state = STATE2;
+      }
+      break;
+    case STATE2:
+      if(Sensor(FRONT_LIGHT) > upper_thresh)
+      {
+        cross_detection_state = STATE1;
+        cross_event = true;
+      }
+      break;
+  }
+}

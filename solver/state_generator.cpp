@@ -92,11 +92,37 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
   }
 
   switch (map_vector[new_row][new_col]) {
+    case 'D':
+      // Move play to the new spot
+      if (map_vector[row][col] == 'M') {
+        map_vector[new_row][new_col] = 'N';
+        map_vector[row][col] = '.';
+      } else if (map_vector[row][col] == 'N') {
+        map_vector[new_row][new_col] = 'N';
+        map_vector[row][col] = 'D';
+      } else {
+        map_vector[new_row][new_col] = 'N';
+        map_vector[row][col] = 'G';
+      }
+
+      // Update Sokoban Struct With New Values
+      new_state.moves.append(update_move);
+      new_state.cost_to_node += COST_MOVE;
+      new_state.cost_to_goal = h1(new_state);
+      new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
+      new_state.player_col = new_col;
+      new_state.player_row = new_row;
+      // Go back to string
+      vecmap2string(new_state, map_vector);
+      break;
     case '.':
       // Move play to the new spot
       if (map_vector[row][col] == 'M') {
         map_vector[new_row][new_col] = 'M';
         map_vector[row][col] = '.';
+      } else if (map_vector[row][col] == 'N') {
+        map_vector[new_row][new_col] = 'M';
+        map_vector[row][col] = 'D';
       } else {
         map_vector[new_row][new_col] = 'M';
         map_vector[row][col] = 'G';
@@ -117,6 +143,9 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
       if (map_vector[row][col] == 'M') {
         map_vector[new_row][new_col] = 'W';
         map_vector[row][col] = '.';
+      } else if (map_vector[row][col] == 'N') {
+        map_vector[new_row][new_col] = 'W';
+        map_vector[row][col] = 'D';
       } else {
         map_vector[new_row][new_col] = 'W';
         map_vector[row][col] = 'G';
@@ -137,6 +166,9 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
       if ( map_vector[row][col] == 'M' ) {
         map_vector[new_row][new_col] = 'M';
         map_vector[row][col] = '.';
+      } else if (map_vector[row][col] == 'N') {
+        map_vector[new_row][new_col] = 'M';
+        map_vector[row][col] = 'D';
       } else {
         map_vector[new_row][new_col] = 'M';
         map_vector[row][col] = 'G';
@@ -144,7 +176,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
 
       switch ( map_vector[new_row_push][new_col_push] ) {
         case '.':
-          if (deadlock_test(map_vector,new_col_push,new_row_push))
+          if (deadlock_test_dynamic(map_vector,new_col_push,new_row_push))
             no_move = true;
           else
             map_vector[new_row_push][new_col_push] = 'J';
@@ -155,6 +187,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
         case 'X':
         case 'J':
         case 'I':
+        case 'D':
         default:
           no_move = true;
           break;
@@ -179,6 +212,9 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
       if (map_vector[row][col] == 'M') {
         map_vector[new_row][new_col] = 'W';
         map_vector[row][col] = '.';
+      } else if (map_vector[row][col] == 'N') {
+        map_vector[new_row][new_col] = 'W';
+        map_vector[row][col] = 'D';
       } else {
         map_vector[new_row][new_col] = 'W';
         map_vector[row][col] = 'G';
@@ -186,7 +222,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
 
       switch ( map_vector[new_row_push][new_col_push] ) {
         case '.':
-          if (deadlock_test(map_vector,new_col_push,new_row_push))
+          if (deadlock_test_dynamic(map_vector,new_col_push,new_row_push))
             no_move = true;
           else
             map_vector[new_row_push][new_col_push] = 'J';
@@ -197,6 +233,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
         case 'X':
         case 'J':
         case 'I':
+        case 'D':
         default:
           no_move = true;
           break;
@@ -225,7 +262,7 @@ Soko_state move(const Soko_state &state_current, vector< vector<char> > map_vect
   return new_state;
 }
 
-bool deadlock_test(vector< vector<char> > map_vector, int col, int row)
+bool deadlock_test_dynamic(vector< vector<char> > map_vector, int col, int row)
 {
   char p1 = map_vector[row-1][col+1];
   char p2 = map_vector[row][col+1];
@@ -236,28 +273,12 @@ bool deadlock_test(vector< vector<char> > map_vector, int col, int row)
   char p7 = map_vector[row-1][col-1];
   char p8 = map_vector[row-1][col];
 
-  // Check for corner deadlock
-  if ((p8 == 'X' && p1 == 'X' && p2 == 'X') ||
-      (p2 == 'X' && p3 == 'X' && p4 == 'X') ||
-      (p4 == 'X' && p5 == 'X' && p6 == 'X') ||
-      (p6 == 'X' && p7 == 'X' && p8 == 'X'))
-  {
-    return true;
-  }
-
   // Check for against wall deadlock
   if (((p1 == 'X' && p2 == 'X' && p3 == 'X') && ( (p4 == 'J' || p4 == 'I') || (p8 == 'J' || p8 == 'I') )) ||
       ((p3 == 'X' && p4 == 'X' && p5 == 'X') && ( (p2 == 'J' || p2 == 'I') || (p6 == 'J' || p6 == 'I') )) ||
       ((p5 == 'X' && p6 == 'X' && p7 == 'X') && ( (p4 == 'J' || p4 == 'I') || (p8 == 'J' || p8 == 'I') )) ||
       ((p7 == 'X' && p8 == 'X' && p1 == 'X') && ( (p2 == 'J' || p2 == 'I') || (p6 == 'J' || p6 == 'I') )))
-  {
     return true;
-  }
-
-  // Chek for empty goal wall deadlock (Make one for eack wall direction)
-  if (false) {
-    // Check if we meed a wall or box before a goal
-  }
 
   return false;
 }
@@ -270,4 +291,13 @@ void vecmap2string (Soko_state &input_state, vector<vector<char>> &map_vector)
       input_state.map_state.push_back( map_vector[i][j] );
     input_state.map_state.push_back('\n');
   }
+}
+
+bool is_goal_state(Soko_state &state_current)
+{
+  size_t legal_chars = state_current.map_state.find_first_not_of("XI.MND\n");
+  if(legal_chars != string::npos)
+    return false;
+  else
+    return true;
 }

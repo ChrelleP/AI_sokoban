@@ -1,7 +1,7 @@
-#include "informed_search.h"
+#include "graph_search.h"
 // https://msdn.microsoft.com/en-us/library/bb982522.aspx
 
-Soko_state informed_search(Soko_state &state_init, string search_type)
+Soko_state graph_search(Soko_state &state_init, string search_type)
 {
   cout << "\n[info] executing " << search_type << " search!" << endl;
 

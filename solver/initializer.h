@@ -1,12 +1,10 @@
-#ifndef COMMON
-#define COMMON
+#ifndef INITILIZER
+#define INITILIZER
 // Includes
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
-#include <queue>
-#include <deque>
 #include <sstream>
 
 using namespace std;
@@ -25,9 +23,9 @@ struct Soko_state
   int f_score;
 };
 
-bool is_goal_state(Soko_state &state_current);
+#include"heuristics.h"
+
 void make_init_state(int argc, char** argv, Soko_state &init_state);
-void deadlock_tester(Soko_state &init_state);
-int h1(const Soko_state &cur_state);
+void deadlock_tester_static(Soko_state &init_state);
 
 #endif

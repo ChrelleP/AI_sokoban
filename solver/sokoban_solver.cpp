@@ -8,6 +8,7 @@
 * . = free ground
 * M = robot on free
 * W = robot on goal
+* N = robot on deadlock
 */
 
 #include <iostream>
@@ -16,9 +17,8 @@
 #include <vector>
 #include <queue>
 #include <deque>
-#include "common.h"
-#include "state_generator.h"
-#include "informed_search.h"
+#include "initializer.h"
+#include "graph_search.h"
 
 
 using namespace std;
@@ -46,7 +46,7 @@ int main(int argc, char** argv)
     return 0;
   }
 
-  solution_state = informed_search(init_state, search_type);
+  solution_state = graph_search(init_state, search_type);
 
   cout << "[info] solution is:\n" << solution_state.moves << endl;
   cout << "[info] solved map is:\n" << solution_state.map_state << endl;

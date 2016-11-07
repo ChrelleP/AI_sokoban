@@ -27,9 +27,6 @@ Soko_state graph_search(Soko_state &state_init, string search_type)
     // maintain closed set
     hash_map_closed.insert(Mymap::value_type(state_current.map_state, state_current));
 
-    if ((hash_map_closed.size() % 10000) == 0)
-      cout << "[info] visited "<< hash_map_closed.size()/1000 <<"K nodes"<<endl;
-
     // If current state is the goal state, then terminate
     if (is_goal_state(state_current))
       return state_current;
@@ -54,6 +51,8 @@ Soko_state graph_search(Soko_state &state_init, string search_type)
 
       state_successors.pop();
     }
+    if ((hash_map_closed.size() % 10000) == 0)
+      cout << "[info] visited "<< hash_map_closed.size()/1000 <<"K nodes"<<endl;
   }
   state_current.map_state = "SOLUTION NOT FOUND!\n";
   return state_current;

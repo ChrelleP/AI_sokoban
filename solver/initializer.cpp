@@ -44,12 +44,9 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
     if(!found)
       row++;
 
-    for (int j = 0; j < init_state.width ; j++)
-    {
-      if (!found)
-      {
-        if (line[j] == 'M' || line[j] == 'W' || line[j] == 'N')
-        {
+    for (int j = 0; j < init_state.width ; j++){
+      if (!found){
+        if (line[j] == 'M' || line[j] == 'W' || line[j] == 'N'){
           col = j;
           found = true;
         }

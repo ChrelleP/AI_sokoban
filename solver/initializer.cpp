@@ -75,34 +75,19 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
 //http://www.lamsade.dauphine.fr/~cazenave/papers/sokoban.pdf
 void deadlock_tester_static(Soko_state &init_state)
 {
-  vector< vector<char>> map_vector;
-  map_vector.resize( init_state.height , vector<char>( init_state.width , 'Q' ) );
-
-  // Make string to vector<vector<char>> map
-  int row_tmp = 0, col_tmp = 0;
-  for (int i = 0; i < init_state.map_state.size(); i++) {
-    if (init_state.map_state[i]=='\n') {
-      row_tmp += 1;
-      col_tmp = 0;
-    }
-    else {
-      map_vector[row_tmp][col_tmp] = init_state.map_state[i];
-      col_tmp +=1;
-    }
-  }
-
   char p1,p2,p3,p4,p5,p6,p7,p8;
+  int row_tmp = 0, col_tmp = 0;
 
   for (int row = 1; row < init_state.height-1; row++) {
     for (int col = 1; col < init_state.width-1; col++) {
-      p1 = map_vector[row-1][col+1];
-      p2 = map_vector[row][col+1];
-      p3 = map_vector[row+1][col+1];
-      p4 = map_vector[row+1][col];
-      p5 = map_vector[row+1][col-1];
-      p6 = map_vector[row][col-1];
-      p7 = map_vector[row-1][col-1];
-      p8 = map_vector[row-1][col];
+      p1 = init_state.get(row-1,col+1);
+      p2 = init_state.get(row,col+1);
+      p3 = init_state.get(row+1,col+1);
+      p4 = init_state.get(row+1,col);
+      p5 = init_state.get(row+1,col-1);
+      p6 = init_state.get(row,col-1);
+      p7 = init_state.get(row-1,col-1);
+      p8 = init_state.get(row-1,col);
 
       // DEADLOCK CORNER TESTS:
       row_tmp = row;
@@ -110,195 +95,189 @@ void deadlock_tester_static(Soko_state &init_state)
 
       if (p8 == 'X' && p2 == 'X') {
 
-        if (map_vector[row][col] == '.' || map_vector[row][col] == 'M') {
-          if ( map_vector[row][col] == 'M') {
-            map_vector[row][col] = 'N';
-          } else map_vector[row][col] = 'D';
+        if (init_state.get(row,col) == '.' || init_state.get(row,col) == 'M') {
+          if ( init_state.get(row,col) == 'M') {
+            init_state.set(row,col,'N');
+          } else init_state.set(row,col,'D');
           // HORISONTAL RIGHT TOP CORNER
           bool clean_wall = false;
-          while ( map_vector[row_tmp-1][col_tmp] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if (map_vector[row_tmp][col_tmp-1] == 'X') {
+          while ( init_state.get(row_tmp-1,col_tmp) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if (init_state.get(row_tmp,col_tmp-1) == 'X') {
               row_tmp = row;
               col_tmp = col;
               clean_wall = true;
               break;
             } else col_tmp--; }
 
-          while ( map_vector[row_tmp-1][col_tmp] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if ( map_vector[row_tmp][col_tmp] == 'M') {
-              map_vector[row_tmp][col_tmp] = 'N';
-            } else if ( map_vector[row_tmp][col_tmp] == '.')
-              map_vector[row_tmp][col_tmp] = 'D';
+          while ( init_state.get(row_tmp-1,col_tmp) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if ( init_state.get(row_tmp,col_tmp) == 'M') {
+              init_state.set(row_tmp,col_tmp,'N');
+            } else if ( init_state.get(row_tmp,col_tmp) == '.')
+              init_state.set(row_tmp,col_tmp,'D');
             col_tmp--; }
 
           // VERTICAL LEFT TOP CORNER
           row_tmp = row;
           col_tmp = col;
           clean_wall = false;
-          while ( map_vector[row_tmp][col_tmp+1] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if (map_vector[row_tmp+1][col_tmp] == 'X') {
+          while ( init_state.get(row_tmp,col_tmp+1) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if (init_state.get(row_tmp+1,col_tmp) == 'X') {
               row_tmp = row;
               col_tmp = col;
               clean_wall = true;
               break;
             } else row_tmp++; }
 
-          while ( map_vector[row_tmp][col_tmp+1] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if ( map_vector[row_tmp][col_tmp] == 'M') {
-              map_vector[row_tmp][col_tmp] = 'N';
-            } else if ( map_vector[row_tmp][col_tmp] == '.')
-              map_vector[row_tmp][col_tmp] = 'D';
+          while ( init_state.get(row_tmp,col_tmp+1) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if ( init_state.get(row_tmp,col_tmp) == 'M') {
+              init_state.set(row_tmp,col_tmp,'N');
+            } else if ( init_state.get(row_tmp,col_tmp) == '.')
+              init_state.set(row_tmp,col_tmp,'D');
             row_tmp++; }
         }
 
       } else if (p2 == 'X' && p4 == 'X') {
-        if (map_vector[row][col] == '.' || map_vector[row][col] == 'M') {
-          if ( map_vector[row][col] == 'M') {
-            map_vector[row][col] = 'N';
-          } else map_vector[row][col] = 'D';
+        if (init_state.get(row,col) == '.' || init_state.get(row,col) == 'M') {
+          if ( init_state.get(row,col) == 'M') {
+            init_state.set(row,col,'N');
+          } else init_state.set(row,col,'D');
           // HORISONTAL RIGHT BOTTOM CORNER
           bool clean_wall = false;
-          while ( map_vector[row_tmp+1][col_tmp] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if (map_vector[row_tmp][col_tmp-1] == 'X') {
+          while ( init_state.get(row_tmp+1,col_tmp) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if (init_state.get(row_tmp,col_tmp-1) == 'X') {
               row_tmp = row;
               col_tmp = col;
               clean_wall = true;
               break;
             } else col_tmp--; }
 
-          while ( map_vector[row_tmp+1][col_tmp] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if ( map_vector[row_tmp][col_tmp] == 'M') {
-              map_vector[row_tmp][col_tmp] = 'N';
-            } else if ( map_vector[row_tmp][col_tmp] == '.')
-              map_vector[row_tmp][col_tmp] = 'D';
+          while ( init_state.get(row_tmp+1,col_tmp) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if ( init_state.get(row_tmp,col_tmp) == 'M') {
+              init_state.set(row_tmp,col_tmp,'N');
+            } else if ( init_state.get(row_tmp,col_tmp) == '.')
+              init_state.set(row_tmp,col_tmp,'D');
             col_tmp--; }
 
           // VERTICAL LEFT BOTTOM CORNER
           row_tmp = row;
           col_tmp = col;
           clean_wall = false;
-          while ( map_vector[row_tmp][col_tmp+1] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if (map_vector[row_tmp-1][col_tmp] == 'X') {
+          while ( init_state.get(row_tmp,col_tmp+1) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if (init_state.get(row_tmp-1,col_tmp) == 'X') {
               row_tmp = row;
               col_tmp = col;
               clean_wall = true;
               break;
             } else row_tmp--; }
 
-          while ( map_vector[row_tmp][col_tmp+1] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if ( map_vector[row_tmp][col_tmp] == 'M') {
-              map_vector[row_tmp][col_tmp] = 'N';
-            } else if ( map_vector[row_tmp][col_tmp] == '.')
-              map_vector[row_tmp][col_tmp] = 'D';
+          while ( init_state.get(row_tmp,col_tmp+1) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if ( init_state.get(row_tmp,col_tmp) == 'M') {
+              init_state.set(row_tmp,col_tmp,'N');
+            } else if ( init_state.get(row_tmp,col_tmp) == '.')
+              init_state.set(row_tmp,col_tmp,'D');
             row_tmp--; }
         }
       } else if (p4 == 'X' && p6 == 'X') {
-        if (map_vector[row][col] == '.' || map_vector[row][col] == 'M') {
-          if ( map_vector[row][col] == 'M') {
-            map_vector[row][col] = 'N';
-          } else map_vector[row][col] = 'D';
+        if (init_state.get(row,col) == '.' || init_state.get(row,col) == 'M') {
+          if ( init_state.get(row,col) == 'M') {
+            init_state.set(row,col,'N');
+          } else init_state.set(row,col,'D');
           // HORISONTAL LEFT BOTTOM CORNER
           bool clean_wall = false;
-          while ( map_vector[row_tmp+1][col_tmp] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if (map_vector[row_tmp][col_tmp+1] == 'X') {
+          while ( init_state.get(row_tmp+1,col_tmp) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if (init_state.get(row_tmp,col_tmp+1) == 'X') {
               row_tmp = row;
               col_tmp = col;
               clean_wall = true;
               break;
             } else col_tmp++; }
 
-          while ( map_vector[row_tmp+1][col_tmp] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if ( map_vector[row_tmp][col_tmp] == 'M') {
-              map_vector[row_tmp][col_tmp] = 'N';
-            } else if ( map_vector[row_tmp][col_tmp] == '.')
-              map_vector[row_tmp][col_tmp] = 'D';
+          while ( init_state.get(row_tmp+1,col_tmp) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if ( init_state.get(row_tmp,col_tmp) == 'M') {
+              init_state.set(row_tmp,col_tmp,'N');
+            } else if ( init_state.get(row_tmp,col_tmp) == '.')
+              init_state.set(row_tmp,col_tmp,'D');
             col_tmp++; }
 
           // VERTICAL LEFT BOTTOM CORNER
           row_tmp = row;
           col_tmp = col;
           clean_wall = false;
-          while ( map_vector[row_tmp][col_tmp-1] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if (map_vector[row_tmp-1][col_tmp] == 'X') {
+          while ( init_state.get(row_tmp,col_tmp-1) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if (init_state.get(row_tmp-1,col_tmp) == 'X') {
               row_tmp = row;
               col_tmp = col;
               clean_wall = true;
               break;
             } else row_tmp--; }
 
-          while ( map_vector[row_tmp][col_tmp-1] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if ( map_vector[row_tmp][col_tmp] == 'M') {
-              map_vector[row_tmp][col_tmp] = 'N';
-            } else if ( map_vector[row_tmp][col_tmp] == '.')
-              map_vector[row_tmp][col_tmp] = 'D';
+          while ( init_state.get(row_tmp,col_tmp-1) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if ( init_state.get(row_tmp,col_tmp) == 'M') {
+              init_state.set(row_tmp,col_tmp,'N');
+            } else if ( init_state.get(row_tmp,col_tmp) == '.')
+              init_state.set(row_tmp,col_tmp,'D');
             row_tmp--; }
         }
       } else if (p6 == 'X' && p8 == 'X') {
-        if (map_vector[row][col] == '.' || map_vector[row][col] == 'M') {
-          if ( map_vector[row][col] == 'M') {
-            map_vector[row][col] = 'N';
-          } else map_vector[row][col] = 'D';
+        if (init_state.get(row,col) == '.' || init_state.get(row,col) == 'M') {
+          if ( init_state.get(row,col) == 'M') {
+            init_state.set(row,col,'N');
+          } else init_state.set(row,col,'D');
 
           // HORISONTAL LEFT TOP CORNER
           bool clean_wall = false;
-          while ( map_vector[row_tmp-1][col_tmp] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if (map_vector[row_tmp][col_tmp+1] == 'X') {
+          while ( init_state.get(row_tmp-1,col_tmp) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if (init_state.get(row_tmp,col_tmp+1) == 'X') {
               row_tmp = row;
               col_tmp = col;
               clean_wall = true;
               break;
             } else col_tmp++; }
 
-          while ( map_vector[row_tmp-1][col_tmp] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if ( map_vector[row_tmp][col_tmp] == 'M') {
-              map_vector[row_tmp][col_tmp] = 'N';
-            } else if ( map_vector[row_tmp][col_tmp] == '.')
-              map_vector[row_tmp][col_tmp] = 'D';
+          while ( init_state.get(row_tmp-1,col_tmp) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if ( init_state.get(row_tmp,col_tmp) == 'M') {
+              init_state.set(row_tmp,col_tmp,'N');
+            } else if ( init_state.get(row_tmp,col_tmp) == '.')
+              init_state.set(row_tmp,col_tmp,'D');
             col_tmp++; }
 
           // VERTICAL LEFT TOP CORNER
           row_tmp = row;
           col_tmp = col;
           clean_wall = false;
-          while ( map_vector[row_tmp][col_tmp-1] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if (map_vector[row_tmp+1][col_tmp] == 'X') {
+          while ( init_state.get(row_tmp,col_tmp-1) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if (init_state.get(row_tmp+1,col_tmp) == 'X') {
               row_tmp = row;
               col_tmp = col;
               clean_wall = true;
               break;
             } else row_tmp++; }
 
-          while ( map_vector[row_tmp][col_tmp-1] == 'X' &&
-                ( map_vector[row_tmp][col_tmp] == '.' || map_vector[row_tmp][col_tmp] == 'D' || map_vector[row_tmp][col_tmp] == 'M' || map_vector[row_tmp][col_tmp] == 'N') ) {
-            if ( map_vector[row_tmp][col_tmp] == 'M') {
-              map_vector[row_tmp][col_tmp] = 'N';
-            } else if ( map_vector[row_tmp][col_tmp] == '.')
-              map_vector[row_tmp][col_tmp] = 'D';
+          while ( init_state.get(row_tmp,col_tmp-1) == 'X' &&
+                ( init_state.get(row_tmp,col_tmp) == '.' || init_state.get(row_tmp,col_tmp) == 'D' || init_state.get(row_tmp,col_tmp) == 'M' || init_state.get(row_tmp,col_tmp) == 'N') ) {
+            if ( init_state.get(row_tmp,col_tmp) == 'M') {
+              init_state.set(row_tmp,col_tmp,'N');
+            } else if ( init_state.get(row_tmp,col_tmp) == '.')
+              init_state.set(row_tmp,col_tmp,'D');
             row_tmp++; }
 
         }
       }
     }
-  }
-  init_state.map_state = "";
-  for (int i = 0; i < init_state.height; i++) {
-    for (int j = 0; j < init_state.width; j++)
-      init_state.map_state.push_back( map_vector[i][j] );
-    init_state.map_state.push_back('\n');
   }
 }

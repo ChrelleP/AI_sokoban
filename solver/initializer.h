@@ -13,8 +13,8 @@ using namespace std;
 struct Soko_state
 {
   string map_state;
-  void set( int row, int col, char value ){ map_state[(row*(height+1))+col] = value; }
-  char get( int row, int col ){ return map_state[(row*(height+1))+col]; }
+  void set( int row, int col, char value ){ map_state[(row*(width+1))+col] = value; }
+  char get( int row, int col ){ return map_state[(row*(width+1))+col]; }
   string moves;
   int player_row;
   int player_col;

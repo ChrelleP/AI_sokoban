@@ -96,7 +96,6 @@ Soko_state move(const Soko_state &state_current, char movement_type)
       new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
       new_state.player_col = new_col;
       new_state.player_row = new_row;
-      // Go back to string
       break;
     case '.':
       // Move play to the new spot
@@ -248,7 +247,7 @@ bool deadlock_test_dynamic(Soko_state state_current, int col, int row)
   char p7 = state_current.get(row-1,col-1);
   char p8 = state_current.get(row-1,col);
 
-  // Check against wall and besides box deadlock 
+  // Check against wall and besides box deadlock
   if (((p1 == 'X' && p2 == 'X' && p3 == 'X') && ( (p4 == 'J' || p4 == 'I') || (p8 == 'J' || p8 == 'I') )) ||
       ((p3 == 'X' && p4 == 'X' && p5 == 'X') && ( (p2 == 'J' || p2 == 'I') || (p6 == 'J' || p6 == 'I') )) ||
       ((p5 == 'X' && p6 == 'X' && p7 == 'X') && ( (p4 == 'J' || p4 == 'I') || (p8 == 'J' || p8 == 'I') )) ||

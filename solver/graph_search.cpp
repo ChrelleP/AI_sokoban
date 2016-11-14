@@ -28,8 +28,10 @@ Soko_state graph_search(Soko_state &state_init, string search_type)
     hash_map_closed.insert(Mymap::value_type(state_current.map_state, state_current));
 
     // If current state is the goal state, then terminate
-    if (is_goal_state(state_current))
+    if (is_goal_state(state_current)){
+      cout << "[info] visited a total of "<< hash_map_closed.size() <<" nodes"<<endl;
       return state_current;
+    }
 
     // State generation
     queue<Soko_state> state_successors = make_states(state_current);
@@ -81,4 +83,13 @@ void a_star_queuing(Mymap &hash_map_open, Soko_state &state_current_successors, 
 
   if (!inserted)
     open_set.push_back(state_current_successors);
+}
+
+bool is_goal_state(Soko_state &state_current)
+{
+  size_t legal_chars = state_current.map_state.find_first_not_of("XI.MND\n");
+  if(legal_chars != string::npos)
+    return false;
+  else
+    return true;
 }

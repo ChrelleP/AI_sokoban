@@ -256,12 +256,3 @@ bool deadlock_test_dynamic(Soko_state state_current, int col, int row)
 
   return false;
 }
-
-bool is_goal_state(Soko_state &state_current)
-{
-  size_t legal_chars = state_current.map_state.find_first_not_of("XI.MND\n");
-  if(legal_chars != string::npos)
-    return false;
-  else
-    return true;
-}

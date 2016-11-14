@@ -1,0 +1,541 @@
+Microban III variations
+
+Collection: Microban III variations
+Authors: David W. Skinner and Jordi Domenech
+Email: jd_sokoban@abelmartin.com
+Website:
+- David W. Skinner:
+http://users.bentonrea.com/~sasquatch/sokoban/
+- Jordi Domenech:
+http://www.abelmartin.com/rj/sokoban.html
+http://sokoban-jd.blogspot.com/
+Copyright: (c) David W. Skinner and Jordi Domenech
+Date: May 2012
+
+Author's note:
+Most of these variations are from 2010. Some of this were posted in 
+the Yahoo Sokoban forum, but until now I have not decided to collect 
+them in a collection. What sense does add some boxes or walls to 
+increase the difficulty, in these levels that are for beginners, 
+or even for children, such as Skinner says in its website? It seems 
+to me absurd. But the difficulty is the law of gravity of Sokoban, 
+and all the levels tend to the difficulty in the same way that a stone 
+tends to the center of the Earth. It is inevitable. However, I am a 
+strong supporter of the levels for beginners, i.e. of the easy and 
+nice but good levels. In any case, here are these variations, that 
+at least I have tried to make them attractive for all lovers of this 
+classic and excellent David W. Skinner Microban collection.- J.D. 
+
+----------------------------------------------------------------------
+
+These levels are copyright (c) by David W. Skinner and Jordi Domenech 
+and may be freely distributed for non-commercial use provided they 
+remain unchanged, credited with the author's name, and provided the 
+author is notified. 
+
+License: Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported
+http://creativecommons.org/licenses/by-nc-nd/3.0/
+
+-----------------------------------------------------------------------
+
+
+#######
+#     #
+# .$$ #
+##. ###
+# .$$ #
+# . # #
+#   @ #
+#######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #3
+Comment: added a box, rearranged boxes
+
+################
+#  #  #  #  #  #
+#. .  #  #$ #$ #
+# $#  *  # .#  #
+#  #. #  *  #$ #
+# $# $#  #  . .#
+#  #  # @#  #  #
+################
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #8
+Comment: added 4 boxes
+
+####
+#  #####
+#      #
+# .#.# #
+##$$$$ #
+# . .###
+# @  #
+######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #15
+Comment: added a wall and a floor
+
+    ####
+ ####  ##
+ #  # * ##
+##.$#  * ##
+#     * * #
+# @ #  *  #
+######    #
+     ######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #20 (a)
+Comment: stoned 2 floors
+
+   ####
+####  ##
+#  # * ##
+#.$#  * ##
+#    * * #
+# @#  *  #
+######   #
+     #  ##
+     ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #20 (b)
+Comment: stoned 3 floors
+
+    #####
+   ##   #
+   #  @ #
+#### #$##
+#...  . #
+#  ###  #
+## $ $ ##
+ #  $ ##
+ ###  #
+   ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #21
+Comment: added a box
+
+   ######
+   #  . #
+   #  $ #
+   ## #######
+#####   ##  #
+#  #  *     #
+#.$# *+* #$.#
+#     *  #  #
+#  ## $ #####
+####### ##
+    # $  #
+    # .  #
+    ######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #23 (a)
+Comment: added a box, stoned many floors
+
+    ####
+    #  ###
+    # $. #
+    #  $ #
+    ## ########
+ #####   ##   #
+ #  # .*.   $ #
+##.$# *@* #$.##
+# $   .*. #  #
+#   ##   #####
+######## ##
+     # $  #
+     # .$ #
+     ###  #
+       ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #23 (b)
+Comment: added 4 boxes
+
+    ####
+    #  ###
+    #  . #
+    #  $ #
+    ## ########
+ #####    #   #
+ #  # ***     #
+##.$# *+* #$.##
+#     *** #  #
+#   #     ####
+######## ##
+     # $  #
+     # .$ #
+     ###  #
+       ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #23 (c)
+Comment: added 5 boxes, deleted 3 walls
+
+    ####
+    #  ###
+    # $. #
+    #  $ #
+    ## ########
+ ####.   .#   #
+ #  # ***   $ #
+##.$# *@* #$.##
+# $   *** #  #
+#   #.   .####
+######## ##
+     # $  #
+     # .$ #
+     ###  #
+       ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #23 (d)
+Comment: added 8 boxes, deleted 4 walls
+Set: The beautiful world of remodels 3 #42
+
+    ####
+    #  ###
+    # $. #
+    #  $ #
+    ## ########
+ #####  ###   #
+ #  ## .    $ #
+##.$# .*. #$.##
+# $    . ##  #
+#   ###  #####
+######## ##
+     # $  #
+     # .$ #
+     ### @#
+       ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #24 (a)
+Comment: added a box
+
+    ####
+    #  ###
+    # $. #
+    #  $ #
+    ## ########
+ #####  ###   #
+ #  ##.*      #
+##.$# * * #$.##
+#      *.##  #
+#   ###  #####
+######## ##
+     # $  #
+     # .$ #
+     ### @#
+       ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #24 (b)
+Comment: added 2 boxes
+
+#########
+#   ## .#
+#      .#
+## #$# .#####
+ # #   .##  #
+## ####  $$ #
+#  #   ##$  #
+#        @ ##
+#  #########
+####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #27
+Comment: some changes on the left side, added a wall
+
+####  ####
+#  ####  #
+# $$  $$ #
+# .$..$. #
+## .@ . ##
+ ########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #28
+Comment: stoned 4 floors
+
+###########
+#         ##
+# ### ###  #
+# .*.*.*.  #
+#   $+$   ##
+###$###$###
+  #  $   #
+  #  #   #
+  #  #####
+  ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #30
+Comment: extension
+
+       ####
+  ###### .#
+###      .#
+#  $$ # ..#
+# $  #  .##
+#  $$# #.###
+###  # $*  #
+  #    # # #
+  #####    #
+      # @ ##
+      #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #31
+Comment: added 2 boxes
+
+           #######
+          ##     #
+         ##  ### #
+         #  $ $  ##
+         # $ $ $  #
+ #########  ### @ #
+ # . . . # ## #####
+##   .   $   $ #
+#  . . . # #   #
+# ######## #####
+#          #
+############
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #33
+Comment: added a box
+
+     ####
+   ### @#
+   #  $ #
+   #    #
+  ### ###
+ ## $$ #
+##.....#
+#   $$ #
+# # #  #
+#   ####
+#####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #39 (a)
+Comment: stoned 5 floors
+
+      ####
+     ## @#
+   ### $ #
+   #  $  #
+   #    ##
+  ### ###
+### $$ #
+#......#
+#   $$ #
+# # #  #
+#   ####
+#####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #39 (b)
+Comment: added a box
+
+   ########
+   #   #  #
+   #    $ #
+ #####$## #
+ #   # ##.#
+ #   #  #.#
+ ##  $  #.#
+  #  #  #.#
+  #$#####.#
+### #  ##.##
+#      $   #
+# $#   # @ #
+#      #####
+########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #40
+Comment: some changes at the bottom
+
+#####
+#   #######
+#  . . . .#
+## $ $ $  #
+######@####
+#  $ $ $ #
+#  . . . #
+#######$ #
+      #  #
+      ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #42
+Comment: added a box, rearranged goals
+
+#####    #####
+#. #######   #
+# $ #####  $ #
+#  $ ###  $ ##
+##  $ #  $ ###
+ ##  .... ###
+ ### .##*####
+ ####*##. ###
+ ### ....  ##
+### $  # $  ##
+## $  ### $  #
+# $  ##### $ #
+#@  ####### .#
+#####    #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #46
+Comment: added 2 boxes
+Set: The beautiful world of remodels 3 #43
+
+  #########
+  #       #
+### # # # ###
+#  $.$.$.$  #
+# #.$.$.$.# #
+# .$.# #.$$ #
+# #.$ @ $.# #
+# $$.# #.$. #
+# #.$.$.$.# #
+#  $.$.$.$  #
+### #.#$# ###
+  #       #
+  #########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #57 (a)
+Comment: added 3 boxes
+
+  #########
+  #       #
+### # # # ###
+#  $.$.$.$  #
+# #.$.$.$.# #
+#  $.# #.$# #
+# #.$ @ $.# #
+# #$.# #.$  #
+# #.$.$.$.# #
+#  $.$.$.$  #
+### # ### ###
+  #       #
+  #########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #57 (b)
+Comment: added 3 walls
+
+###############
+#             #
+# # # # #$#.# #
+# .$.$.$.$.$  #
+# #.$.$.$.$.# #
+# $$.$.$.$.$  #
+# #.$.$.$.$.# #
+#  $.$.@.$.$  #
+# #.$.$.$.$.# #
+#  $.$.$.$.$$ #
+# #.$.$.$.$.# #
+#  $.$.$.$.$. #
+# #.#$# # # # #
+#             #
+###############
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #58
+Comment: added 4 boxes
+
+#################
+#               #
+#*...*######### #
+#.$$$.  $       #
+#.$@$.######### #
+#.$$$.    $     #
+#*...*######### #
+#  $        $   #
+# ############# #
+#               #
+#################
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #59
+Comment: added 3 boxes, rearranged goals/boxes
+
+     ####
+######  #
+#   ##@ #
+#    #$.#
+##    $.#
+ ##  #$.#
+  ####  #
+     ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #64 LOMA 1e
+Comment: stoned 4 floors
+
+ #####
+ #   #
+##   #
+# * ##
+#.@$#
+# * #
+#  ##
+####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #89 LOMA 8a
+Comment: stoned 3 floors
+
+ #####
+##   #
+# *  #
+#.@$##
+# *  #
+##   #
+ #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #91 LOMA 8c
+Comment: stoned 2 floors
+
+ ######
+ #    ##
+## ##  #
+# . ## #
+# .  # #
+# .  # #
+###$$$ #
+  #@ ###
+  ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #92 LOMA 8d
+Comment: rearranged goals/boxes
+
+     #####     #####     #####     #####
+     #   #######   #######   #######   ####
+     # # #  #### # #  #### # #  #### # #  ##
+     #       ###       ###       ###       ##
+    #### #    #### #    #### #    #### #    ##
+#######   #    ##   #    ##   #    ##   #    #
+#   ###    #    #    #    #    #    #    # $ #
+# # #  #    #    #    #    #    #    # ** #  #
+#       #    #    #    #    #    #    #    ###
+### #    #    #    #    #    #    #    #    ##
+ #   #    #    #    #    #    #    #    #    #
+ #    #    #    #    #    #    #    #    #   #
+ ##    #    #    #    #    #    #    #    # ###
+ ###    #    #    #    #    #    #    #       #
+ ####    #    # ** #    #    #    #    #  # # #
+######    #    #    #    #    #    #    ###   #
+#   ###    #    #    # ** #    #    #    ######
+# # #  #    #    # ** #    #    #    #    ####
+#       #    # ** #    #    # ** #    #    ###
+### #    #    #    #    # ** #    #    #    ##
+ #   #    #    #    # ** #    #    #    #    #
+ #    #    #    # ** #    #    #    #    #   #
+ ##    #    # ** #    #    # ** #    #    # ###
+ ###    #    #    #    # ** #    #    #       #
+ ####    #    #    # ** #    #    #    #  # # #
+######    #    #    #    #    #    #    ###   #
+#   ###    #    #    #    # ** #    #    ######
+# # #  #    #    #    #    #    #    #    ####
+#       #    #    #    #    #    #    #    ###
+### #    #    #    #    #    #    #    #    ##
+ #   #    #    #    #    #    #    #    #    #
+ #    #    #    #    #    #    #    #    #   #
+ ##    #    #    #    #    #    #    #    # ###
+ ###    #    #    #    #    #    #    #       #
+ #  # ** #    #    #    #    #    #    #  # # #
+ # . #    #    #    #    #    #    #    ###   #
+ #  @ #   ##    #   ##    #   ##    #   #######
+ ##    # ####    # ####    # ####    # ####
+  ##       ###       ###       ###       #
+   ##  # # ####  # # ####  # # ####  # # #
+    ####   #######   #######   #######   #
+       #####     #####     #####     #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban III #101
+Comment: added 30 boxes

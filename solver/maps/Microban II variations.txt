@@ -1,0 +1,770 @@
+Microban II variations
+
+Collection: Microban II variations
+Authors: David W. Skinner and Jordi Domenech
+Email: jd_sokoban@abelmartin.com
+Website:
+- David W. Skinner:
+http://users.bentonrea.com/~sasquatch/sokoban/
+- Jordi Domenech:
+http://www.abelmartin.com/rj/sokoban.html
+http://sokoban-jd.blogspot.com/
+Copyright: (c) David W. Skinner and Jordi Domenech
+Date: May 2012
+
+Author's note:
+Most of these variations are from 2010. Some of this were posted in 
+the Yahoo Sokoban forum, but until now I have not decided to collect 
+them in a collection. What sense does add some boxes or walls to 
+increase the difficulty, in these levels that are for beginners, 
+or even for children, such as Skinner says in its website? It seems 
+to me absurd. But the difficulty is the law of gravity of Sokoban, 
+and all the levels tend to the difficulty in the same way that a stone 
+tends to the center of the Earth. It is inevitable. However, I am a 
+strong supporter of the levels for beginners, i.e. of the easy and 
+nice but good levels. In any case, here are these variations, that 
+at least I have tried to make them attractive for all lovers of this 
+classic and excellent David W. Skinner Microban collection.- J.D. 
+
+----------------------------------------------------------------------
+
+These levels are copyright (c) by David W. Skinner and Jordi Domenech 
+and may be freely distributed for non-commercial use provided they 
+remain unchanged, credited with the author's name, and provided the 
+author is notified. 
+
+License: Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported
+http://creativecommons.org/licenses/by-nc-nd/3.0/
+
+-----------------------------------------------------------------------
+
+
+#####
+#   #
+#   ##
+#$$$@#
+#... #
+######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #10
+Comment: stoned 2 floors
+
+ #####
+ #   #
+ # # #
+##*..#
+# $ ##
+# $  #
+# @  #
+######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #17
+Comment: rearranged goals/boxes
+
+ ####
+ #  ###
+ #$.  #
+ # .# #
+##$.  #
+# $ ###
+# @ #
+#####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #20
+Comment: moved a goal
+
+     #####
+######   #
+#  @## # #
+# $$$    #
+### ###$###
+#        .##
+#   ###... #
+#####    # #
+    # #  # #
+    # #### #
+    #      #
+    ########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #24
+Comment: added 2 boxes
+
+#######
+#  +  #
+# *$* #
+#. # .#
+#  #  #
+#  #  #
+# $#$ #
+#  #  #
+#######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #27
+Comment: reduction map
+
+######
+#    #
+# ##$###
+# # $  #
+# ..*. #
+##  $  #
+ #@# ###
+ #   #
+ #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #29 (a)
+Comment: extension, added a box
+
+######
+#    #
+# ##$###
+# # $  #
+#  .*..#
+##  $  #
+ #@# ###
+ #   #
+ #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #29 (b)
+Comment: extension, added a box
+
+######
+#    #
+# ##$###
+# # $  #
+#  .*..#
+# # $  #
+# @  ###
+######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #29 (c)
+Comment: extension, added a box
+
+######
+#    #
+# ##$#####
+# # $    #
+# ..*..# #
+##  $    #
+ #@#$#####
+ #   #
+ #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #29 (d)
+Comment: extension, added 2 boxes
+
+######
+#    #
+# ##$###
+# # $  ##
+# ..*.. #
+##  $ # #
+ #@#$   #
+ #   ####
+ #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #29 (e)
+Comment: extension, added 2 boxes
+
+######
+#    #
+# ##$####
+# # $   #
+#...*.. #
+##  $ # #
+ #@#$ $ #
+ #   ####
+ #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #29 (f)
+Comment: extension, added 3 boxes
+
+  ########
+  #  #   #
+  #  $   #
+  #  ##$##
+#### ##  #
+#  ...#$ #
+#  $ .   #
+###### @##
+     ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #31
+Comment: added a box
+
+ #####
+ #   #
+## . #
+#  * #
+# # ##
+#  $ #
+## * #
+ # * #
+ # @ #
+ #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #40
+Comment: extension, added a box
+
+########
+#  #   #
+#      #
+#  ## ###
+## ##$$ #
+## ## #@#
+# . .$. #
+#   #####
+#####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #46
+Comment: reduction map
+
+  ####
+###  #
+#    #
+# .$.##
+##$#$ #
+ #.$. #
+ #    #
+ ##@ ##
+  ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #49
+Comment: stoned 2 floors
+
+#######
+#  $. #
+#  $. #
+###  ###
+ # $.  #
+ #@$.  #
+ #######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #51
+Comment: stoned 4 floors
+
+ ######
+ #    ###
+ # $  $ #
+###$# # ##
+# .$...  #
+#   ## @ #
+##########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #59
+Comment: added a box, redraw map
+
+   ####
+   #  #
+   # .###
+   #$.  #
+#### .$ #
+#  $$.###
+#   @ #
+#######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #62
+Comment: stoned 2 floors
+
+######
+#    #
+# ## #
+# # *###
+# #@*  ##
+# # *   #
+# # * $ #
+# ## #.##
+#    ###
+######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #65
+Comment: added a wall
+
+     #####
+     #   #
+     # # #
+     #   #
+#######. #
+#    $.*$#####
+# # $*  .#   #
+#   #.  *$ # #
+#####$*.$    #
+    # .#######
+    #   #
+    # # #
+    # @ #
+    #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #66
+Comment: added 2 boxes
+
+   ####
+  ##  ##
+ ## *. ##
+## $ .$ ##
+#  .$  * #
+# *  $.  #
+## $. $ ##
+ ## .* ##
+  ##@ ##
+   ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #67
+Comment: added 2 boxes
+
+     #
+    #.#
+   # $ #
+  ##   ##
+ #  ***  #
+#.$ *@* $.#
+ #  ***  #
+  ##   ##
+   # $ #
+    #.#
+     #
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #68
+Comment: stoned 4 floors
+
+########
+#  #   #
+#  #...#
+# $$$$$#
+#  #.*.#
+#  #   #
+#  @  ##
+#######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #70
+Comment: added a wall and a box
+
+  #####
+  #   ###
+ ## #   ###
+ #  .$#   #
+## #$.$.# #
+#  $.+.$  #
+# #.$.$# ##
+#   #$.  #
+###   #$##
+  ###   #
+    #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #77
+Comment: added a box
+
+ #####
+ #   ###
+##.#   ##
+# $ $#  #
+# .$    #
+##.$##  #
+ #.@#####
+ ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #79
+Comment: stoned 2 floors, redraw map
+
+ ####
+ #  ######
+ # $#  . ###
+ #   $ # @ #
+ ## # $ $  #
+  # ##..####
+  # ##. #
+### ### ###
+#     $   #
+#   ###.  #
+##### #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #81
+Comment: added a box, stoned 2 floors
+
+ #########
+ #       ##
+ #.####   #
+##.$ @ $$ #
+# .*.$ #  #
+# ### ## ##
+#        #
+##########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #82
+Comment: added a wall
+
+     ######
+    ## .  ##
+    #. .$  #
+    #.  #  #
+    ## ##  #
+   ##  #####
+  ## $ #
+ ## $  #
+## $  ##
+# $  ##
+#.@ ##
+#####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #87
+Comment: added a box, stoned 2 floors
+
+    ####
+  ###  #
+ ## .  #
+##     #
+# .$. ##
+# $ ###
+# .$###
+###   #
+  #$# #
+  # @ #
+  #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #93
+Comment: reduction map
+
+#########
+#       ####
+#    ## #  #
+## ### $ $ #
+# ...# $$$ #
+#    @     #
+##..########
+ ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #95
+Comment: stoned 4 floors
+
+#####
+#   ###
+# # $ ##
+# #.$  #
+# #.$#@#
+# #.$  #
+#  .$###
+##$.  #
+ # .  #
+ ######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #98 (a)
+Comment: added a box and change wall for a box
+
+#####
+#   ###
+# # $ ##
+# # $  #
+# #.$#@#
+# #.$  #
+#  . ###
+##$. #
+ # . #
+ #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #98 (b)
+Comment: added a box, deleted a wall, stoned 2 floors
+
+ #####
+ # . #####
+ #$ $$ $ #
+ #  ... .#
+##$.  *$ #
+# $*  .$##
+#. ...  #
+#@$ $$ $#
+##### . #
+    #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #109
+Comment: added 2 boxes
+
+#########
+#  ##   #
+# $...$ #
+# $*@*$ #
+# $...$ #
+#   ##  #
+#########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #112 (a)
+Comment: added 2 walls
+
+#########
+#       #
+# $...$ #
+##$*@*$##
+# $...$ #
+#       #
+#########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #112 (b)
+Comment: change position walls
+
+###########
+#    #    #
+#  * . *  #
+##*$*@*$*##
+#  * . *  #
+#    #    #
+###########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #113
+Comment: added a wall
+
+      #####
+    ###   #
+    #   # #
+    # #   #
+##### $ $#####
+#   ##$#.#   #
+# # $....$$# ##
+#    #.@.#    #
+## #$$....$ # #
+ #   #.#$##   #
+ #####$ $ #####
+    #   # #
+    # #   #
+    #   ###
+    #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #114
+Comment: added 4 boxes
+
+      #
+     # #
+    #   #
+   # .$. #
+  # .$.$. #
+ # .$$$$$. #
+# .$.$+$.$. #
+ # .$ $ $. #
+  # .$*$. #
+   # .$. #
+    #   #
+     # #
+      #
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #115
+Comment: added 3 boxes
+
+########
+#  #   #
+#      #
+#  ## ##
+##  #  #########
+ #  #  #       #
+ #  #  $ $ $ $ #
+##$### ####### #
+# $  . . . . ..#
+# @ ############
+#####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #116
+Comment: added 2 boxes, deleted 3 walls
+
+     #####
+     #   ##
+######  $ ##
+#   ###  $ ##
+#     ##  $ #
+#...#  ##   #
+#      ##$  #
+#...# ## $ ##
+##### # $  #
+    #  @  ##
+    #  ####
+    ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #118
+Comment: added a wall
+
+     ####
+   ###  ######
+   #         #
+  ##$  $## # #
+  #  #  ## $ ##
+  #    ## $$  #
+##### $   #   #
+#   #  ########
+#     ##
+#......#
+#   @  #
+########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #120
+Comment: stoned 2 floors
+
+ #######
+ #     #
+ # $$  #
+ #  $###
+ # #  #
+ # #$ #
+ # #  #
+## ##.##
+#    . #######
+# ###...     #
+#   #.#### $ #
+### #.# $ $$ #
+  #  .  @ #  #
+  ############
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #126 (a)
+Comment: stoned 2 floors, moved a goal
+
+ #######
+ #     #
+ # $$  #
+ #  $###
+ # #  #
+ # #$ #
+ # #  #
+## ##.#
+#    .########
+# ###...     #
+#   #.#### $ #
+### #.# $ $$ #
+  #  .  @ #  #
+  #########  #
+          ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #126 (b)
+Comment: moved a goal, added a wall
+
+            ####
+           ##  ###
+          ##  @  #
+         ##  *$  #
+        ##  **  ##
+       ##  **  ##
+      ##  **  ##
+     ##  **  ##
+    ##  **  ##
+   ##  **  ##
+  ##  **  ##
+ ##  **  ##
+##  **  ##
+#  **  ##
+# **  ##
+#. ####
+####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #130
+Comment: moved a goal
+
+                  #####
+            ##### #   #
+            #   ### # #
+      ##### # #       #
+##### #   # #   #### ##
+#   ### # # ### #  # #
+# #    @  #   # #  # ###
+#   ####$###### ####   #
+### #  #......$ #    # #
+  # #  #  ## .#    #   #
+ ## #####  ##.   # #####
+ #         ##  ### #
+ # # ###$#$ #####  # #####
+ #   # #    # #    # #   #
+ ##### #  ##### $#$### # #
+       # ###  ##         #
+   ##### #  $ ##  ##### ##
+   #   #    #  ##  #  # #
+   # #    # $      #  # ###
+   #   #### ###### ####   #
+   ### #  # #   #       # #
+     # #  # ### # # ###   #
+    ## ####   # #   # #####
+    #       # # #####
+    # # ###   #
+    #   # #####
+    #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #132 The Mixer
+Comment: added 7 boxes
+
+            ##### # #####
+           ##   ######  ##
+          # #           # #
+         ##### #######  ####
+        ##   #  #   ## ##  ##
+       # #      # # #      # #
+      ##### ##  ##.##   #  ####
+     ##   #  ####   ##### ##  ##
+    # #      # #     # #      # #
+   ##### ##  ##  #    ##   #  ####
+  ##   #  ####   # #   ##### ##  ##
+ # #      # #    # #    # #      # #
+##### ##  ##     # # #   ##   #  ####
+#   #  ####   ## # $ #    ##### ##  #
+#      # #        .# # #   # #      #
+## ##  ##   ###### $ # #    ##   #  #
+## #####           # #       ##### ##
+ # #  #   ###$#$## # # #####  #  # #
+## # #.       .   +   .       .# # ##
+ # #  #  ##### # # ##$#$###   #  # #
+## #####       # #           ##### ##
+#  #   ##    # # $ ######   ##  ## ##
+#      # #   # # #.        # #      #
+#  ## #####    # $ # ##   ####  #   #
+####  #   ##   # # #     ##  ## #####
+ # #      # #    # #    # #      # #
+  ##  ## #####   # #   ####  #   ##
+   ####  #   ##    #  ##  ## #####
+    # #      # #     # #      # #
+     ##  ## #####   ####  #   ##
+      ####  #   ## ##  ## #####
+       # #    $ #   #      # #
+        ##  ## ## # #  #   ##
+         ####  ## # ## #####
+          # #  $ .#.    # #
+           ##  ######   ##
+            ##### # #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #134 Stargate
+Comment: added 9 boxes
+
+          ####
+          #  #          ####
+      #####  #          #  #         ####
+      #   #  #      #####. #         #  #
+      #     ####    #   #  #     #####  #
+      ####     #    #    $####   #   #  #
+         # #   #   #####     #   #     ####
+         # #####   #   # #   #  #####     #
+     ##### ##  #####     #####  #   # #   #
+     #   # ##  #  #####     #####     #####
+     #     ##  #  #  ## #   #  #####     ####
+     ####     ##  #  ## #####  #  ## #   #  #
+       #  ##     ##  ## #####  #  ## #####  #
+       #  #  ##     ###       ##  ## #####  #
+       #  #  #  ##       ###     ###       ####
+       ####  #  #  ##### ##  ##       ### $ . #
+         #####  #  ##### ##  #  ##### ##  #   #
+         #  #####  #   # ##  #  ##### ##  #####
+     #####  #  ##### . $ #####  #   # ##  #
+     #   #  #  #  ##### $ . #####     #####
+    ##     #####  #   # #   #  #####     #
+    #####     ##### . $ #####  #  #  #   #
+    #  ## #   #  ##### $ . #####  #  #####
+#####  ## #####  #  ## #   #  #####  #
+#   #  ## #####  #  ## #####  #  #####
+# . $ ###       ##  ## #####  #  #  ####
+####       ###     ###       ##  #  #  #
+  #  ##### ##  ##       ###     ##  #  #
+  #  ##### ##  #  ##### ##  ##     ##  #
+  #  #   # ##  #  ##### ##  #  ##     ####
+  ####     #####  #   # ##  #  #  ##     #
+    #####     #####     #####  #  ## #   #
+    #   # #   #  #####     #####  ## #####
+    #     #####  #   # #   #   ##### #
+    ####     #   #     #####   #   # #
+      #  #   #   ####     #    #     ####
+      #  #####     # $#   #    ####     #
+      #  #         # .#####      #  #   #
+      ####         # @#          #  #####
+                   ####          #  #
+                                 ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban II #135 Fractal
+Comment: added 7 boxes

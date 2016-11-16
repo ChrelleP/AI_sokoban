@@ -1,7 +1,7 @@
-#include "informed_search.h"
+#include "graph_search.h"
 // https://msdn.microsoft.com/en-us/library/bb982522.aspx
 
-Soko_state informed_search(Soko_state &state_init, string search_type)
+Soko_state graph_search(Soko_state &state_init, string search_type)
 {
   cout << "\n[info] executing " << search_type << " search!" << endl;
 
@@ -27,15 +27,11 @@ Soko_state informed_search(Soko_state &state_init, string search_type)
     // maintain closed set
     hash_map_closed.insert(Mymap::value_type(state_current.map_state, state_current));
 
-    // Make bools for the next loop
-    bool dublicated_state = false;
-
-    if ((hash_map_closed.size() % 10000) == 0)
-      cout << "[info] searched "<< hash_map_closed.size() <<" nodes"<<endl;
-
     // If current state is the goal state, then terminate
-    if (is_goal_state(state_current))
+    if (is_goal_state(state_current)){
+      cout << "[info] visited a total of "<< hash_map_closed.size() <<" nodes"<<endl;
       return state_current;
+    }
 
     // State generation
     queue<Soko_state> state_successors = make_states(state_current);
@@ -43,30 +39,22 @@ Soko_state informed_search(Soko_state &state_init, string search_type)
     // For each state state successors of state current do
     while (!state_successors.empty())
     {
-      dublicated_state = false;
       Soko_state state_current_successors = state_successors.front();
 
-      // Is the current state successors in the open set?
-      if (hash_map_open.count(state_current_successors.map_state))
-        dublicated_state = true;
-
-      // Is the current state successors in the closed set?
-      if (hash_map_closed.count(state_current_successors.map_state))
-        dublicated_state = true;
-
-      // If seen
-      if (dublicated_state)
+      // Is the current state successors in the open or closed set?
+      if (hash_map_open.count(state_current_successors.map_state) || hash_map_closed.count(state_current_successors.map_state)){
         state_successors.pop();
-      else
-      {
-        if (search_type == "breadth_first") {
-          breadth_first_queuing(hash_map_open, state_current_successors, open_set);
-        } else if (search_type == "a_star") {
-          a_star_queuing(hash_map_open, state_current_successors, open_set);
-        }
-        state_successors.pop();
-      }
+        continue; }
+
+      if (search_type == "breadth_first")
+        breadth_first_queuing(hash_map_open, state_current_successors, open_set);
+      else if (search_type == "a_star")
+        a_star_queuing(hash_map_open, state_current_successors, open_set);
+
+      state_successors.pop();
     }
+    if ((hash_map_closed.size() % 10000) == 0)
+      cout << "[info] visited "<< hash_map_closed.size()/1000 <<"K nodes"<<endl;
   }
   state_current.map_state = "SOLUTION NOT FOUND!\n";
   return state_current;
@@ -95,4 +83,13 @@ void a_star_queuing(Mymap &hash_map_open, Soko_state &state_current_successors, 
 
   if (!inserted)
     open_set.push_back(state_current_successors);
+}
+
+bool is_goal_state(Soko_state &state_current)
+{
+  size_t legal_chars = state_current.map_state.find_first_not_of("XI.MND\n");
+  if(legal_chars != string::npos)
+    return false;
+  else
+    return true;
 }

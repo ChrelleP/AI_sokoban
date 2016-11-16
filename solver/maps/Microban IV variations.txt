@@ -1,0 +1,527 @@
+Microban IV variations
+
+Collection: Microban IV variations
+Authors: David W. Skinner and Jordi Domenech
+Email: jd_sokoban@abelmartin.com
+Website:
+- David W. Skinner:
+http://users.bentonrea.com/~sasquatch/sokoban/
+- Jordi Domenech:
+http://www.abelmartin.com/rj/sokoban.html
+http://sokoban-jd.blogspot.com/
+Copyright: (c) David W. Skinner and Jordi Domenech
+Date: May 2012
+
+Author's note:
+Most of these variations are from 2010. Some of this were posted in 
+the Yahoo Sokoban forum, but until now I have not decided to collect 
+them in a collection. What sense does add some boxes or walls to 
+increase the difficulty, in these levels that are for beginners, 
+or even for children, such as Skinner says in its website? It seems 
+to me absurd. But the difficulty is the law of gravity of Sokoban, 
+and all the levels tend to the difficulty in the same way that a stone 
+tends to the center of the Earth. It is inevitable. However, I am a 
+strong supporter of the levels for beginners, i.e. of the easy and 
+nice but good levels. In any case, here are these variations, that 
+at least I have tried to make them attractive for all lovers of this 
+classic and excellent David W. Skinner Microban collection.- J.D. 
+
+----------------------------------------------------------------------
+
+These levels are copyright (c) by David W. Skinner and Jordi Domenech 
+and may be freely distributed for non-commercial use provided they 
+remain unchanged, credited with the author's name, and provided the 
+author is notified. 
+
+License: Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported
+http://creativecommons.org/licenses/by-nc-nd/3.0/
+
+-----------------------------------------------------------------------
+
+
+#####  ####
+#   #  #  #
+# $ ####$ ##
+#  $.... $ ##
+##  ####  @ #
+ #  #  #    #
+ ####  #  ###
+       ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #6
+Comment: stoned 2 floors
+
+    ####
+    #  #
+  ###$.##
+###     #
+# . **  ###
+# $ *@* $ #
+### *** . #
+  #     ###
+  ##.$###
+   #  #
+   ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #9 (a)
+Comment: added a box
+
+    ####
+    #  #
+  ###$.##
+###   * #
+# .* *  ###
+# $ *@* $ #
+###    *. #
+  # *   ###
+  ##.$###
+   #  #
+   ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #9 (b)
+Comment: added a box, moved 3 goals
+
+#######
+#  #  ###
+#.$#  * ##
+#  @ * * #
+#  ##    #
+#####  ###
+    ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #15 (a)
+Comment: stoned 3 floors
+
+#######
+#  #  ###
+#.$#    ##
+#  @ * * #
+#  ## *  #
+#####   ##
+    #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #15 (b)
+Comment: stoned 2 floors, moved a goal
+
+  ####
+  #  #####
+ ##      #
+ # .**$  #
+## #  # ##
+#  ***. #
+# $    ##
+##### @#
+    ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #18
+Comment: added a box
+
+ #######
+ #  .  #
+ #  $# #
+###$$+.##
+ #  $# #
+ #  .  #
+ #######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #22
+Comment: moved 2 goals
+Set: The beautiful world of remodels 3 #44
+
+     #####
+ #####   #
+ #  # $# ##
+## **  $  #
+# .*.+# $ #
+#  ** #   #
+##   ######
+ #   #
+ #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #28
+Comment: added a box, moved a goal
+Set: The beautiful world of remodels 3 #45
+
+ #######
+#   .   #
+# #$#$# #
+# $. .$ #
+#.# $ #.#
+# $...$ #
+# #$#$# #
+#   +   #
+ #######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #35
+Comment: added a box
+
+ #######
+##     ##
+# $.$.$ #
+# .$.$. #
+# $.*.$ #
+# .$.$. #
+# $.$.$ #
+##  @  ##
+ #######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #38
+Comment: added a box
+
+     ####
+     #  #### #####
+     #     # #   ######
+     # $$  # #        #
+   ####  $## ##....  .#
+   #    $ ##  ##  #. .#
+#### ##$#  #   #  #. ##
+#  $$##@## ######### ###
+# #    $               #
+#   ### ### ########   #
+##### #     #      #####
+      #######
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #42 Classic level #1 revised
+Comment: added a box, stoned 3 floors
+
+         ####
+##########  #
+#   $   ... #
+#  $ $   #  #
+#### #### . #
+  # $  @  ###
+  #   #####
+  #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #44
+Comment: stoned 2 floors
+
+########
+#   #  ####
+# # @     #
+# # * $$# #
+#  #*##   #
+##  *.  ###
+ ##.* ###
+  #  ##
+  #  #
+  ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #45
+Comment: added a box
+
+    ########
+#####  @   #
+#   #$$#$# ##
+# #         #
+# ###*##### #
+#  # .... # #
+## # .... # ##
+#  #####$##  #
+# $  $    $$ #
+###   #   #  #
+  ############
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #46
+Comment: added a box, 3 walls
+Set: The beautiful world of remodels 3 #24
+
+ ####
+ #  #######
+##.$#  *  #
+#     * * #
+# @ #  *  #
+######* ###
+     #   #
+     #   #
+     #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #55
+Comment: stoned 2 floors
+
+#########
+###    ##  ####
+#    * ##  #  #
+# ****  ####$.##
+#  *@*      $..#
+#  **** ####   #
+## * $  #  #####
+##    ###
+#########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #57
+Comment: added a box
+
+ ####
+ #  ###
+ # $* #######
+ #  . $ #   #
+###.# . $ # #
+#   .*#*. $ #
+# # $ . #@###
+#   # $ .  #
+####### *$ #
+      ###  #
+        ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #62
+Comment: added a box
+
+    ####
+#####  #
+# $.$ *#
+#  . . ###
+###*. $$ #
+ # .#.   #
+##$. $.###
+# $ #$ #
+# @    #
+########
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #73
+Comment: added a wall
+
+ #####
+ #   #
+ # # ####
+ # $.*  #
+ # .$ * #
+###*#$.@#
+#  .$ * #
+# #$.*  #
+#    ####
+#   ##
+#####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #77
+Comment: stoned 2 floors
+
+  ####
+  #  #
+  # $#
+###  #
+# $ $###
+# ..$  #
+##.@*  #
+ #.. ###
+ #.$$###
+ #. $  #
+ ###   #
+   #####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #78
+Comment: stoned many floors
+
+#######
+#   @ #
+# $ $ #####
+####$...  #
+   # .# * ###
+   #$...$#  #
+   # .#.$ $ #
+   #$.$$.   #
+   #  #  ####
+   ####$ #
+      #  #
+      ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #80
+Comment: stoned many floors
+
+  #######
+  #  #  #
+  # $$$ #
+  #.....#
+####$.$##
+#   $. ###
+# $  .   #
+####$.$  #
+   # @####
+   ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #82
+Comment: stoned 4 floors
+
+   ####    #####
+   #  #    #   #
+   # $#    #$# ##
+   #  ######    #
+   ## . $ .  $# #
+#####$.#.#. #   #
+#   # .#.#.$#####
+# $ @ .$. . #
+####  $.$.$ ##
+  #  ######  #
+  # $#    #$ #
+  #  #    #  #
+  ####    ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #85
+Comment: redraw map
+Set: The beautiful world of remodels 3 #25
+
+       #
+ #############
+ ## *     .  #
+ # .$.$$$.$. #
+##.$*$.*.$*$.##
+ # .$.$$$.$. #
+ #@ .     *  #
+ #############
+       #
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #89
+Comment: added 2 boxes, a wall
+
+      # #
+ #############
+ ##   .$.   ##
+##.$  $.$  $.##
+ #$.*** ***.$#
+##.$  $.$  $.##
+ ##@  .$.   ##
+ #############
+      # #
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #90
+Comment: added 4 walls
+
+      ###
+ #############
+ ## $.   .$  #
+##  *$.$. *  ##
+## .$.$*$.$. ##
+##  * .$.$*  ##
+ ##@$.   .$ ##
+ #############
+      ###
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #91
+Comment: added 2 boxes, 3 walls
+
+     # # #
+ #############
+ #         . #
+ # .**$  **$ #
+###*  ***  *###
+ # $**  $**. #
+ #@.         #
+ #############
+     # # #
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #92 (a)
+Comment: added 2 walls, moved 2 boxes
+
+     # # #
+ #############
+ # $       . #
+ # .**   **$ #
+## *  ###  * ##
+ # $** # **. #
+ #@.       $ #
+ #############
+     # # #
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #92 (b)
+Comment: stoned 3 boxes, added a wall
+
+     ## ##
+ #############
+##   .   .   ##
+## $$*$$$*$$ ##
+ #.....#.....#
+## $$*$$$*$$ ##
+##@  .   .   ##
+ #############
+     ## ##
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #93
+Comment: stoned a box
+
+   ### # ###
+ #############
+ ###   .     #
+## .$ $$$.$. ##
+##*$.*...*.$*##
+## .$.$$$ $. ##
+ #@    *   ###
+ #############
+   ### # ###
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #94
+Comment: added a box, 4 walls
+
+  ### #### ###
+ ##############
+##    #       ##
+ #$.$  .$.$.$.#
+##.$.$.$.$.$.$##
+##$.$.$.$.$.$.##
+ #.$.$.$.  $.$#
+##@      #    ##
+ ##############
+  ### #### ###
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #97
+Comment: added 2 walls
+
+  ## # ## # ##
+ ##############
+##    .  $    ##
+##**.**$$**.**##
+ #  $ ...$ $  #
+ #  $ $... $  #
+##**.**$$**.**##
+##@   $  .    ##
+ ##############
+  ## # ## # ##
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #98
+Comment: added 2 boxes
+
+                      ####   ##### ####
+           ########   #  #   #   ###  #
+ ###########  #   #####  #   #        #
+##            #          ######## ##  #
+#  ###### $   ## ###### ##  #   #  # ####
+# ........#####  #   #      #      # #  #
+## ###### ##  #      #   #  ## ##  # #  #
+ # #   #      #  ## ###### ###  #### #  #
+##     #   #  ####  #   #       #  # # ##
+#  ## ###### ##  #      #   ##  #      #
+#  #  #   #      #  ## ##########  ##$ #
+#  #      #   #  ##### #     #  ## ##  ##
+####  ## ###### ##   # #   $ #      #   #
+   ##### ##  #     $   #  ####  #   #   #
+   #   #  # $#   ##  # ## #  ## #########
+   #      #  #########  # #      #   #  #
+##### ##  #             # #  #   #      #
+#   #  ####   #######  ## ## ###### ##  #
+#      #  #####  ## ##### ##  #   #  # ##
+### #  #          #     # # $ #      # #
+  # ####  ### ##  #    ## #   ## ##  # #
+  # #  ## ##   # ##    #  ## ###  #### #
+  # #      # $ # #     #          #  # ###
+ ## #  #   #  ## ##### ##  #####  #      #
+ #  ## ###### ## ##  #######   ####  #   #
+ #      #   #  # #             #  ## #####
+ #  #   #      # #  #########  #      #
+ ######### ##  # ## #  ##   #$ #  #   #
+ #   #   #  ####  #   $     #  ## #####
+ #   #      # $   # #   ## ###### ##  ####
+ ##  ## ##  #     # #####  #   #      #  #
+  # $##  ########## ##  #      #   #  #  #
+  #      #  ##   #      #  ## ###### ##  #
+ ## # #  #       #   #  ####  #   #     ##
+ #  # ####  ### ###### ##  # $  $ #   # #
+ #  # #  ## ##  #   #      #  ## ###### ##
+ #  # #      #      #   #  #####*+...... #
+ #### #  #   #  ## ###### ##   $ ######  #
+   #  ## ########          #     $      ##
+   #        #   #  #####   #  ###########
+   #  ###   #   #  #   ########
+   #### #####   ####
+Author: David W. Skinner + Jordi Domenech
+Title: Microban IV #101
+Comment: added 15 boxes, redraw goals area
+Set: The beautiful world of remodels 3 #26

@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
         }
 
         next_command = solver_plan.at(1);
-        if(isupper(current_command) && islower(next_command)){
+        if(isupper(current_command) && (current_command != next_command)){
           robot_plan.append("D");
           switch(rob_ori){
             case UP:

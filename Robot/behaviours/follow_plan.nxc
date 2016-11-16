@@ -53,24 +53,20 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
       if(cross_event == true)
       {
         if(event_counter == 1){
-          if(slow_down < 30)
-            slow_down += 5;
-
-          motor_array[LEFT] = motor_array[LEFT] - slow_down;
-          motor_array[RIGHT] = motor_array[RIGHT] - slow_down;
-
-          if(Sensor(LEFT_LIGHT) < 50 && Sensor(RIGHT_LIGHT) < 50){
-            slow_down = 0;
             cross_event = false;
             follow_plan_state = INITIAL;
             event_complete = true;
             current_event = 'N';
-          }
         }
         else{
           cross_event = false;
           event_counter --;
         }
+      }
+
+      if(event_counter > 1){
+        motor_array[LEFT] = motor_array[LEFT] + (100 - SPEED);
+        motor_array[RIGHT] = motor_array[RIGHT] + (100 - SPEED);
       }
       break;
     case STATE4: // DEPLOY
@@ -91,3 +87,100 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
       break;
   }
 }
+
+// SLOW AND STEADY
+/*sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete, char &current_event bool &event_complete, int &event_counter, int &deploy_action, bool &deploy_complete)
+{
+  switch (follow_plan_state) {
+    case INITIAL: // IDLE STATE
+      switch(current_event){
+        case 'L':
+          follow_plan_state = STATE1;
+          break;
+        case 'R':
+          follow_plan_state = STATE2;
+          break;
+        case 'F':
+          follow_plan_state = STATE3;
+          break;
+        case 'D':
+          follow_plan_state = STATE4;
+          break;
+        case 'S':
+          follow_plan_state = STATE5;
+          break;
+        case 'N':
+          follow_plan_state = INITIAL;
+          break;
+        default:
+          break;
+      }
+      break;
+    case STATE1: // TURN LEFT
+      if(turn_complete == true){
+        follow_plan_state = STATE3;
+        turn_action = 0;
+        turn_complete = false;
+        cross_event = false;
+      }
+      else{
+        turn_action = 1;
+      }
+      break;
+    case STATE2: // TURN RIGHT
+      if(turn_complete == true){
+        follow_plan_state = STATE3;
+        turn_action = 0;
+        turn_complete = false;
+        cross_event = false;
+      }
+      else{
+        turn_action = 2;
+      }
+      break;
+    case STATE3: // FORWARD
+      if(cross_event == true)
+      {
+        if(event_counter == 1){
+          if(slow_down < 40)
+            slow_down += 5;
+
+          motor_array[LEFT] = motor_array[LEFT] - slow_down;
+          motor_array[RIGHT] = motor_array[RIGHT] - slow_down;
+
+          if(Sensor(LEFT_LIGHT) < 50 && Sensor(RIGHT_LIGHT) < 50){
+            slow_down = 0;
+            cross_event = false;
+            follow_plan_state = INITIAL;
+            event_complete = true;
+            current_event = 'N';
+          }
+        }
+        else{
+          cross_event = false;
+          event_counter --;
+        }
+      }
+      if(event_counter > 1){
+        motor_array[LEFT] = motor_array[LEFT] + (100 - SPEED);
+        motor_array[RIGHT] = motor_array[RIGHT] + (100 - SPEED);
+      }
+      break;
+    case STATE4: // DEPLOY
+      if(deploy_complete == true){
+        deploy_complete = false;
+        cross_event = false;
+        event_complete = true;
+        follow_plan_state = INITIAL;
+        current_event = 'N';
+      }
+      else{
+        deploy_action = STATE1;
+      }
+      break;
+    case STATE5:
+      motor_array[LEFT] = 0;
+      motor_array[RIGHT] = 0;
+      break;
+  }
+}*/

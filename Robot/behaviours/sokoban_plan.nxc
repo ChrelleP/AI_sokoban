@@ -9,9 +9,12 @@ sub sokoban_plan(char &current_event, bool &event_complete, int &event_counter)
       sokoban_plan_state = STATE1;
       break;
     case STATE1:  // Retrieve plan event
-      if(StrIndex(plan, pos) != 0){
+      if(StrIndex(plan, pos) == 'X'){
+        sokoban_plan_state = INITIAL;
+      }
+      else if(StrIndex(plan, pos) != 0){
         current_event = StrIndex(plan, pos);
-        while(StrIndex(plan, pos + 1) == 'F'){
+        while( (current_event != 'D') && (StrIndex(plan, pos + 1) == 'F') ){
           pos ++;
           event_counter ++;
         }

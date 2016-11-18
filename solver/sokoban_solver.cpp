@@ -39,11 +39,27 @@ int main(int argc, char** argv)
   int choise = 0;
   cin >> choise;
   string search_type = "";
+  string heuristics_type = "";
+
   if (choise == 1) {
     search_type = "breadth_first";
   }
   else if (choise == 2) {
     search_type = "a_star";
+    cout << "\n1) heuristic 1\n2) heuristic 2\n3) heuristic 3\nEnter search type: ";
+    int choise2 = 0;
+    cin >> choise2;
+    if (choise2 == 1)
+      heuristics_type="h1";
+    else if (choise2 == 2)
+      heuristics_type="h2";
+    else if (choise2 == 3)
+      heuristics_type="h3";
+    else{
+      cerr << "[error]  " << choise << ") is not a valid search_type"<< endl;
+      return 0;
+    }
+
   }
   else {
     cerr << "[error]  " << choise << ") is not a valid search_type"<< endl;
@@ -51,7 +67,7 @@ int main(int argc, char** argv)
   }
 
   auto start = Time::now();
-  solution_state = graph_search(init_state, search_type);
+  solution_state = graph_search(init_state, search_type, heuristics_type);
   auto end = Time::now();
 
   cout << "[info] solution is:\n" << solution_state.moves << endl;

@@ -1,7 +1,7 @@
 #include "graph_search.h"
 // https://msdn.microsoft.com/en-us/library/bb982522.aspx
 
-Soko_state graph_search(Soko_state &state_init, string search_type)
+Soko_state graph_search(Soko_state &state_init, string search_type, string heuristics_type)
 {
   cout << "\n[info] executing " << search_type << " search!" << endl;
 
@@ -34,7 +34,7 @@ Soko_state graph_search(Soko_state &state_init, string search_type)
     }
 
     // State generation
-    queue<Soko_state> state_successors = make_states(state_current);
+    queue<Soko_state> state_successors = make_states(state_current, heuristics_type);
 
     // For each state state successors of state current do
     while (!state_successors.empty())

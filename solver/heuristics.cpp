@@ -2,8 +2,10 @@
 
 // TODO: Make function that only asigns a goal once to the box closest to it
 
-// TODO: Make function that extracts box, and goal locations
-// This is called: Simple lower bound!
+// Manhatten distance from each box to its closest goal
+// Simple lower bound from rolling stone - underestimates the grossly in most cases
+// The reason for this is that only one box can be on one goal
+// Notice that this is a lower bound for the distance, we cannot solve the level faster
 int h1(const Soko_state &state_current)
 {
 	vector< point > box_vector;
@@ -13,38 +15,43 @@ int h1(const Soko_state &state_current)
 	int hscore = 0, player2box_shortest = 500, closest_box2goal = 500;
 
 	get_box_goal_positions( box_vector, goal_vector, boxgoal_vector, state_current.map_state );
-	hscore -= boxgoal_vector.size()*500;
+	//hscore -= boxgoal_vector.size()*500;
 
 	for (int i = 0; i < box_vector.size(); i++)
 	{
 		closest_box2goal = 500;
 		for (int j = 0; j < goal_vector.size(); j++)
 		{
-			int col_dist = box_vector[i].col - goal_vector[j].col;
-			int row_dist = box_vector[i].row - goal_vector[j].row;
-			if (col_dist < 0)
-				col_dist *= -1;
-			if (row_dist < 0)
-				row_dist *= -1;
-			if (closest_box2goal > ( col_dist + row_dist ))
-				closest_box2goal = (col_dist + row_dist);
+			int manhatten_dist = abs(box_vector[i].col - goal_vector[j].col) + abs(box_vector[i].row - goal_vector[j].row);
+			if (closest_box2goal > manhatten_dist)
+				closest_box2goal = manhatten_dist;
 		}
-		hscore += closest_box2goal;
-		int player2box_col = box_vector[i].col - state_current.player_row;
-		int player2box_row = box_vector[i].row - state_current.player_col;
-		if (player2box_col < 0)
-			player2box_col *= -1;
-		if (player2box_row < 0)
-			player2box_row *= -1;
-		if (player2box_shortest > (player2box_row + player2box_col))
-			player2box_shortest = (player2box_row + player2box_col);
 	}
-	hscore += player2box_shortest;
+	return hscore;
+}
+
+// Manhattan from each goal to each box
+int h2(const Soko_state &state_current)
+{
+	vector< point > box_vector;
+	vector< point > goal_vector;
+	vector< point > boxgoal_vector;
+
+	int hscore = 0, player2box_shortest = 500;
+
+	get_box_goal_positions( box_vector, goal_vector, boxgoal_vector, state_current.map_state );
+	//hscore -= boxgoal_vector.size()*500;
+
+	for (int i = 0; i < box_vector.size(); i++)
+		for (int j = 0; j < goal_vector.size(); j++)
+			hscore += abs(box_vector[i].col - goal_vector[j].col) + abs(box_vector[i].row - goal_vector[j].row);
+
 	return hscore;
 }
 
 // Manhattan distance between player and nearest box, and between the boxes and the goals.
-int h2(const Soko_state &state_current)
+// http://fragfrog.nl/papers/solving_the_sokoban_problem.pdf
+int h3(const Soko_state &state_current)
 {
 	vector< point > box_vector;
 	vector< point > goal_vector;
@@ -58,24 +65,11 @@ int h2(const Soko_state &state_current)
 	for (int i = 0; i < box_vector.size(); i++)
 	{
 		for (int j = 0; j < goal_vector.size(); j++)
-		{
-			int col_dist = box_vector[i].col - goal_vector[j].col;
-			int row_dist = box_vector[i].row - goal_vector[j].row;
-			if (col_dist < 0)
-				col_dist *= -1;
-			if (row_dist < 0)
-				row_dist *= -1;
-			hscore += col_dist;
-			hscore += row_dist;
-		}
-		int player2box_col = box_vector[i].col - state_current.player_row;
-		int player2box_row = box_vector[i].row - state_current.player_col;
-		if (player2box_col < 0)
-			player2box_col *= -1;
-		if (player2box_row < 0)
-			player2box_row *= -1;
-		if (player2box_shortest > (player2box_row + player2box_col))
-			player2box_shortest = (player2box_row + player2box_col);
+			hscore += abs(box_vector[i].col - goal_vector[j].col) + abs(box_vector[i].row - goal_vector[j].row);
+
+		int player2box_manhatten_dist = abs(box_vector[i].col - state_current.player_row) + abs(box_vector[i].row - state_current.player_col);
+		if (player2box_shortest > player2box_manhatten_dist)
+			player2box_shortest = player2box_manhatten_dist;
 	}
 	hscore += player2box_shortest;
 	return hscore;
@@ -112,11 +106,3 @@ void get_box_goal_positions(vector< point > &box_vector, vector< point > &goal_v
 		cur_row++;
 	}
 }
-
-// dDDRluurrruulDrddddlluluurRurDDDuullluRdlddlluuuRRdrrrddLLLLdlUUdrruurrruulDrdddllluuuRdlddrrruuLLulDDurrrddllLLdlUdrRurrruuuulDrdLLulDDurrrddllLdlluRRRluurrrddLdLruruulllddR H2A*
-// dDDRluurrruulDrddddlluluurRurDDDuullluRdlddlluuuRRdrrrddLLLLdlUUdrruurrruulDrdddllluuuRdlddrrruuLLulDDurrrddllLLdlUdrRurrruuuulDrdLLulDDurrrddllLdlluRRRluurrrddLdLruruulllddR H1A*
-// dDDRluurrruulDrddddlluluurRurDDDuullluRdlddlluuuRRdrrrddLLLLdlUUdrruurrruulDrdddllluuuRdlddrrruuLLulDDurrrddllLLdlUdrRurrruuuulDrdLLulDDurrrddllLdlluRRRluurrrddLdLruruulllddR
-
-// drddlllUdLdlluRRRRRdrUUruulldRRdldlllllURuulDDrddlluRRRRRdrUUruurrdLulDulldRddlluLdlluurDldRRRRdrUUUluRdddlllluuurDDldRRRdrUU H2A*
-// drddlllLdlluRRRRRdrUUruulldRRdldlllUdllURuulDDrddlluRRRRRdrUUruurrdLulDulldRddlluLdlluurDldRRRRdrUUUluRdddlllluuurDDldRRRdrUU H1A*
-// drddlllLUddlluRRRRRdrUUruulldRRdldlluLuulldRurDDullDRdRRRdrUUruurrdLulDulldRddlllluurDldRRRdrUUUluRdddlllldlluRRRRRdrUU

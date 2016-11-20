@@ -1,0 +1,9 @@
+13 08 04
+XXXXX..XXXX..
+X...X..X..X..
+X.J.XXXXJ.XX.
+X..JGGGG.J.XX
+XX..XXXX..M.X
+.X..X..X....X
+.XXXX..X..XXX
+.......XXXX..

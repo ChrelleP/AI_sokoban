@@ -6,10 +6,11 @@ INCPATH=
 LDFLAGS= #Linker options
 
 SOURCES= 	sokoban_solver.cpp \
+					initializer.cpp \
 					graph_search.cpp	\
-					state_generator.cpp \
+					deadlock.cpp \
 					heuristics.cpp \
-					initializer.cpp
+					state_generator.cpp
 
 OBJECTS=$(SOURCES:.cpp=.o)  #Object files
 EXECUTEABLE=solve #Output name

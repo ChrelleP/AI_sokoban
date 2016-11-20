@@ -113,6 +113,8 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         new_state.cost_to_goal = h2(new_state);
       else if (heuristics_type == "h3")
         new_state.cost_to_goal = h3(new_state);
+      else if (heuristics_type == "h4")
+        new_state.cost_to_goal = h3(new_state);
       else
         new_state.cost_to_goal = 0;
 
@@ -143,6 +145,8 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         new_state.cost_to_goal = h2(new_state);
       else if (heuristics_type == "h3")
         new_state.cost_to_goal = h3(new_state);
+      else if (heuristics_type == "h4")
+        new_state.cost_to_goal = h3(new_state);
       else
         new_state.cost_to_goal = 0;
 
@@ -172,6 +176,8 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       else if (heuristics_type == "h2")
         new_state.cost_to_goal = h2(new_state);
       else if (heuristics_type == "h3")
+        new_state.cost_to_goal = h3(new_state);
+      else if (heuristics_type == "h4")
         new_state.cost_to_goal = h3(new_state);
       else
         new_state.cost_to_goal = 0;
@@ -222,6 +228,8 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         else if (heuristics_type == "h2")
           new_state.cost_to_goal = h2(new_state);
         else if (heuristics_type == "h3")
+          new_state.cost_to_goal = h3(new_state);
+        else if (heuristics_type == "h4")
           new_state.cost_to_goal = h3(new_state);
         else
           new_state.cost_to_goal = 0;
@@ -275,6 +283,8 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
           new_state.cost_to_goal = h2(new_state);
         else if (heuristics_type == "h3")
           new_state.cost_to_goal = h3(new_state);
+        else if (heuristics_type == "h4")
+          new_state.cost_to_goal = h3(new_state);
         else
           new_state.cost_to_goal = 0;
 
@@ -293,25 +303,4 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       break;
   }
   return new_state;
-}
-
-bool deadlock_test_dynamic(Soko_state state_current, int col, int row)
-{
-  char p1 = state_current.get(row-1,col+1);
-  char p2 = state_current.get(row,col+1);
-  char p3 = state_current.get(row+1,col+1);
-  char p4 = state_current.get(row+1,col);
-  char p5 = state_current.get(row+1,col-1);
-  char p6 = state_current.get(row,col-1);
-  char p7 = state_current.get(row-1,col-1);
-  char p8 = state_current.get(row-1,col);
-
-  // Check against wall and besides box deadlock
-  if (((p1 == 'X' && p2 == 'X' && p3 == 'X') && ( (p4 == 'J' || p4 == 'I') || (p8 == 'J' || p8 == 'I') )) ||
-      ((p3 == 'X' && p4 == 'X' && p5 == 'X') && ( (p2 == 'J' || p2 == 'I') || (p6 == 'J' || p6 == 'I') )) ||
-      ((p5 == 'X' && p6 == 'X' && p7 == 'X') && ( (p4 == 'J' || p4 == 'I') || (p8 == 'J' || p8 == 'I') )) ||
-      ((p7 == 'X' && p8 == 'X' && p1 == 'X') && ( (p2 == 'J' || p2 == 'I') || (p6 == 'J' || p6 == 'I') )))
-    return true;
-
-  return false;
 }

@@ -95,6 +95,7 @@ int h4(const Soko_state &state_current)
 		if (player2box_shortest > player2box_manhatten_dist)
 			player2box_shortest = player2box_manhatten_dist;
 	}
+	hscore += player2box_shortest;
 
 	int closest_box2goal;
 	for (int i = 0; i < box_vector.size(); i++)
@@ -112,8 +113,6 @@ int h4(const Soko_state &state_current)
 		}
 		hscore += closest_box2goal;
 	}
-
-	hscore += player2box_shortest;
 	return hscore;
 }
 

@@ -1,6 +1,7 @@
 // Follow Plan state function
 
-sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete, char &current_event bool &event_complete, int &event_counter, int &deploy_action, bool &deploy_complete)
+// SPEEDY
+/*sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete, char &current_event bool &event_complete, int &event_counter, int &deploy_action, bool &deploy_complete)
 {
   switch (follow_plan_state) {
     case INITIAL: // IDLE STATE
@@ -86,10 +87,10 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
       motor_array[RIGHT] = 0;
       break;
   }
-}
+}*/
 
 // SLOW AND STEADY
-/*sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete, char &current_event bool &event_complete, int &event_counter, int &deploy_action, bool &deploy_complete)
+sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete, char &current_event bool &event_complete, int &event_counter, int &deploy_action, bool &deploy_complete)
 {
   switch (follow_plan_state) {
     case INITIAL: // IDLE STATE
@@ -183,4 +184,4 @@ sub follow_plan(int &motor_array[], bool &cross_event, int &turn_action, bool &t
       motor_array[RIGHT] = 0;
       break;
   }
-}*/
+}

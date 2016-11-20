@@ -12,20 +12,21 @@ int h1(const Soko_state &state_current)
 	vector< point > goal_vector;
 	vector< point > boxgoal_vector;
 
-	int hscore = 0, player2box_shortest = 500, closest_box2goal = 500;
+	int closest_box2goal, hscore = 0;
 
 	get_box_goal_positions( box_vector, goal_vector, boxgoal_vector, state_current.map_state );
-	//hscore -= boxgoal_vector.size()*500;
+	hscore -= boxgoal_vector.size()*500;
 
 	for (int i = 0; i < box_vector.size(); i++)
 	{
-		closest_box2goal = 500;
+		closest_box2goal = 5000;
 		for (int j = 0; j < goal_vector.size(); j++)
 		{
 			int manhatten_dist = abs(box_vector[i].col - goal_vector[j].col) + abs(box_vector[i].row - goal_vector[j].row);
 			if (closest_box2goal > manhatten_dist)
 				closest_box2goal = manhatten_dist;
 		}
+		hscore += closest_box2goal;
 	}
 	return hscore;
 }
@@ -37,10 +38,10 @@ int h2(const Soko_state &state_current)
 	vector< point > goal_vector;
 	vector< point > boxgoal_vector;
 
-	int hscore = 0, player2box_shortest = 500;
+	int hscore = 0;
 
 	get_box_goal_positions( box_vector, goal_vector, boxgoal_vector, state_current.map_state );
-	//hscore -= boxgoal_vector.size()*500;
+	hscore -= boxgoal_vector.size()*500;
 
 	for (int i = 0; i < box_vector.size(); i++)
 		for (int j = 0; j < goal_vector.size(); j++)
@@ -71,6 +72,47 @@ int h3(const Soko_state &state_current)
 		if (player2box_shortest > player2box_manhatten_dist)
 			player2box_shortest = player2box_manhatten_dist;
 	}
+	hscore += player2box_shortest;
+	return hscore;
+}
+
+// Manhattan distance between player and nearest box, and between the boxes and the closest goal.
+// Goal can only be assigned once
+int h4(const Soko_state &state_current)
+{
+	vector< point > box_vector;
+	vector< point > goal_vector;
+	vector< point > boxgoal_vector;
+
+	int hscore = 0, player2box_shortest = 500;
+
+	get_box_goal_positions( box_vector, goal_vector, boxgoal_vector, state_current.map_state );
+	hscore -= boxgoal_vector.size()*500;
+
+	for (int i = 0; i < box_vector.size(); i++)
+	{
+		int player2box_manhatten_dist = abs(box_vector[i].col - state_current.player_row) + abs(box_vector[i].row - state_current.player_col);
+		if (player2box_shortest > player2box_manhatten_dist)
+			player2box_shortest = player2box_manhatten_dist;
+	}
+
+	int closest_box2goal;
+	for (int i = 0; i < box_vector.size(); i++)
+	{
+		closest_box2goal = 1000;
+		for (int j = 0; j < goal_vector.size(); j++)
+		{
+			int manhatten_dist = abs(box_vector[i].col - goal_vector[j].col) + abs(box_vector[i].row - goal_vector[j].row);
+			if (closest_box2goal > manhatten_dist)
+			{
+				closest_box2goal = manhatten_dist;
+				goal_vector[j].col = 10000;
+				goal_vector[j].row = 10000;
+			}
+		}
+		hscore += closest_box2goal;
+	}
+
 	hscore += player2box_shortest;
 	return hscore;
 }

@@ -36,8 +36,8 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
   int row = state_current.player_row, col = state_current.player_col;
   string update_move = "", update_move_push = "";
 
-  int COST_MOVE = 1, COST_PUSH = 1;
-  bool straight_reward = false;
+  int COST_MOVE = 4, COST_PUSH = 20;
+  bool straight_reward = true;
 
   switch (movement_type) {
     case 'u':

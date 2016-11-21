@@ -1,5 +1,4 @@
 #include "graph_search.h"
-// https://msdn.microsoft.com/en-us/library/bb982522.aspx
 
 Soko_state graph_search(Soko_state &state_init, string search_type, string heuristics_type)
 {
@@ -11,8 +10,8 @@ Soko_state graph_search(Soko_state &state_init, string search_type, string heuri
   // Initialize open and closed set
   deque<Soko_state> open_set;
   priority_queue<Soko_state,vector<Soko_state>, compare > open_set_pq;
-  Mymap hash_map_closed;
-  Mymap hash_map_open;
+  MyClosed hash_map_closed;
+  MyOpen hash_map_open;
 
   // Put start state in the open set.
   if (search_type == "a_star")
@@ -20,7 +19,7 @@ Soko_state graph_search(Soko_state &state_init, string search_type, string heuri
   else
     open_set.push_back(state_init);
 
-  hash_map_open.insert(Mymap::value_type(state_init.map_state, state_init));
+  hash_map_open.insert(MyOpen::value_type(state_init.map_state, state_init));
 
   while ( (search_type == "a_star" ? !open_set_pq.empty() : !open_set.empty()) )
   {
@@ -36,7 +35,7 @@ Soko_state graph_search(Soko_state &state_init, string search_type, string heuri
     hash_map_open.erase(state_current.map_state);
 
     // maintain closed set
-    hash_map_closed.insert(Mymap::value_type(state_current.map_state, state_current));
+    hash_map_closed.insert(MyClosed::value_type(state_current.map_state, 's'));
 
     // If current state is the goal state, then terminate
     if (is_goal_state(state_current)){
@@ -59,7 +58,7 @@ Soko_state graph_search(Soko_state &state_init, string search_type, string heuri
 
       if (search_type == "breadth_first"){
         open_set.push_back(state_current_successors);
-        hash_map_open.insert(Mymap::value_type(state_current_successors.map_state, state_current_successors));
+        hash_map_open.insert(MyOpen::value_type(state_current_successors.map_state, state_current_successors));
       }
       else if (search_type == "a_star")
         open_set_pq.push(state_current_successors);

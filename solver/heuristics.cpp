@@ -1,7 +1,5 @@
 #include"heuristics.h"
 
-// TODO: Make function that only asigns a goal once to the box closest to it
-
 // Manhatten distance from each box to its closest goal
 int h1(const Soko_state &state_current)
 {

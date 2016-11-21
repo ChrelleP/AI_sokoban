@@ -6,7 +6,8 @@
 #include <unordered_map>
 using namespace std;
 
-typedef std::unordered_map<string, Soko_state> Mymap;
+typedef std::unordered_map<string, Soko_state> MyOpen;
+typedef std::unordered_map<string, char> MyClosed;
 
 // Decleration
 Soko_state graph_search(Soko_state &init_state, string search_type, string heuristics_type);

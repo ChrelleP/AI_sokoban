@@ -1,9 +1,0 @@
-08 08 05
-XXXXXXXX
-XG.....X
-X......X
-X..J...X
-X......X
-X..X...X
-X.....MX
-XXXXXXXX

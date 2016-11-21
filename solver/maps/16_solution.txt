@@ -2,3 +2,24 @@ RuRldlddrURRRdrUluRRRurrddlUlllldllURRRdrUruullllDurrrrddllldlluRRRRRllllldlluRR
 
 BFS
 RuRldlddrURURRRRRurrddlUlldldllUluRRRRRuurrdLrddlUlluulllDDldRllluRuRldRRRRRuulllDldRRRdrUUddldlUluRRdrURlllluurrR
+
+MOVE = 3; PUSH = 3; TRUE 115
+RuRldlddrURURRRRlllldRllluRRRRRddlUrrURurrddlUluullllDDRRRUdRuurrdLrddlUllllluurrRdddlldlUlluuRdRRRRuulllDldRRRdrUR
+
+MOVE = 8; PUSH = 8; TRUE 122
+RuRldlddrURURRRRRurrddlUlllllldRllluRRRRRRRuullllDurrrrrrdLrddlUlllddlllluuuRdRRRRuulllDldRRRddlUrrUUddllluRRdrURlllluurrR
+
+MOVE = 4; PUSH = 8; TRUE
+RuRldlddrURURRRRRurrddlUlllllldRllluRRRRRRRuullllDurrrrrrdLrddlUlllddlllluuuRdRRRRuulllDldRRRdrUUddldlUluRRdrURlllluurrR
+
+MOVE = 1; PUSH = 3; FALSE
+RuRldlddrURURRRRRurrddlUllldldlUluRRRRRuurrdLrddlUlluulllDDldlluRuRldRRRRRuulllDldRRRdrUUddlldlUluRRRdrURlllluurrR
+
+MOVE = 1; PUSH = 10; FALSE
+RuRldlddrURURRRRRurrddlUlllddllUluRRRRRuullllDurrrrrrdLrddlUllldllluRRRdrUUdllluurrRlllddldlluRuRldRRRRRuulllDldRRRdrUR
+
+MOVE = 1; PUSH = 20; FALSE
+RuRldlddrURURRRRRurrddlUlllllldlluRRRRRRRuullllDurrrrrrdLrddlUlldlldllluuuRdRRRRuulllDldRRRdrURlUddlldlUluRRRdrUllluurrR
+
+MOVE = 4; PUSH = 20; TRUE
+RuRldlddrURURRRRRurrddlUlllllldlluRRRRRRRuullllDurrrrrrdLrddlUlllddlllluuuRdRRRRuulllDldRRRdrUUdRlllddlUluRRRdrUllluurrR

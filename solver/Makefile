@@ -1,5 +1,5 @@
 CC=clang++ #Compiler
-CFLAGS= -c -std=c++11   -fPIE   #Compiler Flags
+CFLAGS= -c -std=c++11   -fPIE -Ofast #Compiler Flags
 DEFINES=-DENABLE_DELETE
 INCPATH=
 

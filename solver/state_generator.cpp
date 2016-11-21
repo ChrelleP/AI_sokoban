@@ -115,6 +115,10 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         new_state.cost_to_goal = h3(new_state);
       else if (heuristics_type == "h4")
         new_state.cost_to_goal = h4(new_state);
+      else if (heuristics_type == "h5")
+        new_state.cost_to_goal = h5(new_state);
+      else if (heuristics_type == "h6")
+        new_state.cost_to_goal = h6(new_state);
       else
         new_state.cost_to_goal = 0;
 
@@ -147,6 +151,10 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         new_state.cost_to_goal = h3(new_state);
       else if (heuristics_type == "h4")
         new_state.cost_to_goal = h4(new_state);
+      else if (heuristics_type == "h5")
+        new_state.cost_to_goal = h5(new_state);
+      else if (heuristics_type == "h6")
+        new_state.cost_to_goal = h6(new_state);
       else
         new_state.cost_to_goal = 0;
 
@@ -179,6 +187,10 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         new_state.cost_to_goal = h3(new_state);
       else if (heuristics_type == "h4")
         new_state.cost_to_goal = h4(new_state);
+      else if (heuristics_type == "h5")
+        new_state.cost_to_goal = h5(new_state);
+      else if (heuristics_type == "h6")
+        new_state.cost_to_goal = h6(new_state);
       else
         new_state.cost_to_goal = 0;
 
@@ -231,6 +243,10 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
           new_state.cost_to_goal = h3(new_state);
         else if (heuristics_type == "h4")
           new_state.cost_to_goal = h4(new_state);
+        else if (heuristics_type == "h5")
+          new_state.cost_to_goal = h5(new_state);
+        else if (heuristics_type == "h6")
+          new_state.cost_to_goal = h6(new_state);
         else
           new_state.cost_to_goal = 0;
 
@@ -285,6 +301,10 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
           new_state.cost_to_goal = h3(new_state);
         else if (heuristics_type == "h4")
           new_state.cost_to_goal = h4(new_state);
+        else if (heuristics_type == "h5")
+          new_state.cost_to_goal = h5(new_state);
+        else if (heuristics_type == "h6")
+          new_state.cost_to_goal = h6(new_state);
         else
           new_state.cost_to_goal = 0;
 

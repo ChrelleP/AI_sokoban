@@ -10,18 +10,29 @@ Soko_state graph_search(Soko_state &state_init, string search_type, string heuri
 
   // Initialize open and closed set
   deque<Soko_state> open_set;
+  priority_queue<Soko_state,vector<Soko_state>, compare > open_set_pq;
   Mymap hash_map_closed;
   Mymap hash_map_open;
 
   // Put start state in the open set.
-  open_set.push_back(state_init);
+  if (search_type == "a_star")
+    open_set_pq.push(state_init);
+  else
+    open_set.push_back(state_init);
+
   hash_map_open.insert(Mymap::value_type(state_init.map_state, state_init));
 
-  while (!open_set.empty())
+  while ( (search_type == "a_star" ? !open_set_pq.empty() : !open_set.empty()) )
   {
     // Maintain open set
-    state_current = open_set.front();
-    open_set.pop_front();
+    if (search_type == "a_star"){
+      state_current = open_set_pq.top();
+      open_set_pq.pop();
+    }
+    else{
+      state_current = open_set.front();
+      open_set.pop_front();
+    }
     hash_map_open.erase(state_current.map_state);
 
     // maintain closed set
@@ -46,10 +57,12 @@ Soko_state graph_search(Soko_state &state_init, string search_type, string heuri
         state_successors.pop();
         continue; }
 
-      if (search_type == "breadth_first")
-        breadth_first_queuing(hash_map_open, state_current_successors, open_set);
+      if (search_type == "breadth_first"){
+        open_set.push_back(state_current_successors);
+        hash_map_open.insert(Mymap::value_type(state_current_successors.map_state, state_current_successors));
+      }
       else if (search_type == "a_star")
-        a_star_queuing(hash_map_open, state_current_successors, open_set);
+        open_set_pq.push(state_current_successors);
 
       state_successors.pop();
     }
@@ -58,31 +71,6 @@ Soko_state graph_search(Soko_state &state_init, string search_type, string heuri
   }
   state_current.map_state = "SOLUTION NOT FOUND!\n";
   return state_current;
-}
-
-void breadth_first_queuing(Mymap &hash_map_open, Soko_state &state_current_successors, deque<Soko_state> &open_set)
-{
-  open_set.push_back(state_current_successors);
-  hash_map_open.insert(Mymap::value_type(state_current_successors.map_state, state_current_successors));
-}
-
-void a_star_queuing(Mymap &hash_map_open, Soko_state &state_current_successors, deque<Soko_state> &open_set)
-{
-  bool inserted = false;
-
-  for (auto it = open_set.begin(); it != open_set.end(); it++)
-  {
-    if ((it->f_score) > (state_current_successors.f_score))
-    {
-      open_set.insert(it, state_current_successors);
-      hash_map_open.insert(Mymap::value_type(state_current_successors.map_state, state_current_successors));
-      inserted = true;
-      break;
-    }
-  }
-
-  if (!inserted)
-    open_set.push_back(state_current_successors);
 }
 
 bool is_goal_state(Soko_state &state_current)

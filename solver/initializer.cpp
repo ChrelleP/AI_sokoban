@@ -21,6 +21,7 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
 
   init_state.height = map_height;
   init_state.width = map_width;
+  init_state.num_of_goals = num_of_goals;
 
   // Extract map
   string sokoban_map = "";

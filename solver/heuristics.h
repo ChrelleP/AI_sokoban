@@ -17,8 +17,5 @@ void get_box_goal_positions(vector< point > &box_vector, vector< point > &goal_v
 int h1(const Soko_state &cur_state);
 int h2(const Soko_state &cur_state);
 int h3(const Soko_state &cur_state);
-int h4(const Soko_state &cur_state);
-int h5(const Soko_state &cur_state);
-int h6(const Soko_state &cur_state);
 
 #endif

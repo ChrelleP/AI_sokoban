@@ -1,5 +1,69 @@
 // Deploy mechanism function
 
+//SPEED 2.0
+sub deploy(int &motor_array[], bool &cross_event, int &deploy_action, bool &deploy_complete)
+{
+  switch (deploy_action) {
+    case INITIAL: // IDLE STATE
+      // DO nothing
+      break;
+    case STATE1: // Deploy
+      switch(deploy_state)
+      {
+        case 0: // WAIT FOR CROSS EVENT
+          if(cross_event){
+            cross_event = 0;
+            deploy_state = 1;
+            timer = 0;
+          }
+          break;
+        case 1: // GO BACKWARDS UNTILL CROSS
+          {
+            current_timer = CurrentTick();
+            float difference = current_timer - timer;
+            if(difference > 500){
+              deploy_state = 2;
+              cross_event = false;
+            }
+            else{
+              motor_array[LEFT] = -SPEED;
+              motor_array[RIGHT] = -SPEED;
+            }
+          }
+          break;
+        case 2: // Wait for first cross
+          if(StrIndex(plan, pos + 1) != 0){
+            char next_event = StrIndex(plan, pos + 1);
+            if(next_event == 'F'){
+            }
+          }
+
+          break;
+        case 3: // Wait for first cross
+          if(cross_event == true){
+            deploy_state = 3;
+            cross_event = false;
+          }
+          else{
+            motor_array[LEFT] = -TURN_SPEED;
+            motor_array[RIGHT] = TURN_SPEED;
+          }
+          break;
+        case 4: // Wait for line
+          int difference = abs((Sensor(LEFT_LIGHT) + 7) - Sensor(RIGHT_LIGHT));
+          if(difference > 10){
+            deploy_state = 4;
+          }
+          else{
+            motor_array[LEFT] = -TURN_SPEED/2;
+            motor_array[RIGHT] = TURN_SPEED/2;
+          }
+          break;
+      }
+      break;
+  }
+}
+
 //SPEED
 /*sub deploy(int &motor_array[], bool &cross_event, int &deploy_action, bool &deploy_complete)
 {
@@ -19,7 +83,7 @@
           break;
         case 1: // GO BACKWARDS AND WAIT FOR CROSS
           {
-            if(motor_ramp == 30){
+            if(motor_ramp == 50){
               deploy_state = 2;
               cross_event = false;
             }
@@ -74,7 +138,7 @@
 }*/
 
 // SLOW AND STEADY
-sub deploy(int &motor_array[], bool &cross_event, int &deploy_action, bool &deploy_complete)
+/*sub deploy(int &motor_array[], bool &cross_event, int &deploy_action, bool &deploy_complete)
 {
   switch (deploy_action) {
     case INITIAL: // IDLE STATE
@@ -144,4 +208,4 @@ sub deploy(int &motor_array[], bool &cross_event, int &deploy_action, bool &depl
       }
       break;
   }
-}
+}*/

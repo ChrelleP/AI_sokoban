@@ -1,78 +1,6 @@
 // Turn mechanism function
 
 // Reliable
-sub turn(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete)
-{
-  switch (turn_action) {
-    case INITIAL: // IDLE STATE
-      // DO nothing
-      break;
-    case STATE1: // TURN LEFT
-      switch(turn_state)
-      {
-        case 0: // WAIT FOR CROSS EVENT
-          if(cross_event){
-            cross_event = 0;
-            turn_state = 1;
-          }
-          else{
-            motor_array[RIGHT] = TURN_SPEED;
-            motor_array[LEFT] = 0;
-          }
-          break;
-        case 1: // WAIT FOR HIGH ENOUGH DIFFERENCE BETWEEN SENSORS
-          {
-            float difference = abs((Sensor(LEFT_LIGHT) + 7) - Sensor(RIGHT_LIGHT));
-
-            if(difference > 10){
-              turn_state = 0;
-              cross_event = false;
-              turn_action = INITIAL;
-              turn_complete = true;
-            }
-            else{
-              motor_array[RIGHT] = TURN_SPEED;
-              motor_array[LEFT] = 0;
-            }
-          }
-          break;
-      }
-      break;
-    case STATE2: // TURN RIGHT
-      switch(turn_state)
-      {
-        case 0: // WAIT FOR CROSS EVENT
-          if(cross_event){
-            turn_state = 1;
-            cross_event = 0;
-          }
-          else{
-            motor_array[RIGHT] = 0;
-            motor_array[LEFT] = TURN_SPEED;
-          }
-          break;
-        case 1: // WAIT FOR HIGH ENOUGH DIFFERENCE BETWEEN SENSORS
-          {
-            float difference = abs((Sensor(LEFT_LIGHT) + 7) - Sensor(RIGHT_LIGHT));
-
-            if(difference > 10){
-              turn_state = 0;
-              cross_event = false;
-              turn_action = INITIAL;
-              turn_complete = true;
-            }
-            else{
-              motor_array[RIGHT] = 0;
-              motor_array[LEFT] = TURN_SPEED;
-            }
-          }
-          break;
-      }
-      break;
-  }
-}
-
-// SPEED MODE
 /*sub turn(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete)
 {
   switch (turn_action) {
@@ -143,3 +71,85 @@ sub turn(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_com
       break;
   }
 }*/
+
+// SPEED MODE
+sub turn(int &motor_array[], bool &cross_event, int &turn_action, bool &turn_complete)
+{
+  switch (turn_action) {
+    case INITIAL: // IDLE STATE
+      // DO nothing
+      break;
+    case STATE1: // TURN LEFT
+      switch(turn_state)
+      {
+        case 0: // WAIT FOR CROSS EVENT
+          if(cross_event){
+            cross_event = 0;
+            turn_state = 1;
+            timer = CurrentTick();
+          }
+          else{
+            motor_array[RIGHT] = TURN_SPEED;
+            motor_array[LEFT] = 0;
+          }
+          break;
+        case 1: // WAIT FOR HIGH ENOUGH DIFFERENCE BETWEEN SENSORS
+          {
+            float difference = abs((Sensor(LEFT_LIGHT) + 7) - Sensor(RIGHT_LIGHT));
+            current_timer = CurrentTick();
+
+            float timer_difference = current_timer - timer;
+            TextOut(0,LCD_LINE2, NumToStr(timer_difference));
+
+            if(difference > 10 && timer_difference > 50){
+              turn_state = 0;
+              cross_event = false;
+              turn_action = INITIAL;
+              turn_complete = true;
+            }
+            else{
+              motor_array[RIGHT] = TURN_SPEED;
+              motor_array[LEFT] = 0;
+            }
+          }
+          break;
+      }
+      break;
+    case STATE2: // TURN RIGHT
+      switch(turn_state)
+      {
+        case 0: // WAIT FOR CROSS EVENT
+          if(cross_event){
+            turn_state = 1;
+            cross_event = 0;
+            timer = CurrentTick();
+          }
+          else{
+            motor_array[RIGHT] = 0;
+            motor_array[LEFT] = TURN_SPEED;
+          }
+          break;
+        case 1: // WAIT FOR HIGH ENOUGH DIFFERENCE BETWEEN SENSORS
+          {
+            float difference = abs((Sensor(LEFT_LIGHT) + 7) - Sensor(RIGHT_LIGHT));
+            current_timer = CurrentTick();
+
+            float timer_difference = current_timer - timer;
+            TextOut(0,LCD_LINE2, NumToStr(timer_difference));
+
+            if(difference > 10 && timer_difference > 70){
+              turn_state = 0;
+              cross_event = false;
+              turn_action = INITIAL;
+              turn_complete = true;
+            }
+            else{
+              motor_array[RIGHT] = 0;
+              motor_array[LEFT] = TURN_SPEED;
+            }
+          }
+          break;
+      }
+      break;
+  }
+}

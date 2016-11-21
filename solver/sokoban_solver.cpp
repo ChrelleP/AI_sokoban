@@ -46,7 +46,7 @@ int main(int argc, char** argv)
   }
   else if (choise == 2) {
     search_type = "a_star";
-    cout << "\n1) heuristic 1\n2) heuristic 2\n3) heuristic 3\n4) heuristic 4\nEnter search type: ";
+    cout << "\n1) heuristic 1 - Box dist to closest goal\n2) heuristic 2 - H1 + player dist to closest box\n3) heuristic 3 - H2 + hungarian\nEnter search type: ";
     int choise2 = 0;
     cin >> choise2;
     if (choise2 == 1)
@@ -55,9 +55,7 @@ int main(int argc, char** argv)
       heuristics_type="h2";
     else if (choise2 == 3)
       heuristics_type="h3";
-    else if (choise2 == 4)
-      heuristics_type="h4";
-    else{
+    else {
       cerr << "[error]  " << choise << ") is not a valid search_type"<< endl;
       return 0;
     }

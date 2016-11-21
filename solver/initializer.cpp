@@ -21,6 +21,7 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
 
   init_state.height = map_height;
   init_state.width = map_width;
+  init_state.num_of_goals = num_of_goals;
 
   // Extract map
   string sokoban_map = "";
@@ -33,29 +34,23 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   deadlock_tester_static(init_state);
 
   // Find player
-  // http://stackoverflow.com/questions/5757721/use-getline-and-while-loop-to-split-a-string
-  bool found = false;
-  int row=-1, col=0;
-  stringstream string_iterator(init_state.map_state);
+  int row=0, col=0;
 
-  for(int i = 0; i < init_state.height; i++)
-  {
-    getline( string_iterator, line, '\n' );
-    if(!found)
-      row++;
-
-    for (int j = 0; j < init_state.width ; j++){
-      if (!found){
-        if (line[j] == 'M' || line[j] == 'W' || line[j] == 'N'){
-          col = j;
-          found = true;
-        }
+  while (true) {
+    if (init_state.get(row, col) == 'M' || init_state.get(row, col) == 'N' || init_state.get(row, col) == 'W')
+      break;
+    if (col == init_state.height){
+      col = 0;
+      if (row == init_state.width){
+        cout << "[error]  player not found" << endl;
+        break;
       }
+      else
+        row++;
     }
+    else
+      col++;
   }
-
-  if(!found)
-    cout << "[error]  player not found" << endl;
 
   init_state.player_row = row;
   init_state.player_col = col;

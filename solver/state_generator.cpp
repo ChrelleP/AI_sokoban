@@ -113,8 +113,6 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         new_state.cost_to_goal = h2(new_state);
       else if (heuristics_type == "h3")
         new_state.cost_to_goal = h3(new_state);
-      else if (heuristics_type == "h4")
-        new_state.cost_to_goal = h3(new_state);
       else
         new_state.cost_to_goal = 0;
 
@@ -145,8 +143,6 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         new_state.cost_to_goal = h2(new_state);
       else if (heuristics_type == "h3")
         new_state.cost_to_goal = h3(new_state);
-      else if (heuristics_type == "h4")
-        new_state.cost_to_goal = h3(new_state);
       else
         new_state.cost_to_goal = 0;
 
@@ -176,8 +172,6 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       else if (heuristics_type == "h2")
         new_state.cost_to_goal = h2(new_state);
       else if (heuristics_type == "h3")
-        new_state.cost_to_goal = h3(new_state);
-      else if (heuristics_type == "h4")
         new_state.cost_to_goal = h3(new_state);
       else
         new_state.cost_to_goal = 0;
@@ -228,8 +222,6 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         else if (heuristics_type == "h2")
           new_state.cost_to_goal = h2(new_state);
         else if (heuristics_type == "h3")
-          new_state.cost_to_goal = h3(new_state);
-        else if (heuristics_type == "h4")
           new_state.cost_to_goal = h3(new_state);
         else
           new_state.cost_to_goal = 0;
@@ -282,8 +274,6 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         else if (heuristics_type == "h2")
           new_state.cost_to_goal = h2(new_state);
         else if (heuristics_type == "h3")
-          new_state.cost_to_goal = h3(new_state);
-        else if (heuristics_type == "h4")
           new_state.cost_to_goal = h3(new_state);
         else
           new_state.cost_to_goal = 0;

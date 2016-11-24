@@ -36,8 +36,8 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
   int row = state_current.player_row, col = state_current.player_col;
   string update_move = "", update_move_push = "";
 
-  int COST_MOVE = 4, COST_PUSH = 20;
-  bool straight_reward = true;
+  int COST_MOVE = 1, COST_PUSH = 1;
+  bool straight_reward = false;
 
   switch (movement_type) {
     case 'u':
@@ -289,7 +289,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       new_state.map_state = "NO_MOVE";
       break;
     default:
-      cout << "[error]  " << new_state.get(new_row, new_col) << " is a unknown puzzle type" << endl;
+      cout << "[error]  " << new_state.get(new_row, new_col) << " is a unknown puzzle type - Col: " << new_col << " Row: " << new_row << endl;
       break;
   }
   return new_state;

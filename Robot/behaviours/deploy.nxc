@@ -14,14 +14,14 @@ sub deploy(int &motor_array[], bool &cross_event, int &deploy_action, bool &depl
           if(cross_event){
             cross_event = 0;
             deploy_state = 1;
-            timer = 0;
+            timer = CurrentTick();
           }
           break;
         case 1: // GO BACKWARDS UNTILL CROSS
           {
             current_timer = CurrentTick();
             float difference = current_timer - timer;
-            if(difference > 500){
+            if(difference > 470){
               deploy_state = 2;
               cross_event = false;
             }
@@ -35,30 +35,91 @@ sub deploy(int &motor_array[], bool &cross_event, int &deploy_action, bool &depl
           if(StrIndex(plan, pos + 1) != 0){
             char next_event = StrIndex(plan, pos + 1);
             if(next_event == 'F'){
+              temp_state = 1;
+              deploy_state = 3;
+              cross_event = false;
             }
+            else if(next_event == 'L'){
+              deploy_state = 4;
+              cross_event = false;
+              timer = CurrentTick();
+            }
+            else if(next_event == 'R'){
+              deploy_state = 5;
+              cross_event = false;
+              timer = CurrentTick();
+            }
+         }
+         else{
+            motor_array[LEFT] = 0;
+            motor_array[RIGHT] = 0;
+         }
+          break;
+        case 3: // FORWARDS
+          switch(temp_state){
+            case 1:
+              if(cross_event){
+                temp_state = 2;
+                cross_event = false;
+              }
+              else{
+                motor_array[RIGHT] = TURN_SPEED;
+                motor_array[LEFT] = -TURN_SPEED;
+              }
+              break;
+            case 2:
+              if(cross_event){
+                temp_state = 3;
+                cross_event = false;
+              }
+              else{
+                motor_array[RIGHT] = TURN_SPEED;
+                motor_array[LEFT] = -TURN_SPEED;
+              }
+            case 3:
+              int difference = abs((Sensor(LEFT_LIGHT) + 7) - Sensor(RIGHT_LIGHT));
+              if(difference > 10){
+                deploy_state = 0;
+                deploy_complete = true;
+                deploy_action = INITIAL;
+              }
           }
+          break;
+        case 4: // RIGHT
+          {
+          current_timer = CurrentTick();
+          float difference = current_timer - timer;
+          if(difference > 250){
+            deploy_state = 6;
+            plan = StrReplace(plan, pos + 1, "F");
+          }
+          else{
+            motor_array[LEFT] = SPEED;
+            motor_array[RIGHT] = -SPEED;
+          }
+          }
+          break;
+        case 5: // LEFT_LIGHT
+          {
+          current_timer = CurrentTick();
+          float difference = current_timer - timer;
+          if(difference > 250){
+            deploy_state = 6;
+            plan = StrReplace(plan, pos + 1, "F");
+          }
+          else{
+            motor_array[LEFT] = -SPEED;
+            motor_array[RIGHT] = SPEED;
+          }
+          }
+          break;
+        case 6:
+          //motor_array[LEFT] = 0;
+          //motor_array[RIGHT] = 0;
 
-          break;
-        case 3: // Wait for first cross
-          if(cross_event == true){
-            deploy_state = 3;
-            cross_event = false;
-          }
-          else{
-            motor_array[LEFT] = -TURN_SPEED;
-            motor_array[RIGHT] = TURN_SPEED;
-          }
-          break;
-        case 4: // Wait for line
-          int difference = abs((Sensor(LEFT_LIGHT) + 7) - Sensor(RIGHT_LIGHT));
-          if(difference > 10){
-            deploy_state = 4;
-          }
-          else{
-            motor_array[LEFT] = -TURN_SPEED/2;
-            motor_array[RIGHT] = TURN_SPEED/2;
-          }
-          break;
+          deploy_state = 0;
+          deploy_complete = true;
+          deploy_action = INITIAL;
       }
       break;
   }

@@ -50,12 +50,9 @@ task main()
     ClearScreen();
     //float timer_difference = CurrentTick() - timer;
     //TextOut(0,LCD_LINE2, NumToStr(timer_difference));
-    TextOut(0,LCD_LINE4, "VALUE:");
-    TextOut(0,LCD_LINE5, NumToStr(abs((Sensor(LEFT_LIGHT) + 7) - Sensor(RIGHT_LIGHT))));
+    TextOut(0,LCD_LINE4, plan);
+    TextOut(0,LCD_LINE5, NumToStr(current_event));
     TextOut(0,LCD_LINE6, NumToStr(MotorRotationCount	(	LEFT	)));
     TextOut(0,LCD_LINE7, NumToStr(MotorRotationCount	(	RIGHT	)));
-
-
-
   }
 }

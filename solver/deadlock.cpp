@@ -1,7 +1,11 @@
 #include "deadlock.h"
 
+// Deadlock detection is inspired by http://www.lamsade.dauphine.fr/~cazenave/papers/sokoban.pdf
+
+// Find dynamic deadlocks
 bool deadlock_test_dynamic(Soko_state state_current, int col, int row)
 {
+  // Get chars of the eight neighbors
   char p1 = state_current.get(row-1,col+1);
   char p2 = state_current.get(row,col+1);
   char p3 = state_current.get(row+1,col+1);
@@ -21,7 +25,8 @@ bool deadlock_test_dynamic(Soko_state state_current, int col, int row)
   return false;
 }
 
-//http://www.lamsade.dauphine.fr/~cazenave/papers/sokoban.pdf
+// Find static deadlocks
+// Cornor deadlock and wall with no goal deadlock
 void deadlock_tester_static(Soko_state &init_state)
 {
   char p1,p2,p3,p4,p5,p6,p7,p8;

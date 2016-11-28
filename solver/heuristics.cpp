@@ -56,7 +56,7 @@ int h2(const Soko_state &state_current)
 }
 
 // Manhatten distance from each box to its closest goal + player dist
-// No box can point at the same goal. --> Solution: Hungaring method
+// No box can point at the same goal. -- It is therefore using the Hungaring method
 int h3(const Soko_state &state_current)
 {
 	vector< point > box_vector;
@@ -85,7 +85,7 @@ int h3(const Soko_state &state_current)
 	return hscore;
 }
 
-
+// Extract the position of the goals and the boxes
 void get_box_goal_positions(vector< point > &box_vector, vector< point > &goal_vector, vector< point > &boxgoal_vector, Soko_state state_current){
 	for (int col = 0; col < state_current.width; col++) {
 		for (int row = 0; row < state_current.height; row++) {

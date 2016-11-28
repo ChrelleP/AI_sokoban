@@ -1,20 +1,20 @@
-20 20 05
+20 20 04
 XXXXXXXXXXXXXXXXXXXX
-XXXXXXXX..G...G...XX
-XXXXXXXX.X.XGX.X..XX
-XXXXXX....G...G...XX
-XXXXXXM...........XX
-XXXXXXXXXXX.XXXXXXXX
-XXXXX...X....XX..XXX
-XX......X....X.J.XXX
-X..X.X.XXX.XXX....XX
-X..........X.......X
+XXXXXXXX.JG.......XX
+XXXXXXXX.X.X.XJX..XX
+XXXXXX........G...XX
+XXXXXXX...........XX
+XXXXXXXXXXX..XXXXXXX
+XXXXX...X.....X..XXX
+XX......X........XXX
+X..X.XGXXX.XX.....XX
+X..........X.J...G.X
 X..X...XX.......X..X
-X....XXXX.XXXXJXX..X
+X....XXXX.XXXX.XX..X
 XXXX..XX...X....X..X
-XXXXJ.XX...X.X.....X
-XXXX...X...X..J....X
-XXXXXX.X.J..X....XXX
+XXXX..XX.J.X.X.....X
+XXXXX..X...X.......X
+XXXXXX.X.M..X....XXX
 XXXXXX.X....X...XXXX
 XXXXXX.XXXXXXXX.XXXX
 XXXXXX..........XXXX

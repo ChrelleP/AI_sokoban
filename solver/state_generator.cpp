@@ -2,43 +2,50 @@
 
 queue<Soko_state> make_states(const Soko_state &state_current, string heuristics_type)
 {
-  /// Make moves
+  /// Make containers for newly generated states
   queue<Soko_state> new_states;
   Soko_state move_state;
-  // forward
+
+  // forward move
   move_state = move( state_current, 'u' , heuristics_type);
-  if (move_state.map_state != "NO_MOVE") {
+  if (move_state.map_state != "NO_MOVE")
     new_states.push( move_state );
-  }
-  // backward
+
+  // backward move
   move_state = move( state_current, 'd' , heuristics_type);
-  if (move_state.map_state != "NO_MOVE") {
+  if (move_state.map_state != "NO_MOVE")
     new_states.push( move_state );
-  }
-  // right
+
+  // right move
   move_state = move( state_current, 'r' , heuristics_type);
-  if (move_state.map_state != "NO_MOVE") {
+  if (move_state.map_state != "NO_MOVE")
     new_states.push( move_state );
-  }
-  // left
+
+  // left move
   move_state = move( state_current, 'l' , heuristics_type);
-  if (move_state.map_state != "NO_MOVE") {
+  if (move_state.map_state != "NO_MOVE")
     new_states.push( move_state );
-  }
+
   return new_states;
 }
 
+// Function that genereate states in a given direction
 Soko_state move(const Soko_state &state_current, char movement_type, string heuristics_type)
 {
+  // Initialize the new state
   Soko_state new_state = state_current;
   bool no_move = false;
   int new_row, new_col, new_row_push, new_col_push;
   int row = state_current.player_row, col = state_current.player_col;
   string update_move = "", update_move_push = "";
 
+  // Costs for moving and pushing -- Can be prioritized
   int COST_MOVE = 1, COST_PUSH = 1;
+
+  // Should the solver prefer moves in the same direction?
   bool straight_reward = false;
 
+  // Initialize paramters for the given move direction
   switch (movement_type) {
     case 'u':
       if (state_current.moves.back() == 'u' && straight_reward)
@@ -89,6 +96,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       break;
   }
 
+  // Make desitions based on the character of the new position
   switch (new_state.get(new_row, new_col)) {
     case 'D':
       // Move play to the new spot
@@ -107,6 +115,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       new_state.moves.append(update_move);
       new_state.cost_to_node += COST_MOVE;
 
+      // Calculate heuristica (cost to goal)
       if (heuristics_type == "h1")
         new_state.cost_to_goal = h1(new_state);
       else if (heuristics_type == "h2")
@@ -116,6 +125,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       else
         new_state.cost_to_goal = 0;
 
+      // Update state
       new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
       new_state.player_col = new_col;
       new_state.player_row = new_row;
@@ -137,6 +147,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       new_state.moves.append(update_move);
       new_state.cost_to_node += COST_MOVE;
 
+      // Calculate heuristica (cost to goal)
       if (heuristics_type == "h1")
         new_state.cost_to_goal = h1(new_state);
       else if (heuristics_type == "h2")
@@ -146,6 +157,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       else
         new_state.cost_to_goal = 0;
 
+      // Update state
       new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
       new_state.player_col = new_col;
       new_state.player_row = new_row;
@@ -167,6 +179,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       new_state.moves.append(update_move);
       new_state.cost_to_node += COST_MOVE;
 
+      // Calculate heuristica (cost to goal)
       if (heuristics_type == "h1")
         new_state.cost_to_goal = h1(new_state);
       else if (heuristics_type == "h2")
@@ -176,6 +189,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       else
         new_state.cost_to_goal = 0;
 
+      // Update state
       new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
       new_state.player_col = new_col;
       new_state.player_row = new_row;
@@ -193,6 +207,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         new_state.set(row, col, 'G');
       }
 
+      // Check where the box is pushed to
       switch ( new_state.get(new_row_push, new_col_push) ) {
         case '.':
           if (deadlock_test_dynamic(new_state,new_col_push,new_row_push))
@@ -217,6 +232,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         new_state.moves.append(update_move_push);
         new_state.cost_to_node += COST_PUSH;
 
+        // Calculate heuristica (cost to goal)
         if (heuristics_type == "h1")
           new_state.cost_to_goal = h1(new_state);
         else if (heuristics_type == "h2")
@@ -226,6 +242,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         else
           new_state.cost_to_goal = 0;
 
+        // Update state
         new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
         new_state.player_col = new_col;
         new_state.player_row = new_row;
@@ -269,6 +286,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         new_state.moves.append( update_move_push );
         new_state.cost_to_node += COST_PUSH;
 
+        // Calculate heuristica (cost to goal)
         if (heuristics_type == "h1")
           new_state.cost_to_goal = h1(new_state);
         else if (heuristics_type == "h2")
@@ -278,6 +296,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
         else
           new_state.cost_to_goal = 0;
 
+        // Update state
         new_state.f_score = new_state.cost_to_node + new_state.cost_to_goal;
         new_state.player_col = new_col;
         new_state.player_row = new_row;
@@ -286,6 +305,7 @@ Soko_state move(const Soko_state &state_current, char movement_type, string heur
       }
       break;
     case 'X':
+      // If it is a wall - Then no move
       new_state.map_state = "NO_MOVE";
       break;
     default:

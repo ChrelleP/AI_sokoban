@@ -2,6 +2,7 @@
 
 void make_init_state(int argc, char** argv, Soko_state &init_state)
 {
+  // Open map file
   ifstream sokoban_map_file;
   sokoban_map_file.open (argv[1]);
   if (!sokoban_map_file)
@@ -9,8 +10,7 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
     cerr << "[error]  can't open " << argv[1] << endl;
   }
 
-  // Extract map metadata
-  // http://www.cplusplus.com/forum/general/13135/
+  // Extract map metadata --> inspired http://www.cplusplus.com/forum/general/13135/
   string line;
 	getline(sokoban_map_file, line, ' ');
 	int map_width = atoi(line.c_str());
@@ -31,11 +31,12 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
   }
 
   init_state.map_state = sokoban_map;
+
+  // Perform deadlock detection
   deadlock_tester_static(init_state);
 
-  // Find player
+  // Extract player position
   int row=0, col=0;
-
   while (true) {
     if (init_state.get(row, col) == 'M' || init_state.get(row, col) == 'N' || init_state.get(row, col) == 'W')
       break;
@@ -51,16 +52,17 @@ void make_init_state(int argc, char** argv, Soko_state &init_state)
     else
       col++;
   }
-
   init_state.player_row = row;
   init_state.player_col = col;
 
+  // Make user feedback
   cout << "[map]  map dimensions:  "<< map_height << " x " << map_width << endl;
   cout << "[map]  number of goals: "<< num_of_goals << endl;
   cout << "[map]  player position: "<< row << " x " << col << endl << endl;
   cout << "[map]  sokoban map loaded:" << endl;
   cout << init_state.map_state << endl;
 
+  // Initialize costs for A*
   init_state.moves = "";
   init_state.cost_to_node = 0;
   init_state.cost_to_goal = h1(init_state);
